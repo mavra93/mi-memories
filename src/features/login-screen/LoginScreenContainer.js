@@ -5,7 +5,7 @@ import {login} from '../../redux/actions/userActions'
 
 class LoginScreenContainer extends Component {
     login = (user) => {
-        if (user.email && user.password) {
+        if (user.email.value && user.password.value) {
             this.props.login(user);
         }
     };

@@ -1,17 +1,28 @@
 import React, {Component} from 'react'
-import {View, StatusBar, Animated, TouchableOpacity, TextInput, Keyboard} from 'react-native';
-import {Container, Header, Content, Form, Item, Input, Label, Button, Text} from 'native-base';
+import {View, TextInput} from 'react-native';
+import {Container, Form, Button, Text} from 'native-base';
+import ErrorText from '../../_shared/error-text/ErrorText'
 import styles from '../styles';
 import * as Animatable from 'react-native-animatable';
+import isValid from '../../helpers/isValid';
 
 const ANIMATION_DURATION = 500;
 
 class RegisterComponent extends Component {
 
     state = {
-        username: null,
-        email: null,
-        password: null
+        username: {
+            value: null,
+            type: 'text'
+        },
+        email: {
+            value: null,
+            type: 'email'
+        },
+        password: {
+            value: null,
+            type: 'password'
+        }
     };
 
 
@@ -23,33 +34,46 @@ class RegisterComponent extends Component {
         this.props.onLoginClick('login');
     };
 
+    onChange = (e) => {
+        const targetName = e._targetInst.memoizedProps.name;
+        this.state[targetName].value = e.nativeEvent.text;
+        const validation = isValid(this.state, targetName);
+        this.setState({
+            formValid: validation.isFormValid,
+            [targetName]: {
+                ...this.state[targetName],
+                isValid: validation.isElValid
+            }
+        });
+    };
+
     render() {
+        const {username, email, password, formValid} = this.state;
         return (
-
             <Container>
-                <Form>
+                <Form onChange={this.onChange}>
                     <View style={styles.fakeInput}>
-                        <TextInput ref="usernameTextInput" placeholder="Enter your username"
+                        <TextInput name="username" placeholder="Enter your username"
                                    underlineColorAndroid="transparent"
-                                   onChangeText={(username) => this.setState({username})}
-                                   value={this.state.username}/>
+                                   value={username.value}/>
+                        {!username.isValid && username.value ? <ErrorText text="Username is required"/> : null}
                     </View>
 
                     <View style={styles.input}>
-                        <TextInput placeholder="Enter your email" underlineColorAndroid="transparent"
-                                   onChangeText={(email) => this.setState({email})}
-                                   value={this.state.email}/>
+                        <TextInput name="email" placeholder="Enter your email" underlineColorAndroid="transparent"
+                                   value={email.value}/>
+                        {!email.isValid && email.value ? <ErrorText text="Email is not valid"/> : null}
                     </View>
                     <View style={styles.input}>
-                        <TextInput placeholder="Enter your password" underlineColorAndroid="transparent"
+                        <TextInput name="password" placeholder="Enter your password" underlineColorAndroid="transparent"
                                    secureTextEntry={true}
-                                   onChangeText={(password) => this.setState({password})}
-                                   value={this.state.password}/>
+                                   value={password.value}/>
+                        {!password.isValid && password.value ? <ErrorText text="Password must be at least 6 characters"/> : null}
                     </View>
                 </Form>
                 <View style={styles.buttonsWrapper}>
                     <Animatable.View animation="fadeInUp" iterationCount={1} delay={100} duration={ANIMATION_DURATION}>
-                        <Button rounded title='Login' onPress={() => this.handleSignUp()} style={styles.button}>
+                        <Button disabled={!formValid} rounded title='Login' onPress={() => this.handleSignUp()} style={[styles.button, {opacity: !formValid ? 0.5 : 1}]}>
                             <Text style={styles.buttonText}>REGISTER</Text>
                         </Button>
                     </Animatable.View>

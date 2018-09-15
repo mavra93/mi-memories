@@ -30,7 +30,7 @@ export function getUser() {
 
 export function login(user) {
     return dispatch => {
-        firebaseApp.auth().signInWithEmailAndPassword(user.email, user.password).then(user => {
+        firebaseApp.auth().signInWithEmailAndPassword(user.email.value, user.password.value).then(user => {
             dispatch({
                 type: AUTH_SUCCESS,
                 payload: user
@@ -64,8 +64,8 @@ export function updateProfile(username, inRegistration) {
 export function signUp(user) {
     let userInfo = user;
     return dispatch => {
-        firebaseApp.auth().createUserWithEmailAndPassword(user.email, user.password).then(() => {
-            updateProfile(userInfo.username, true);
+        firebaseApp.auth().createUserWithEmailAndPassword(user.email.value, user.password.value).then(() => {
+            updateProfile(userInfo.username.value, true);
         }).catch(err => {
             dispatch({
                 type: AUTH_ERR,
@@ -77,7 +77,7 @@ export function signUp(user) {
 
 export function signOut() {
     return dispatch => {
-        firebaseApp.auth().signOut().then(function() {
+        firebaseApp.auth().signOut().then(() => {
             dispatch({
                 type: SIGNED_OUT,
             })

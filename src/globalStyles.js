@@ -2,7 +2,7 @@ const globalStyles = {
     primaryColor: '#42b72a',
     textPrimaryColor: '#FFFFFF',
     dividerPrimaryColor: '#FFFFFF',
-    buttonPrimaryColor: '#da4a4f',
+    red: '#da4a4f',
     borderPrimaryColor: '#FFFFFF',
     secondaryBackgroundColor: '#fefefe',
     buttonSecondaryColor: '#ff5722'
