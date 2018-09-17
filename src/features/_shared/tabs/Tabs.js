@@ -66,7 +66,7 @@ class Tabs extends Component {
                                 break;
                         }
                         return(
-                            <TouchableOpacity onPress={() => this.selectTab(tab.screen, i)} style={tabStyles}>
+                            <TouchableOpacity onPress={() => this.selectTab(tab.screen, i)} style={tabStyles} key={i}>
                                 <Icon type="FontAwesome" name={tab.icon} style={{color: activeIndex === i ? '#42b72a' : '#525252'}}/>
                             </TouchableOpacity>
                         )
