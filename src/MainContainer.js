@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {View, StatusBar} from 'react-native';
 import {Router, Actions} from 'react-native-router-flux';
 import scenes from './scenes';
 import {getUser} from './redux/actions/userActions';
@@ -21,7 +20,7 @@ class MainContainer extends Component {
     redirectToInitialScene() {
         const {userFetched, isLoggedIn} = this.props;
         if (isLoggedIn && userFetched) {
-            Actions.homeScreen();
+            Actions.layoutScreen();
         } else if (!isLoggedIn && userFetched) {
             Actions.authScreen();
         } else {

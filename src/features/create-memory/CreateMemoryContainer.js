@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
-import {View, StatusBar, Text, Button} from 'react-native';
+import {View, StatusBar} from 'react-native';
 import {connect} from 'react-redux'
-import {signOut} from '../../redux/actions/userActions'
+import { Text} from 'native-base';
+import { signOut } from '../../redux/actions/userActions'
 
-class HomeScreenContainer extends Component {
+class CreateMemoryContainer extends Component {
     signOut = () => {
         this.props.signOut();
     };
@@ -15,9 +16,7 @@ class HomeScreenContainer extends Component {
                     backgroundColor="white"
                     barStyle="dark-content"
                 />
-                <Button rounded info title='signOut' onPress={() => this.signOut()}>
-                    <Text>Sign out</Text>
-                </Button>
+                <Text>create memory</Text>
             </View>
         )
     }
@@ -29,5 +28,5 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-export default connect(null, mapDispatchToProps)(HomeScreenContainer)
+export default connect(null, mapDispatchToProps)(CreateMemoryContainer)
 

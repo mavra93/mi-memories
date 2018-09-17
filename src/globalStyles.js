@@ -4,6 +4,7 @@ const globalStyles = {
     dividerPrimaryColor: '#FFFFFF',
     red: '#da4a4f',
     borderPrimaryColor: '#FFFFFF',
+    primaryBackgroundColor: '#f7f7f7',
     secondaryBackgroundColor: '#fefefe',
     buttonSecondaryColor: '#ff5722'
 };
