@@ -4,7 +4,7 @@ import HomeScreenContainer from "./features/home-screen/HomeScreenContainer";
 import AuthScreenContainer from "./features/auth-screen/AuthScreenContainer";
 import SplashScreenContainer from './features/splash-screen/SplashScreenContainer';
 import LayoutScreenContainer from './features/layout-screen/LayoutScreenContainer';
-import CreateMemoryContainer from './features/create-memory/CreateMemoryContainer';
+import CreateEditMemoryContainer from './features/create-edit-memory/CreateEditMemoryContainer';
 
 const scenes = Actions.create(
     <Scene key="root">
@@ -12,7 +12,7 @@ const scenes = Actions.create(
         <Scene key="authScreen" component={AuthScreenContainer} title="Auth" hideNavBar={true} />
         <Scene key="layoutScreen" component={LayoutScreenContainer} title="Layout" hideNavBar={true} />
         <Scene key="homeScreen" component={HomeScreenContainer} title="Home" hideNavBar={true} />
-        <Scene key="createMemory" component={CreateMemoryContainer} />
+        <Scene key="createMemory" component={CreateEditMemoryContainer} />
     </Scene>
 );
 
