@@ -12,7 +12,7 @@ const scenes = Actions.create(
         <Scene key="authScreen" component={AuthScreenContainer} title="Auth" hideNavBar={true} />
         <Scene key="layoutScreen" component={LayoutScreenContainer} title="Layout" hideNavBar={true} />
         <Scene key="homeScreen" component={HomeScreenContainer} title="Home" hideNavBar={true} />
-        <Scene key="createMemory" component={CreateEditMemoryContainer} />
+        <Scene key="createMemory" component={CreateEditMemoryContainer} hideNavBar={true} />
     </Scene>
 );
 

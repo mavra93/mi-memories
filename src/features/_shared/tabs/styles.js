@@ -21,21 +21,21 @@ const styles = StyleSheet.create({
     centeredTab: {
         position: 'absolute',
         zIndex: 20,
-        bottom: -20,
+        bottom: -10,
         backgroundColor: '#7acc69',
         opacity: 0.8,
-        left: SCREEN_WIDTH / 2 - 50,
-        height: 100,
-        width: 100,
-        borderRadius: 50,
+        left: SCREEN_WIDTH / 2 - 35,
+        height: 70,
+        width: 70,
+        borderRadius: 35,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center'
     },
     centeredTabInner: {
-        height: 80,
-        width: 80,
-        borderRadius: 40,
+        height: 60,
+        width: 60,
+        borderRadius: 30,
         zIndex: 25,
         backgroundColor: globalStyles.primaryColor,
         flexDirection: 'row',
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'flex-start',
+        justifyContent: 'flex-start'
     },
     tabRight: {
         flex: 1,
