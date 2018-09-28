@@ -3,9 +3,12 @@ import '@firebase/firestore';
 import {uploadImage} from '../../helpers/uploadImage';
 
 export const MEMORY_CREATED = 'MEMORY_CREATED';
+export const FETCH_MEMORIES_BEGIN = 'FETCH_MEMORIES_BEGIN';
+export const FETCH_MEMORIES_FINISHED = 'FETCH_MEMORIES_FINISHED';
+export const FETCH_MEMORIES_ERROR = 'FETCH_MEMORIES_ERROR';
+
 const firestore = firebaseApp.firestore();
 firestore.settings({timestampsInSnapshots: true});
-
 
 export function createMemory(memory) {
     let index = 0;
@@ -29,6 +32,34 @@ export function createMemory(memory) {
                             })
                         })
                 }
+            });
+        });
+    }
+}
+
+export function fetchMemories() {
+    const memories = [];
+
+    return dispatch => {
+        dispatch({
+            type: FETCH_MEMORIES_BEGIN
+        });
+
+        firestore.collection('memories')
+            .get()
+            .then((querySnapshot) => {
+                querySnapshot.forEach(doc => {
+                    const memory = doc.data();
+                    memories.push(memory);
+                });
+                dispatch({
+                    type: FETCH_MEMORIES_FINISHED,
+                    payload: memories
+                });
+            }).catch((error) => {
+            dispatch({
+                type: FETCH_MEMORIES_ERROR,
+                payload: {error}
             });
         });
     }

@@ -1,33 +1,63 @@
 import React, {Component} from 'react';
-import {View, StatusBar, Text, Button} from 'react-native';
-import {connect} from 'react-redux'
-import {signOut} from '../../redux/actions/userActions'
+import {View, StatusBar, Text, Image, FlatList} from 'react-native';
+import {connect} from 'react-redux';
+import {signOut} from '../../redux/actions/userActions';
+import {fetchMemories} from '../../redux/actions/memoryActions';
+import styles from './styles';
 
 class HomeScreenContainer extends Component {
+
+    componentDidMount() {
+        this.props.fetchMemories();
+    }
+
     signOut = () => {
         this.props.signOut();
     };
 
     render() {
+        const {memories} = this.props;
+
         return (
             <View style={{flex: 1}}>
                 <StatusBar
                     backgroundColor="white"
                     barStyle="dark-content"
                 />
-                <Button rounded info title='signOut' onPress={() => this.signOut()}>
-                    <Text>Sign out</Text>
-                </Button>
+                <View>
+                    <FlatList
+                        style={styles.list}
+                        data={memories}
+                        renderItem={({item}) =>
+                            <View style={styles.memoryBox}>
+                                <Image
+                                    style={{width: 300, height: 58}}
+                                    source={{uri: item.images[0]}}
+                                />
+                                <Text style={styles.memoryTitle}>{item.title}</Text>
+                                <Text style={styles.memoryTitle}>{item.description}</Text>
+                            </View>
+                        }
+                    />
+                </View>
+
             </View>
         )
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapStateToProps = (state) => {
     return {
-        signOut: () => dispatch(signOut()),
+        memories: state.memory.memories
     };
 };
 
-export default connect(null, mapDispatchToProps)(HomeScreenContainer)
+const mapDispatchToProps = (dispatch) => {
+    return {
+        signOut: () => dispatch(signOut()),
+        fetchMemories: () => dispatch(fetchMemories()),
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomeScreenContainer)
 
