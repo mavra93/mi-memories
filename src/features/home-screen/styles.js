@@ -2,6 +2,9 @@ import {StyleSheet} from 'react-native';
 import globalStyles from '../../globalStyles';
 
 const styles = StyleSheet.create({
+    listWrapper: {
+        height: globalStyles.screenHeight - 50,
+    },
     list: {
         backgroundColor: 'blue',
         width: globalStyles.screenWidth,
@@ -16,7 +19,11 @@ const styles = StyleSheet.create({
         marginBottom: 20
     },
     memoryTitle: {
-        color: 'white'
+        color: 'black'
+    },
+    image: {
+        width: '100%',
+        height: 150
     }
 });
 

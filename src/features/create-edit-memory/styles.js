@@ -5,7 +5,7 @@ const SCREEN_WIDTH = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        backgroundColor: globalStyles.secondaryBackgroundColor
     },
     imageHeader: {
         flex: 1,
@@ -23,6 +23,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center'
     },
+    addImageIcon: {
+        fontSize: 22
+    },
+    form: {
+        paddingHorizontal: 10
+    },
     button: {
         backgroundColor: globalStyles.primaryColor,
         shadowOpacity: 0,
@@ -30,11 +36,30 @@ const styles = StyleSheet.create({
         borderWidth: 0,
         height: 50,
         marginHorizontal: 15,
-        marginBottom: 15,
     },
     buttonText: {
         color: globalStyles.textPrimaryColor
     },
+    input: {
+        borderBottomColor: globalStyles.borderPrimaryColor,
+        borderBottomWidth: 1,
+        color: globalStyles.borderPrimaryColor,
+    },
+    picker: {
+        marginTop: 15,
+        height: 50
+    },
+    pickerItem: {
+        color: globalStyles.borderPrimaryColor,
+    },
+    footer: {
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+        height: 100,
+        paddingBottom: 15
+    }
 });
 
 export default styles;

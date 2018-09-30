@@ -1,6 +1,7 @@
 import {firebaseApp} from '../../firebaseInit';
 import '@firebase/firestore';
 import {uploadImage} from '../../helpers/uploadImage';
+import {Actions} from 'react-native-router-flux';
 
 export const MEMORY_CREATED = 'MEMORY_CREATED';
 export const FETCH_MEMORIES_BEGIN = 'FETCH_MEMORIES_BEGIN';
@@ -29,7 +30,8 @@ export function createMemory(memory) {
                         .then(() => {
                             dispatch({
                                 type: MEMORY_CREATED
-                            })
+                            });
+                            Actions.layoutScreen({loadHomeScreen: true});
                         })
                 }
             });
@@ -44,7 +46,6 @@ export function fetchMemories() {
         dispatch({
             type: FETCH_MEMORIES_BEGIN
         });
-
         firestore.collection('memories')
             .get()
             .then((querySnapshot) => {

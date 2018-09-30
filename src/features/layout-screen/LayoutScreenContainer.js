@@ -14,6 +14,14 @@ class LayoutScreenContainer extends Component {
         currentScreen: homeScreen
     };
 
+    componentWillReceiveProps(nextProps) {
+        if(nextProps.loadHomeScreen) {
+            this.setState({
+                currentScreen: homeScreen
+            })
+        }
+    }
+
     changeScene = (screen) => {
         this.setState({
             currentScreen: screen

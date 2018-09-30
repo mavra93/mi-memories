@@ -16,6 +16,7 @@ class Tabs extends Component {
     };
 
     openModal = () => {
+        this.props.changeScene(null);
         Actions.createMemory();
     };
 

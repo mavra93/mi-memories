@@ -1,16 +1,18 @@
 import React, {Component} from 'react';
-import {View, Picker, Image} from 'react-native';
+import {View, Picker, Animated, Keyboard} from 'react-native';
 import {connect} from 'react-redux'
 import {TouchableOpacity, TextInput} from 'react-native';
-import {Container, Form, Text, Button} from 'native-base';
+import {Icon, Form, Text, Button, Container} from 'native-base';
 import ImagePicker from 'react-native-image-crop-picker';
 import ImageSlider from 'react-native-image-slider';
+import * as Animatable from 'react-native-animatable';
 import styles from './styles';
 import globalStyles from '../../globalStyles';
-import * as Animatable from 'react-native-animatable';
 import {createMemory} from '../../redux/actions/memoryActions';
 import isValid from '../helpers/isValid';
-import ErrorText from "../_shared/error-text/ErrorText";
+import {capitalizeFirstLetter} from '../../helpers/capitalize';
+
+const ANIMATION_DURATION = 300;
 
 class CreateEditMemoryContainer extends Component {
 
@@ -24,15 +26,54 @@ class CreateEditMemoryContainer extends Component {
             value: null,
             type: 'text'
         },
+        categories: ['story', 'trip'],
         category: 'story',
         imagePaths: []
+    };
+
+    componentWillMount() {
+        this.imageSliderOpacity = new Animated.Value(1);
+        this.formHeight = new Animated.Value(200);
+        this.keyboardWillShowSub = Keyboard.addListener('keyboardDidShow', this.keyboardDidShow);
+        this.keyboardWillHideSub = Keyboard.addListener('keyboardDidHide', this.keyboardDidHide);
+    }
+
+    componentWillUnmount() {
+        this.keyboardWillShowSub.remove();
+        this.keyboardWillHideSub.remove();
+    }
+
+    keyboardDidShow = () => {
+        Animated.timing(this.formHeight, {
+            toValue: 350,
+            duration: ANIMATION_DURATION,
+        }).start(
+            Animated.timing(this.imageSliderOpacity, {
+                toValue: 0,
+                duration: ANIMATION_DURATION,
+            }).start()
+        );
+    };
+
+    keyboardDidHide = () => {
+        Animated.timing(this.formHeight, {
+            toValue: 200,
+            duration: ANIMATION_DURATION
+        }).start(
+            Animated.timing(this.imageSliderOpacity, {
+                toValue: 1,
+                duration: ANIMATION_DURATION
+            }).start()
+        );
     };
 
     openImagePicker = () => {
         ImagePicker.openPicker({
             width: 300,
             height: 400,
-            multiple: true
+            multiple: true,
+            compressImageMaxWidth: 350,
+            compressImageQuality: 0.2
         }).then(images => {
             const combinedArray = [...this.state.imagePaths, ...images];
             const result = combinedArray.map(image => image.path ? image.path : image);
@@ -68,48 +109,60 @@ class CreateEditMemoryContainer extends Component {
     };
 
     render() {
-        const {title, description, category, imagePaths, formValid} = this.state;
+        const {title, description, category, imagePaths, formValid, categories} = this.state;
         return (
-            <View style={styles.container}>
-                <View style={styles.imageHeader}>
+            <Container>
+                <Animated.View style={[styles.imageHeader, {opacity: this.imageSliderOpacity}]}>
                     <ImageSlider images={imagePaths}/>
-                    <Button rounded style={styles.addImageButton} onPress={() => this.openImagePicker()}>
-                        <Text>+</Text>
+                    <Button rounded title="open image picker" style={styles.addImageButton}
+                            onPress={() => this.openImagePicker()}>
+                        <Icon name="ios-images" style={styles.addImageIcon}/>
                     </Button>
+                </Animated.View>
+                <Animated.View style={[styles.form, {height: this.formHeight}]}>
+                    <Form onChange={this.onChange}>
+                        <View style={styles.input}>
+                            <TextInput placeholder="Enter memory title"
+                                       underlineColorAndroid="transparent"
+                                       name="title"
+                                       ref="title"
+                                       value={title.value}/>
+                        </View>
+                        <View style={styles.input}>
+                            <TextInput placeholder="Enter memory description"
+                                       underlineColorAndroid="transparent"
+                                       multiline={true}
+                                       numberOfLines={7}
+                                       name="description"
+                                       ref="description"
+                                       value={description.value}/>
+                        </View>
+                        <View>
+                            <Picker
+                                selectedValue={category}
+                                style={styles.picker}
+                                onValueChange={(itemValue, itemIndex) => this.setState({category: itemValue})}>
+                                {categories.map((category, i) => {
+                                    return (
+                                        <Picker.Item key={i} label={capitalizeFirstLetter(category)} value={category}
+                                                     color={globalStyles.borderPrimaryColor}/>
+                                    )
+                                })}
+                            </Picker>
+                        </View>
+                    </Form>
+                </Animated.View>
+                <View style={styles.footer}>
+                    <Animatable.View animation="fadeInUp" iterationCount={1} delay={500} duration={ANIMATION_DURATION}>
+                        <Button disabled={!formValid || imagePaths.length < 1}
+                                style={[styles.button, {opacity: (!formValid || imagePaths.length < 1) ? 0.5 : 1}]}
+                                rounded
+                                title='createMemory' onPress={() => this.createMemory()}>
+                            <Text style={styles.buttonText}>CREATE MEMORY</Text>
+                        </Button>
+                    </Animatable.View>
                 </View>
-                <Form onChange={this.onChange}>
-                    <View style={styles.fakeInput}>
-                        <TextInput placeholder="Enter memory title"
-                                   underlineColorAndroid="transparent"
-                                   name="title"
-                                   ref="title"
-                                   value={title.value}/>
-                        {!title.isValid && title.value ? <ErrorText text="Title is required"/> : null}
-                    </View>
-                    <View style={styles.input}>
-                        <TextInput placeholder="Enter memory description"
-                                   underlineColorAndroid="transparent"
-                                   multiline={true}
-                                   numberOfLines={8}
-                                   name="description"
-                                   ref="description"
-                                   value={description.value}/>
-                        {!description.isValid && description.value ? <ErrorText text="Description is required"/> : null}
-                    </View>
-                    <View>
-                        <Picker
-                            selectedValue={category}
-                            style={{height: 50, width: 400}}
-                            onValueChange={(itemValue, itemIndex) => this.setState({category: itemValue})}>
-                            <Picker.Item label="Story" value="story"/>
-                            <Picker.Item label="Trip" value="trip"/>
-                        </Picker>
-                    </View>
-                </Form>
-                <Button disabled={!formValid || imagePaths.length < 1} style={[styles.button, {opacity: (!formValid || imagePaths.length < 1) ? 0.5 : 1}]} rounded title='createMemory' onPress={() => this.createMemory()}>
-                    <Text style={styles.buttonText}>CREATE MEMORY</Text>
-                </Button>
-            </View>
+            </Container>
         )
     }
 }
