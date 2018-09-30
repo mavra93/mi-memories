@@ -7,9 +7,18 @@ export const MEMORY_CREATED = 'MEMORY_CREATED';
 export const FETCH_MEMORIES_BEGIN = 'FETCH_MEMORIES_BEGIN';
 export const FETCH_MEMORIES_FINISHED = 'FETCH_MEMORIES_FINISHED';
 export const FETCH_MEMORIES_ERROR = 'FETCH_MEMORIES_ERROR';
+export const RESET_MEMORIES = 'RESET_MEMORIES';
 
 const firestore = firebaseApp.firestore();
 firestore.settings({timestampsInSnapshots: true});
+
+export function resetMemories() {
+    return dispatch => {
+        dispatch({
+            type: RESET_MEMORIES
+        });
+    }
+}
 
 export function createMemory(memory) {
     let index = 0;
@@ -17,7 +26,9 @@ export function createMemory(memory) {
         title: memory.title,
         description: memory.description,
         category: memory.category,
-        images: []
+        images: [],
+        createdAt: memory.createdAt,
+        createdBy: memory.createdBy
     };
     return dispatch => {
         memory.imagePaths.forEach(image => {
@@ -46,16 +57,20 @@ export function fetchMemories(loadMore, lastVisible) {
         dispatch({
             type: FETCH_MEMORIES_BEGIN
         });
-        if(loadMore) {
-            if(lastVisible) {
-                firestore.collection('memories').orderBy("category").startAfter(lastVisible).limit(5).get().then((querySnapshot) => {
+        if (loadMore) {
+            if (lastVisible) {
+                firestore.collection('memories').orderBy("createdAt").startAfter(lastVisible).limit(5).get().then((querySnapshot) => {
                     querySnapshot.forEach(doc => {
                         const memory = doc.data();
                         memories.push(memory);
                     });
                     dispatch({
                         type: FETCH_MEMORIES_FINISHED,
-                        payload: {memories, lastVisible: querySnapshot.docs[querySnapshot.docs.length - 1], initialLoadFinished: true}
+                        payload: {
+                            memories,
+                            lastVisible: querySnapshot.docs[querySnapshot.docs.length - 1],
+                            initialLoadFinished: true
+                        }
                     });
                 }).catch((error) => {
                     dispatch({
@@ -65,14 +80,18 @@ export function fetchMemories(loadMore, lastVisible) {
                 });
             }
         } else {
-            firestore.collection('memories').orderBy("category").limit(5).get().then((querySnapshot) => {
+            firestore.collection('memories').orderBy("createdAt").limit(5).get().then((querySnapshot) => {
                 querySnapshot.forEach(doc => {
                     const memory = doc.data();
                     memories.push(memory);
                 });
                 dispatch({
                     type: FETCH_MEMORIES_FINISHED,
-                    payload: {memories, lastVisible: querySnapshot.docs[querySnapshot.docs.length - 1], initialLoadFinished: true}
+                    payload: {
+                        memories,
+                        lastVisible: querySnapshot.docs[querySnapshot.docs.length - 1],
+                        initialLoadFinished: true
+                    }
                 });
             }).catch((error) => {
                 dispatch({

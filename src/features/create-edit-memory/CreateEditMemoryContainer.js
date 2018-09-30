@@ -2,13 +2,14 @@ import React, {Component} from 'react';
 import {View, Picker, Animated, Keyboard} from 'react-native';
 import {connect} from 'react-redux'
 import {TextInput} from 'react-native';
+import moment from 'moment';
 import {Icon, Form, Text, Button, Container} from 'native-base';
 import ImagePicker from 'react-native-image-crop-picker';
 import ImageSlider from 'react-native-image-slider';
 import * as Animatable from 'react-native-animatable';
 import styles from './styles';
 import globalStyles from '../../globalStyles';
-import {createMemory} from '../../redux/actions/memoryActions';
+import {createMemory, resetMemories} from '../../redux/actions/memoryActions';
 import isValid from '../helpers/isValid';
 import {capitalizeFirstLetter} from '../../helpers/capitalize';
 
@@ -32,6 +33,7 @@ class CreateEditMemoryContainer extends Component {
     };
 
     componentWillMount() {
+        this.props.resetMemories();
         this.imageSliderOpacity = new Animated.Value(1);
         this.formHeight = new Animated.Value(200);
         this.keyboardWillShowSub = Keyboard.addListener('keyboardDidShow', this.keyboardDidShow);
@@ -101,7 +103,9 @@ class CreateEditMemoryContainer extends Component {
             title: title.value,
             description: description.value,
             category: category,
-            imagePaths: imagePaths
+            imagePaths: imagePaths,
+            createdAt: moment().unix(),
+            createdBy: this.props.user.email
         };
 
         this.props.createMemory(memory);
@@ -166,11 +170,18 @@ class CreateEditMemoryContainer extends Component {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapStateToProps = (state) => {
     return {
-        createMemory: (memory) => dispatch(createMemory(memory)),
+        user: state.user.user,
     };
 };
 
-export default connect(null, mapDispatchToProps)(CreateEditMemoryContainer)
+const mapDispatchToProps = (dispatch) => {
+    return {
+        createMemory: (memory) => dispatch(createMemory(memory)),
+        resetMemories: () => dispatch(resetMemories()),
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreateEditMemoryContainer)
 

@@ -42,8 +42,7 @@ const styles = StyleSheet.create({
     },
     input: {
         borderBottomColor: globalStyles.borderPrimaryColor,
-        borderBottomWidth: 1,
-        color: globalStyles.borderPrimaryColor,
+        borderBottomWidth: 1
     },
     picker: {
         marginTop: 15,
