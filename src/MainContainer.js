@@ -21,7 +21,10 @@ class MainContainer extends Component {
     }
 
     handleBackPress = () => {
-        return Actions.currentScene === 'authScreen' || Actions.currentScene === 'layoutScreen' || Actions.currentScene === 'splashScreen';
+        if(Actions.currentScene !== 'authScreen' || Actions.currentScene !== 'layoutScreen' || Actions.currentScene !== 'splashScreen') {
+            Actions.pop({refresh: {refresh: true}});
+        }
+        return true;
     };
 
     redirectToInitialScene = () => {

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {View, Picker, Animated, Keyboard} from 'react-native';
 import {connect} from 'react-redux'
-import {TouchableOpacity, TextInput} from 'react-native';
+import {TextInput} from 'react-native';
 import {Icon, Form, Text, Button, Container} from 'native-base';
 import ImagePicker from 'react-native-image-crop-picker';
 import ImageSlider from 'react-native-image-slider';
@@ -44,15 +44,16 @@ class CreateEditMemoryContainer extends Component {
     }
 
     keyboardDidShow = () => {
-        Animated.timing(this.formHeight, {
-            toValue: 350,
+        Animated.timing(this.imageSliderOpacity, {
+            toValue: 0,
             duration: ANIMATION_DURATION,
         }).start(
-            Animated.timing(this.imageSliderOpacity, {
-                toValue: 0,
-                duration: ANIMATION_DURATION,
+            Animated.timing(this.formHeight, {
+                toValue: 350,
+                delay: 5,
+                duration: 150,
             }).start()
-        );
+        )
     };
 
     keyboardDidHide = () => {
@@ -69,8 +70,6 @@ class CreateEditMemoryContainer extends Component {
 
     openImagePicker = () => {
         ImagePicker.openPicker({
-            width: 300,
-            height: 400,
             multiple: true,
             compressImageMaxWidth: 350,
             compressImageQuality: 0.2

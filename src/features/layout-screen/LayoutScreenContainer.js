@@ -15,7 +15,7 @@ class LayoutScreenContainer extends Component {
     };
 
     componentWillReceiveProps(nextProps) {
-        if(nextProps.loadHomeScreen) {
+        if(nextProps.loadHomeScreen || nextProps.refresh) {
             this.setState({
                 currentScreen: homeScreen
             })
@@ -54,7 +54,7 @@ class LayoutScreenContainer extends Component {
             <View style={styles.layoutContainer}>
                 <StatusBar
                     backgroundColor="white"
-                    barStyle="light-content"
+                    barStyle="dark-content"
                 />
                 {screenToShow}
                 <Tabs changeScene={this.changeScene}/>

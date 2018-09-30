@@ -14,7 +14,8 @@ class HomeScreenContainer extends Component {
         dataProvider: new DataProvider((r1, r2) => {
             return r1 !== r2;
         }),
-        layoutProvider: LayoutUtil.getLayoutProvider(0)
+        layoutProvider: LayoutUtil.getLayoutProvider(0),
+        loadMoreReady: false
     };
 
     componentWillReceiveProps(nextProps) {
@@ -39,19 +40,24 @@ class HomeScreenContainer extends Component {
         return <MemoryBox memory={data}/>;
     };
 
+    handleListEnd = () => {
+        const {initialLoadFinished, fetchMemories} = this.props;
+        if(initialLoadFinished){
+            fetchMemories(true, this.props.lastVisible)
+        }
+    };
+
     render() {
 
         return (
             <View style={{flex: 1}}>
-                <StatusBar
-                    backgroundColor="white"
-                    barStyle="dark-content"
-                />
                 <View style={styles.listWrapper}>
                     <RecyclerListView
                         style={styles.list}
                         dataProvider={this.state.dataProvider}
                         rowRenderer={this.rowRenderer}
+                        onEndReachedThreshold={20}
+                        onEndReached={this.handleListEnd}
                         layoutProvider={this.state.layoutProvider}
                     />
                 </View>
@@ -63,14 +69,16 @@ class HomeScreenContainer extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        memories: state.memory.memories
+        memories: state.memory.memories,
+        lastVisible: state.memory.lastVisible,
+        initialLoadFinished: state.memory.initialLoadFinished
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         signOut: () => dispatch(signOut()),
-        fetchMemories: () => dispatch(fetchMemories())
+        fetchMemories: (loadMore, lastVisible) => dispatch(fetchMemories(loadMore, lastVisible))
     };
 };
 

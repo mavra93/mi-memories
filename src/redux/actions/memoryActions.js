@@ -39,29 +39,48 @@ export function createMemory(memory) {
     }
 }
 
-export function fetchMemories() {
+export function fetchMemories(loadMore, lastVisible) {
     const memories = [];
 
     return dispatch => {
         dispatch({
             type: FETCH_MEMORIES_BEGIN
         });
-        firestore.collection('memories')
-            .get()
-            .then((querySnapshot) => {
+        if(loadMore) {
+            if(lastVisible) {
+                firestore.collection('memories').orderBy("category").startAfter(lastVisible).limit(5).get().then((querySnapshot) => {
+                    querySnapshot.forEach(doc => {
+                        const memory = doc.data();
+                        memories.push(memory);
+                    });
+                    dispatch({
+                        type: FETCH_MEMORIES_FINISHED,
+                        payload: {memories, lastVisible: querySnapshot.docs[querySnapshot.docs.length - 1], initialLoadFinished: true}
+                    });
+                }).catch((error) => {
+                    dispatch({
+                        type: FETCH_MEMORIES_ERROR,
+                        payload: {error}
+                    });
+                });
+            }
+        } else {
+            firestore.collection('memories').orderBy("category").limit(5).get().then((querySnapshot) => {
                 querySnapshot.forEach(doc => {
                     const memory = doc.data();
                     memories.push(memory);
                 });
                 dispatch({
                     type: FETCH_MEMORIES_FINISHED,
-                    payload: memories
+                    payload: {memories, lastVisible: querySnapshot.docs[querySnapshot.docs.length - 1], initialLoadFinished: true}
                 });
             }).catch((error) => {
-            dispatch({
-                type: FETCH_MEMORIES_ERROR,
-                payload: {error}
+                dispatch({
+                    type: FETCH_MEMORIES_ERROR,
+                    payload: {error}
+                });
             });
-        });
+        }
+
     }
 }
