@@ -73,7 +73,7 @@ class CreateEditMemoryContainer extends Component {
     openImagePicker = () => {
         ImagePicker.openPicker({
             multiple: true,
-            compressImageMaxWidth: 350,
+            compressImageMaxWidth: 320,
             compressImageQuality: 0.2
         }).then(images => {
             const combinedArray = [...this.state.imagePaths, ...images];

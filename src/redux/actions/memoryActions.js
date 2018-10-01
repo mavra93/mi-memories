@@ -59,7 +59,7 @@ export function fetchMemories(loadMore, lastVisible) {
         });
         if (loadMore) {
             if (lastVisible) {
-                firestore.collection('memories').orderBy("createdAt").startAfter(lastVisible).limit(5).get().then((querySnapshot) => {
+                firestore.collection('memories').orderBy("createdAt", "desc").startAfter(lastVisible).limit(5).get().then((querySnapshot) => {
                     querySnapshot.forEach(doc => {
                         const memory = doc.data();
                         memories.push(memory);
@@ -80,7 +80,7 @@ export function fetchMemories(loadMore, lastVisible) {
                 });
             }
         } else {
-            firestore.collection('memories').orderBy("createdAt").limit(5).get().then((querySnapshot) => {
+            firestore.collection('memories').orderBy("createdAt", "desc").limit(5).get().then((querySnapshot) => {
                 querySnapshot.forEach(doc => {
                     const memory = doc.data();
                     memories.push(memory);

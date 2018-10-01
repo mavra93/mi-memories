@@ -5,7 +5,7 @@ export default function (state = {memory: null, memories: [], memoryCreated: fal
         case MEMORY_CREATED:
             return { ...state, memoryCreated: true};
         case FETCH_MEMORIES_FINISHED:
-            return { ...state, memories: [...state.memories, ...action.payload.memories], lastVisible: action.payload.lastVisible, initialLoadFinished: action.payload.initialLoadFinished};
+            return { ...state, memories: state.memories.concat(action.payload.memories), lastVisible: action.payload.lastVisible, initialLoadFinished: action.payload.initialLoadFinished};
         case RESET_MEMORIES: {
             return {...state, memories: [], initialLoadFinished: false, lastVisible: null }
         }

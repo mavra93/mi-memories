@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
-import {View, StatusBar} from 'react-native';
+import {View, StatusBar, FlatList} from 'react-native';
 import {connect} from 'react-redux';
-import {RecyclerListView, DataProvider} from 'recyclerlistview';
 import {signOut} from '../../redux/actions/userActions';
 import {fetchMemories} from '../../redux/actions/memoryActions';
 import styles from './styles';
@@ -11,22 +10,9 @@ import MemoryBox from "./components/MemoryBox";
 class HomeScreenContainer extends Component {
 
     state = {
-        dataProvider: new DataProvider((r1, r2) => {
-            return r1 !== r2;
-        }),
         layoutProvider: LayoutUtil.getLayoutProvider(0),
         loadMoreReady: false
     };
-
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.memories && (nextProps.memories.length >= this.props.memories.length)) {
-            this.setState({
-                dataProvider: this.state.dataProvider.cloneWithRows(
-                    nextProps.memories
-                ),
-            });
-        }
-    }
 
     componentDidMount() {
         this.props.fetchMemories()
@@ -36,32 +22,35 @@ class HomeScreenContainer extends Component {
         this.props.signOut();
     };
 
-    rowRenderer = (type, data) => {
-        return <MemoryBox memory={data}/>;
+    rowRenderer = (data) => {
+        return <MemoryBox memory={data.item}/>;
     };
 
     handleListEnd = () => {
         const {initialLoadFinished, fetchMemories} = this.props;
-        if(initialLoadFinished){
+        if (initialLoadFinished) {
             fetchMemories(true, this.props.lastVisible)
         }
     };
 
     render() {
-
+        const {memories} = this.props;
         return (
             <View style={{flex: 1}}>
-                <View style={styles.listWrapper}>
-                    <RecyclerListView
-                        style={styles.list}
-                        dataProvider={this.state.dataProvider}
-                        rowRenderer={this.rowRenderer}
-                        onEndReachedThreshold={20}
-                        onEndReached={this.handleListEnd}
-                        layoutProvider={this.state.layoutProvider}
-                    />
-                </View>
-
+                {
+                    memories.length > 0 ?
+                        <View style={styles.listWrapper}>
+                            <FlatList
+                                style={styles.list}
+                                data={this.props.memories}
+                                keyExtractor={item => item.title}
+                                renderItem={this.rowRenderer}
+                                onEndReached={this.handleListEnd}
+                                onEndReachedThreshold={0.1}
+                            />
+                        </View>
+                        : null
+                }
             </View>
         )
     }

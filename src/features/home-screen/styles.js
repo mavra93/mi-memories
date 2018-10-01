@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     },
     memoryBox: {
         flex: 1,
-        height: 600,
+        height: 220,
         position: 'relative',
         width: '100%',
         backgroundColor: globalStyles.dividerPrimaryColor,

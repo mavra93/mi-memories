@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import styles from './styles';
 import globalStyles from '../../globalStyles';
 
-const animationJson = require("../../animations/heart_box.json");
+const animationJson = require("../../animations/heart.json");
 
 class SplashScreenContainer extends Component {
 
