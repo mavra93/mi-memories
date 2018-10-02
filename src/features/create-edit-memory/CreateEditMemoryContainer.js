@@ -9,7 +9,7 @@ import ImageSlider from 'react-native-image-slider';
 import * as Animatable from 'react-native-animatable';
 import styles from './styles';
 import globalStyles from '../../globalStyles';
-import {createMemory, resetMemories} from '../../redux/actions/memoryActions';
+import {createMemory} from '../../redux/actions/memoryActions';
 import isValid from '../helpers/isValid';
 import {capitalizeFirstLetter} from '../../helpers/capitalize';
 
@@ -33,7 +33,6 @@ class CreateEditMemoryContainer extends Component {
     };
 
     componentWillMount() {
-        this.props.resetMemories();
         this.imageSliderOpacity = new Animated.Value(1);
         this.formHeight = new Animated.Value(200);
         this.keyboardWillShowSub = Keyboard.addListener('keyboardDidShow', this.keyboardDidShow);
@@ -178,8 +177,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        createMemory: (memory) => dispatch(createMemory(memory)),
-        resetMemories: () => dispatch(resetMemories()),
+        createMemory: (memory) => dispatch(createMemory(memory))
     };
 };
 

@@ -18,7 +18,7 @@ class SplashScreenContainer extends Component {
     }
 
     componentWillReceiveProps(props) {
-        if(!props.isLoggedIn || !props.userFetched) {
+        if(props.isLoggedIn || props.userFetched) {
             this.setState({
                 stopAnimation: true
             })

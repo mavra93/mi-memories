@@ -1,6 +1,5 @@
 import {firebaseApp} from '../../firebaseInit';
 import '@firebase/firestore'
-import {Actions} from 'react-native-router-flux';
 
 export const GET_USER = 'GET_USER';
 export const AUTH_SUCCESS = 'AUTH_SUCCESS';
@@ -14,7 +13,7 @@ firestore.settings({timestampsInSnapshots: true});
 export function getUser() {
     return dispatch => {
         firebaseApp.auth().onAuthStateChanged(user => {
-            if(user) {
+            if (user) {
                 dispatch({
                     type: GET_USER,
                     payload: user
@@ -44,20 +43,15 @@ export function login(user) {
     }
 }
 
-export function updateProfile(username, inRegistration) {
+function updateProfile(username) {
     firebaseApp.auth().currentUser.updateProfile({displayName: username}).then(() => {
         const currentUser = firebaseApp.auth().currentUser;
-        firestore.collection('users').doc(currentUser.uid).set({
+        const user = {
             displayName: currentUser.displayName,
-            email: currentUser.email
-        }).then(() => {
-            if (inRegistration) {
-                Actions.loginScreen()
-            }
-            console.log(currentUser.uid);
-        }).catch((error) => {
-            console.error(error);
-        });
+            email: currentUser.email,
+            id: currentUser.uid
+        };
+        firestore.collection('users').doc(currentUser.uid).set(user);
     })
 }
 
@@ -65,7 +59,7 @@ export function signUp(user) {
     let userInfo = user;
     return dispatch => {
         firebaseApp.auth().createUserWithEmailAndPassword(user.email.value, user.password.value).then(() => {
-            updateProfile(userInfo.username.value, true);
+            updateProfile(userInfo.username.value);
         }).catch(err => {
             dispatch({
                 type: AUTH_ERR,

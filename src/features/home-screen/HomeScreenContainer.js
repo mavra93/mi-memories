@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
-import {View, StatusBar, FlatList} from 'react-native';
+import {View, StatusBar, FlatList, Text, Button} from 'react-native';
 import {connect} from 'react-redux';
 import {signOut} from '../../redux/actions/userActions';
-import {fetchMemories} from '../../redux/actions/memoryActions';
+import {fetchMemories, resetMemories} from '../../redux/actions/memoryActions';
 import styles from './styles';
 import {LayoutUtil} from './components/LayoutUtil';
 import MemoryBox from "./components/MemoryBox";
+
+const uuid = require('uuid/v1');
 
 class HomeScreenContainer extends Component {
 
@@ -16,6 +18,10 @@ class HomeScreenContainer extends Component {
 
     componentDidMount() {
         this.props.fetchMemories()
+    }
+
+    componentWillUnmount() {
+        this.props.resetMemories();
     }
 
     signOut = () => {
@@ -43,7 +49,7 @@ class HomeScreenContainer extends Component {
                             <FlatList
                                 style={styles.list}
                                 data={this.props.memories}
-                                keyExtractor={item => item.title}
+                                keyExtractor={item => uuid()}
                                 renderItem={this.rowRenderer}
                                 onEndReached={this.handleListEnd}
                                 onEndReachedThreshold={0.1}
@@ -67,7 +73,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         signOut: () => dispatch(signOut()),
-        fetchMemories: (loadMore, lastVisible) => dispatch(fetchMemories(loadMore, lastVisible))
+        fetchMemories: (loadMore, lastVisible) => dispatch(fetchMemories(loadMore, lastVisible)),
+        resetMemories: () => dispatch(resetMemories())
     };
 };
 

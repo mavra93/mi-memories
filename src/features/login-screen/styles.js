@@ -6,8 +6,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 15,
     },
     input: {
-        marginLeft: 15,
-        color: globalStyles.textPrimaryColor
+        marginLeft: 15
     },
     buttonsWrapper: {
         flex: 1,
