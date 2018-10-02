@@ -9,9 +9,9 @@ import MemoryDetailsScreenContainer from './features/memory-details-screen/Memor
 
 const scenes = Actions.create(
     <Scene key="root">
-        <Scene key="splashScreen" component={SplashScreenContainer} hideNavBar={true}/>
+        <Scene key="splashScreen" component={SplashScreenContainer} hideNavBar={true} initial={true} />
         <Scene key="authScreen" component={AuthScreenContainer} title="Auth" hideNavBar={true}/>
-        <Scene key="layoutScreen" component={LayoutScreenContainer} title="Layout" hideNavBar={true}  initial={true}/>
+        <Scene key="layoutScreen" component={LayoutScreenContainer} title="Layout" hideNavBar={true} />
         <Scene key="homeScreen" component={HomeScreenContainer} title="Home" hideNavBar={true}/>
         <Scene key="createMemory" component={CreateEditMemoryContainer} hideNavBar={true}/>
         <Scene key="memoryDetails" component={MemoryDetailsScreenContainer} hideNavBar={true}/>

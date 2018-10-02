@@ -1,18 +1,20 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {View, Text, Animated, Image} from 'react-native';
+import {View, Text, Animated, Image, ScrollView} from 'react-native';
 import {Icon, Form, Button, Container} from 'native-base';
 import ImageCarousel from 'react-native-image-carousel';
+import moment from 'moment';
 import styles from './styles';
 
-
-const images = [
-    'http://placeimg.com/640/480/any',
-    'http://placeimg.com/640/480/any',
-    'http://placeimg.com/640/480/any'
-]
+const HEADER_MAX_HEIGHT = 50;
+const HEADER_MIN_HEIGHT = 20;
+const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT;
 
 class MemoryDetailsScreenContainer extends Component {
+
+    state = {
+        scrollY: new Animated.Value(0),
+    };
 
     componentDidMount() {
         this.imageCarousel = ImageCarousel;
@@ -21,21 +23,34 @@ class MemoryDetailsScreenContainer extends Component {
     renderContent = (id) =>  {
         return (
             <Image
-                style={{width: 200, height: 300}}
+                style={styles.imageGallery}
                 source={{ uri: this.props.memory.images[id] }}
                 resizeMode={'contain'}
             />
         );
+    };
+
+    onScroll = () => {
+        Animated.event(
+            [{nativeEvent: {contentOffset: {y: this.state.scrollY}}}]
+        )
     }
 
     render() {
         const {memory} = this.props;
+        const {scrollY} = this.state;
+        const date = moment.unix(memory.createdAt).format('LL');
+        const headerHeight = scrollY.interpolate({
+            inputRange: [0, HEADER_SCROLL_DISTANCE],
+            outputRange: [HEADER_MAX_HEIGHT, HEADER_MIN_HEIGHT],
+            extrapolate: 'clamp',
+        });
 
         return (
-            <Container>
-                <Animated.View stlye={[styles.imageHeader, {opacity: 1}]}>
-                    <ImageCarousel
-                        style={{width: 500, height: 600}}
+            <View style={{flex: 1}}>
+                <Animated.View stlye={[styles.header, {height: headerHeight}]}>
+                   <ImageCarousel
+                        style={styles.imageCarousel}
                         ref={(imageCarousel) => {
                             this.imageCarousel = imageCarousel;
                         }}
@@ -43,18 +58,29 @@ class MemoryDetailsScreenContainer extends Component {
                     >
                         {memory.images.map((url) => (
                             <Image
-                                style={{width: 200, height: 300}}
+                                style={styles.imageSlider}
                                 key={url}
-                                source={{ uri: url, height: 100 }}
-                                resizeMode={'contain'}
+                                source={{uri: url}}
+                                resizeMode={'cover'}
                             />
                         ))}
-                    </ImageCarousel>
+                    </ImageCarousel>}
                 </Animated.View>
-                <Animated.View>
-                    <Text>{memory.title}</Text>
-                </Animated.View>
-            </Container>
+                <View style={styles.contentWrapper}>
+                    <ScrollView
+                        scrollEventThrottle={16}
+                        onScroll={this.onScroll}>
+                        <Text style={styles.title} numberOfLines={2}>{memory.title}</Text>
+                        <Text style={styles.category}>{memory.category.toUpperCase()}</Text>
+                        <View style={styles.info}>
+                            <Text style={styles.date}>{date}</Text>
+                            <View style={styles.bullet}></View>
+                            <Text style={styles.createdBy}>{memory.createdBy.displayName}</Text>
+                        </View>
+                        <Text style={styles.description}>{memory.description}</Text>
+                    </ScrollView>
+                </View>
+            </View>
         )
     }
 }
