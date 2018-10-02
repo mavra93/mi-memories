@@ -31,13 +31,13 @@ class MainContainer extends Component {
 
     redirectToInitialScene = () => {
         const {userFetched, isLoggedIn} = this.props;
-        if (isLoggedIn && userFetched) {
+    /*    if (isLoggedIn && userFetched) {
             Actions.layoutScreen();
         } else if (!isLoggedIn && userFetched) {
             Actions.authScreen();
         } else {
             Actions.splashScreen();
-        }
+        }*/
     };
 
     getUser = () => {
