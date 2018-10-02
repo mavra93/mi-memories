@@ -14,14 +14,15 @@ const images = [
 
 class MemoryDetailsScreenContainer extends Component {
 
-    componentWillMount() {
+    componentDidMount() {
         this.imageCarousel = ImageCarousel;
     }
 
     renderContent = (id) =>  {
         return (
             <Image
-                source={{ uri: images[id] }}
+                style={{width: 200, height: 300}}
+                source={{ uri: this.props.memory.images[id] }}
                 resizeMode={'contain'}
             />
         );
@@ -34,13 +35,15 @@ class MemoryDetailsScreenContainer extends Component {
             <Container>
                 <Animated.View stlye={[styles.imageHeader, {opacity: 1}]}>
                     <ImageCarousel
+                        style={{width: 500, height: 600}}
                         ref={(imageCarousel) => {
                             this.imageCarousel = imageCarousel;
                         }}
                         renderContent={this.renderContent}
                     >
-                        {images.map((url) => (
+                        {memory.images.map((url) => (
                             <Image
+                                style={{width: 200, height: 300}}
                                 key={url}
                                 source={{ uri: url, height: 100 }}
                                 resizeMode={'contain'}
