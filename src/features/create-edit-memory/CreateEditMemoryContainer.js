@@ -104,7 +104,7 @@ class CreateEditMemoryContainer extends Component {
             category: category,
             imagePaths: imagePaths,
             createdAt: moment().unix(),
-            createdBy: this.props.user.email
+            createdBy: this.props.user.uid
         };
 
         this.props.createMemory(memory);

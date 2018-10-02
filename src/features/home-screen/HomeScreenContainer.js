@@ -28,8 +28,12 @@ class HomeScreenContainer extends Component {
         this.props.signOut();
     };
 
+    createdBy = (memory) => {
+        return this.props.users.find(user => user.id === memory.createdBy)
+    };
+
     rowRenderer = (data) => {
-        return <MemoryBox memory={data.item}/>;
+        return <MemoryBox memory={data.item} createdBy={this.createdBy(data.item)} />;
     };
 
     handleListEnd = () => {
@@ -66,7 +70,8 @@ const mapStateToProps = (state) => {
     return {
         memories: state.memory.memories,
         lastVisible: state.memory.lastVisible,
-        initialLoadFinished: state.memory.initialLoadFinished
+        initialLoadFinished: state.memory.initialLoadFinished,
+        users: state.user.users
     };
 };
 

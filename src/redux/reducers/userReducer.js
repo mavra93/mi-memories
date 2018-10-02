@@ -1,5 +1,5 @@
-import {GET_USER, AUTH_SUCCESS, AUTH_ERR, USER_FETCHED, SIGNED_OUT}  from '../actions/userActions';
-export default function (state = {user: null, err: null, isLoggedIn: false, userFetched: false, registerFinished: false}, action) {
+import {GET_USER, AUTH_SUCCESS, AUTH_ERR, USER_FETCHED, SIGNED_OUT, FETCH_USERS_FINISHED, FETCH_USERS_ERROR}  from '../actions/userActions';
+export default function (state = {users: [], user: null, err: null, isLoggedIn: false, userFetched: false, registerFinished: false}, action) {
     switch(action.type) {
         case USER_FETCHED:
             return { ...state, userFetched: true, registerFinished: false};
@@ -11,6 +11,10 @@ export default function (state = {user: null, err: null, isLoggedIn: false, user
             return { ...state, err: action.payload, isLoggedIn: false};
         case SIGNED_OUT:
             return { ...state, user: null, userFetched: false, isLoggedIn: false};
+        case FETCH_USERS_FINISHED:
+            return { ...state, users: action.payload};
+        case FETCH_USERS_ERROR:
+            return { ...state, err: action.payload};
         default:
             return state;
     }

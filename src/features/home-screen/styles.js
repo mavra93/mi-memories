@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     },
     memoryBox: {
         flex: 1,
-        height: 220,
+        height: 350,
         position: 'relative',
         width: '100%',
         backgroundColor: globalStyles.dividerPrimaryColor,
@@ -22,8 +22,11 @@ const styles = StyleSheet.create({
     },
     memoryTitle: {
         fontSize: 20,
+        width: '85%',
         fontWeight: 'bold',
-        color: globalStyles.titleColor
+        color: globalStyles.titleColor,
+        marginBottom: 15,
+        flex: 0.2
     },
     image: {
         width: '100%',
@@ -31,6 +34,7 @@ const styles = StyleSheet.create({
     },
     memoryDescription: {
         fontSize: 13,
+        flex: 0.6,
         color: globalStyles.borderPrimaryColor
     },
     memoryContent: {
@@ -40,19 +44,20 @@ const styles = StyleSheet.create({
     },
     memoryInfo: {
         color: globalStyles.borderPrimaryColor,
+        flex: 0.2,
         position: 'absolute',
         bottom: 15,
         left: 15,
         fontSize: 12
     },
     memoryCategory: {
-        width: 70,
-        height: 70,
+        width: 50,
+        height: 50,
         backgroundColor: globalStyles.primaryColor,
-        borderRadius: 35,
+        borderRadius: 25,
         position: 'absolute',
-        top: 80,
-        right: 50,
+        top: 165,
+        right: 15,
         justifyContent: 'center',
         alignItems: 'center'
     },

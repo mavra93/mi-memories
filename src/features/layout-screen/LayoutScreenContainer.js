@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {View, StatusBar} from 'react-native';
 import {connect} from 'react-redux'
 import {Text} from 'native-base';
-import {signOut} from '../../redux/actions/userActions'
+import {signOut, getUsers} from '../../redux/actions/userActions'
 import HomeScreenContainer from "../home-screen/HomeScreenContainer";
 import Tabs from '../_shared/tabs/Tabs';
 import {homeScreen, favoriteScreen, notificationsScreen, profileScreen} from '../_shared/tabs/Tabs';
@@ -13,6 +13,10 @@ class LayoutScreenContainer extends Component {
     state = {
         currentScreen: homeScreen
     };
+
+    componentDidMount() {
+        this.props.getUsers();
+    }
 
     componentWillReceiveProps(nextProps) {
         if(nextProps.loadHomeScreen || nextProps.refresh) {
@@ -66,6 +70,7 @@ class LayoutScreenContainer extends Component {
 const mapDispatchToProps = (dispatch) => {
     return {
         signOut: () => dispatch(signOut()),
+        getUsers: () => dispatch(getUsers())
     };
 };
 

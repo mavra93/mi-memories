@@ -6,6 +6,8 @@ export const AUTH_SUCCESS = 'AUTH_SUCCESS';
 export const AUTH_ERR = 'AUTH_ERR';
 export const USER_FETCHED = 'USER_FETCHED';
 export const SIGNED_OUT = 'SIGNED_OUT';
+export const FETCH_USERS_FINISHED = 'FETCH_USERS_FINISHED';
+export const FETCH_USERS_ERROR = 'FETCH_USERS_ERROR';
 
 const firestore = firebaseApp.firestore();
 firestore.settings({timestampsInSnapshots: true});
@@ -23,6 +25,27 @@ export function getUser() {
                     type: USER_FETCHED
                 })
             }
+        });
+    }
+}
+
+export function getUsers() {
+    let users = [];
+    return dispatch => {
+        firestore.collection('users').get().then(querySnapshot => {
+            querySnapshot.forEach(doc => {
+                const user = doc.data();
+                users.push(user);
+            });
+            dispatch({
+                type: FETCH_USERS_FINISHED,
+                payload: users
+            });
+        }).catch((error) => {
+            dispatch({
+                type: FETCH_USERS_ERROR,
+                payload: error
+            });
         });
     }
 }
