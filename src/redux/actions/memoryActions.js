@@ -20,6 +20,20 @@ export function resetMemories() {
     }
 }
 
+export function getFavorites(id) {
+    const favorites = [];
+    return dispatch => {
+        firestore.collection('memories').where('favoriteIds', 'array-contains', id).get().then(querySnapshot => {
+            querySnapshot.forEach(doc => {
+                const favoriteData = doc.data();
+                favorites.push(favoriteData);
+            });
+            console.log(favorites)
+        })
+    }
+
+}
+
 export function createMemory(memory) {
     let index = 0;
     let memoryData = {

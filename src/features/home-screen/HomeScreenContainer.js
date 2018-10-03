@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {View, StatusBar, FlatList, Text, Button} from 'react-native';
 import {connect} from 'react-redux';
 import {signOut} from '../../redux/actions/userActions';
-import {fetchMemories, resetMemories} from '../../redux/actions/memoryActions';
+import {fetchMemories, resetMemories, getFavorites} from '../../redux/actions/memoryActions';
 import styles from './styles';
 import {LayoutUtil} from './components/LayoutUtil';
 import MemoryBox from "./components/MemoryBox";
@@ -18,6 +18,7 @@ class HomeScreenContainer extends Component {
 
     componentDidMount() {
         this.props.fetchMemories()
+        this.props.getFavorites("LK7buv5nIuTL2RR3Dj0zFrpzRub2")
     }
 
     componentWillUnmount() {
@@ -79,7 +80,8 @@ const mapDispatchToProps = (dispatch) => {
     return {
         signOut: () => dispatch(signOut()),
         fetchMemories: (loadMore, lastVisible) => dispatch(fetchMemories(loadMore, lastVisible)),
-        resetMemories: () => dispatch(resetMemories())
+        resetMemories: () => dispatch(resetMemories()),
+        getFavorites: (id) => dispatch(getFavorites(id))
     };
 };
 
