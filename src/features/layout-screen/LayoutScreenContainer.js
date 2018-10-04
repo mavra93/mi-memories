@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import {Text} from 'native-base';
 import {signOut, getUsers} from '../../redux/actions/userActions'
 import HomeScreenContainer from "../home-screen/HomeScreenContainer";
+import FavoriteScreenContainer from '../favorites-screen/FavoriteScreenContainer';
 import Tabs from '../_shared/tabs/Tabs';
 import {homeScreen, favoriteScreen, notificationsScreen, profileScreen} from '../_shared/tabs/Tabs';
 import styles from './styles';
@@ -39,7 +40,7 @@ class LayoutScreenContainer extends Component {
                 currentComponent = <HomeScreenContainer />;
                 break;
             case favoriteScreen:
-                currentComponent = <Text>favorite</Text>;
+                currentComponent = <FavoriteScreenContainer />;
                 break;
             case notificationsScreen:
                 currentComponent = <Text>notifications</Text>;

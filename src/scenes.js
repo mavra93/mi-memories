@@ -6,15 +6,17 @@ import SplashScreenContainer from './features/splash-screen/SplashScreenContaine
 import LayoutScreenContainer from './features/layout-screen/LayoutScreenContainer';
 import CreateEditMemoryContainer from './features/create-edit-memory/CreateEditMemoryContainer';
 import MemoryDetailsScreenContainer from './features/memory-details-screen/MemoryDetailsScreenContainer';
+import FavoriteScreenContainer from './features/favorites-screen/FavoriteScreenContainer';
 
 const scenes = Actions.create(
     <Scene key="root">
-        <Scene key="splashScreen" component={SplashScreenContainer} hideNavBar={true} initial={true} />
+        <Scene key="splashScreen" component={SplashScreenContainer} hideNavBar={true} initial={true}/>
         <Scene key="authScreen" component={AuthScreenContainer} title="Auth" hideNavBar={true}/>
-        <Scene key="layoutScreen" component={LayoutScreenContainer} title="Layout" hideNavBar={true} />
+        <Scene key="layoutScreen" component={LayoutScreenContainer} title="Layout" hideNavBar={true}/>
         <Scene key="homeScreen" component={HomeScreenContainer} title="Home" hideNavBar={true}/>
         <Scene key="createMemory" component={CreateEditMemoryContainer} hideNavBar={true}/>
         <Scene key="memoryDetails" component={MemoryDetailsScreenContainer} hideNavBar={true}/>
+        <Scene key="favoritesScreen" component={FavoriteScreenContainer} hideNavBar={true}/>
     </Scene>
 );
 

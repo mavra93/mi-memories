@@ -8,6 +8,9 @@ export const FETCH_MEMORIES_BEGIN = 'FETCH_MEMORIES_BEGIN';
 export const FETCH_MEMORIES_FINISHED = 'FETCH_MEMORIES_FINISHED';
 export const FETCH_MEMORIES_ERROR = 'FETCH_MEMORIES_ERROR';
 export const RESET_MEMORIES = 'RESET_MEMORIES';
+export const FETCH_FAVORITES_BEGIN = 'FETCH_FAVORITES_BEGIN';
+export const FETCH_FAVORITES_FINISHED = 'FETCH_FAVORITES_FINISHED';
+export const FETCH_FAVORITES_ERROR = 'FETCH_FAVORITES_ERROR';
 
 const firestore = firebaseApp.firestore();
 firestore.settings({timestampsInSnapshots: true});
@@ -20,15 +23,26 @@ export function resetMemories() {
     }
 }
 
-export function getFavorites(id) {
+export function getFavoriteMemories(id) {
     const favorites = [];
     return dispatch => {
+        dispatch({
+            type: FETCH_FAVORITES_BEGIN
+        });
         firestore.collection('memories').where('favoriteIds', 'array-contains', id).get().then(querySnapshot => {
             querySnapshot.forEach(doc => {
                 const favoriteData = doc.data();
                 favorites.push(favoriteData);
             });
-            console.log(favorites)
+            dispatch({
+                type: FETCH_FAVORITES_FINISHED,
+                payload: favorites
+            });
+        }).catch(err => {
+            dispatch({
+                type: FETCH_FAVORITES_ERROR,
+                payload: favorites
+            });
         })
     }
 
