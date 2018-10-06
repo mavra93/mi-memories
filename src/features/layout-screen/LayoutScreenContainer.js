@@ -41,7 +41,7 @@ class LayoutScreenContainer extends Component {
                 currentComponent = <HomeScreenContainer key={key} />;
                 break;
             case favoriteScreen:
-                currentComponent = <FavoriteScreenContainer />;
+                currentComponent = <FavoriteScreenContainer key={key} />;
                 break;
             case notificationsScreen:
                 currentComponent = <Text>notifications</Text>;
