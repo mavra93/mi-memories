@@ -1,9 +1,12 @@
 import React, {Component} from 'react'
-import {View, Text, Animated, Image, ScrollView} from 'react-native';
+import {View, Text, Animated, Image} from 'react-native';
+import {connect} from 'react-redux';
 import ImageCarousel from 'react-native-image-carousel';
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
-import moment from 'moment';
+import {addToFavorite} from '../../redux/actions/memoryActions';
+
 import styles from './styles';
+import Header from './components/Header';
 
 const HEADER_MAX_HEIGHT = 250;
 
@@ -32,20 +35,14 @@ class MemoryDetailsScreenContainer extends Component {
         )
     };
 
+    addToFavorite = () => {
+        const {memory, user} = this.props;
+        this.props.addToFavorite(memory, user)
+    };
+
     renderHeader = () => {
-        const {memory} = this.props;
-        const date = moment.unix(memory.createdAt).format('LL');
-        return (
-            <View style={styles.header}>
-                <Text style={styles.title} numberOfLines={2}>{memory.title}</Text>
-                <Text style={styles.category}>{memory.category.toUpperCase()}</Text>
-                <View style={styles.info}>
-                    <Text style={styles.date}>{date}</Text>
-                    <View style={styles.bullet}></View>
-                    <Text style={styles.createdBy}>{memory.createdBy.displayName}</Text>
-                </View>
-            </View>
-        )
+        const {memory, user} = this.props;
+        return <Header memory={memory} user={user} addToFavorite={this.addToFavorite} />
     };
 
     renderForeground = () => {
@@ -107,6 +104,18 @@ class MemoryDetailsScreenContainer extends Component {
     }
 }
 
-export default MemoryDetailsScreenContainer
+const mapStateToProps = (state) => {
+    return {
+        user: state.user.user
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addToFavorite: (memory, user) => dispatch(addToFavorite(memory, user))
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MemoryDetailsScreenContainer)
 
 

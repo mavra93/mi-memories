@@ -12,7 +12,7 @@ class FavoriteScreenContainer extends Component {
 
     componentDidMount() {
         const {getFavoriteMemories, user} = this.props;
-        getFavoriteMemories("LK7buv5nIuTL2RR3Dj0zFrpzRub2");
+        getFavoriteMemories(user.uid);
     }
 
     createdBy = (memory) => {

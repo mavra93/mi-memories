@@ -2,6 +2,7 @@ import {firebaseApp} from '../../firebaseInit';
 import '@firebase/firestore';
 import {uploadImage} from '../../helpers/uploadImage';
 import {Actions} from 'react-native-router-flux';
+const clone = require('clone');
 
 export const MEMORY_CREATED = 'MEMORY_CREATED';
 export const FETCH_MEMORIES_BEGIN = 'FETCH_MEMORIES_BEGIN';
@@ -32,6 +33,7 @@ export function getFavoriteMemories(id) {
         firestore.collection('memories').where('favoriteIds', 'array-contains', id).get().then(querySnapshot => {
             querySnapshot.forEach(doc => {
                 const favoriteData = doc.data();
+                favoriteData.uid = doc.id;
                 favorites.push(favoriteData);
             });
             dispatch({
@@ -47,6 +49,29 @@ export function getFavoriteMemories(id) {
     }
 
 }
+
+export function addToFavorite(memory, user) {
+    let clonedMemory = clone(memory);
+    if(clonedMemory.favoriteIds) {
+        const removeFromFavorite = clonedMemory.favoriteIds.includes(user.uid);
+        if(removeFromFavorite) {
+            clonedMemory.favoriteIds = clonedMemory.favoriteIds.filter(e => e !== user.uid);
+        } else {
+            clonedMemory.favoriteIds.push(user.uid);
+        }
+    } else {
+        clonedMemory.favoriteIds = [user.uid];
+    }
+
+    clonedMemory.createdBy = clonedMemory.createdBy.id;
+
+    return dispatch => {
+        firestore.collection('memories').doc(clonedMemory.uid).update(clonedMemory).then({
+
+        })
+    }
+}
+
 
 export function createMemory(memory) {
     let index = 0;
@@ -90,6 +115,7 @@ export function fetchMemories(loadMore, lastVisible) {
                 firestore.collection('memories').orderBy("createdAt", "desc").startAfter(lastVisible).limit(5).get().then((querySnapshot) => {
                     querySnapshot.forEach(doc => {
                         const memory = doc.data();
+                        memory.uid = doc.id;
                         memories.push(memory);
                     });
                     dispatch({
@@ -111,6 +137,7 @@ export function fetchMemories(loadMore, lastVisible) {
             firestore.collection('memories').orderBy("createdAt", "desc").limit(5).get().then((querySnapshot) => {
                 querySnapshot.forEach(doc => {
                     const memory = doc.data();
+                    memory.uid = doc.id;
                     memories.push(memory);
                 });
                 dispatch({

@@ -7,6 +7,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "clone": "^2.1.2",
     "firebase": "5.0.3",
     "lottie-react-native": "^2.3.2",
     "moment": "^2.22.2",

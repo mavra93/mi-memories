@@ -47,6 +47,7 @@ const styles = StyleSheet.create({
         fontSize: 18
     },
     info: {
+        position: 'relative',
         flex: 0.3,
         flexDirection: 'row',
         justifyContent: 'flex-start',
@@ -73,6 +74,23 @@ const styles = StyleSheet.create({
     description: {
         color: globalStyles.borderPrimaryColor,
         fontSize: 15
+    },
+    editIcon: {
+        position: 'absolute',
+        color: globalStyles.borderPrimaryColor,
+        fontSize: 40,
+        right: 0,
+        bottom: 0,
+    },
+    favoriteIcon: {
+        position: 'absolute',
+        color: globalStyles.borderPrimaryColor,
+        fontSize: 40,
+        right: 0,
+        bottom: 0,
+    },
+    favoriteIconActive: {
+        color: globalStyles.red,
     }
 });
 
