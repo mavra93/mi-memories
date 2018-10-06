@@ -1,86 +1,79 @@
-import {StyleSheet, Dimensions} from 'react-native';
+import {StyleSheet} from 'react-native';
 import globalStyles from '../../globalStyles';
-
-const { width: viewportWidth, height: viewportHeight } = Dimensions.get('window');
-const entryBorderRadius = 8;
-function wp (percentage) {
-    const value = (percentage * viewportWidth) / 100;
-    return Math.round(value);
-}
-
-const slideHeight = viewportHeight * 0.36;
-const slideWidth = wp(75);
-const itemHorizontalMargin = wp(2);
-const itemWidth = slideWidth + itemHorizontalMargin * 2;
 
 const styles = StyleSheet.create({
     layoutContainer: {
-        flex: 1
+        alignItems: 'center',
+        paddingVertical: 20,
+        height: globalStyles.screenHeight - 90
     },
     slideInnerContainer: {
-        width: 400,
-        height: 300,
-        paddingHorizontal: 20,
-        paddingBottom: 18 // needed for shadow
-    },
-    lideInnerContainer: {
-        width: itemWidth,
-        height: slideHeight,
-        paddingHorizontal: itemHorizontalMargin,
-        paddingBottom: 18 // needed for shadow
-    },
-    shadow: {
-        position: 'absolute',
-        top: 0,
-        left: itemHorizontalMargin,
-        right: itemHorizontalMargin,
-        bottom: 18,
-        shadowColor: globalStyles.dividerPrimaryColor,
-        shadowOpacity: 0.25,
-        shadowOffset: { width: 0, height: 10 },
-        shadowRadius: 10,
-        borderRadius: entryBorderRadius
+        elevation: 4,
+        width: '100%',
+        height: globalStyles.screenHeight - 90,
     },
     imageContainer: {
+        position: 'relative',
         flex: 1,
-        marginBottom: -1, // Prevent a random Android rendering issue
-        backgroundColor: 'white',
-        borderTopLeftRadius: entryBorderRadius,
-        borderTopRightRadius: entryBorderRadius
+        height: '100%',
     },
     image: {
         width: '100%',
-        resizeMode: 'cover',
+        height: globalStyles.screenHeight - 90,
         flex: 1
     },
-    radiusMask: {
+    contentWrapper: {
         position: 'absolute',
         bottom: 0,
         left: 0,
-        right: 0,
-        height: entryBorderRadius,
-        backgroundColor: 'white'
+        height: '40%',
+        width: '100%',
+        backgroundColor: globalStyles.secondaryBackgroundColor
     },
     textContainer: {
-        justifyContent: 'center',
-        paddingTop: 20 - entryBorderRadius,
-        paddingBottom: 20,
-        paddingHorizontal: 16,
-        backgroundColor: 'white',
-        borderBottomLeftRadius: entryBorderRadius,
-        borderBottomRightRadius: entryBorderRadius
+        flex: 1,
+        paddingVertical: 15,
+        paddingHorizontal: 15
     },
     title: {
-        color: globalStyles.dividerPrimaryColor,
-        fontSize: 13,
+        flex: 0.3,
         fontWeight: 'bold',
-        letterSpacing: 0.5
+        color: globalStyles.titleColor,
+        fontSize: 22
     },
-    subtitle: {
-        marginTop: 6,
-        color: globalStyles.textPrimaryColor,
-        fontSize: 12,
-        fontStyle: 'italic'
+    category: {
+        flex: 0.2,
+        fontWeight: 'bold',
+        color: globalStyles.borderPrimaryColor,
+        fontSize: 18
+    },
+    info: {
+        flex: 0.3,
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center'
+    },
+    date: {
+        color: globalStyles.primaryColor,
+        fontSize: 15
+    },
+    bullet: {
+        width: 5,
+        height: 5,
+        borderRadius: 2.5,
+        backgroundColor: globalStyles.borderPrimaryColor,
+        marginHorizontal: 10
+    },
+    createdBy: {
+        color: globalStyles.borderPrimaryColor,
+        fontSize: 15
+    },
+    descriptionContainer: {
+        flex: 0.5,
+    },
+    description: {
+        color: globalStyles.borderPrimaryColor,
+        fontSize: 15
     }
 });
 

@@ -12,7 +12,8 @@ import styles from './styles';
 class LayoutScreenContainer extends Component {
 
     state = {
-        currentScreen: homeScreen
+        currentScreen: homeScreen,
+        key: null
     };
 
     componentDidMount() {
@@ -20,9 +21,9 @@ class LayoutScreenContainer extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if(nextProps.loadHomeScreen || nextProps.refresh) {
+        if(nextProps.refresh) {
             this.setState({
-                currentScreen: homeScreen
+                key: Math.random()
             })
         }
     }
@@ -33,11 +34,11 @@ class LayoutScreenContainer extends Component {
         })
     };
 
-    showComponent = (currentScreen) => {
+    showComponent = (currentScreen, key) => {
         let currentComponent = null;
         switch(currentScreen) {
             case homeScreen:
-                currentComponent = <HomeScreenContainer />;
+                currentComponent = <HomeScreenContainer key={key} />;
                 break;
             case favoriteScreen:
                 currentComponent = <FavoriteScreenContainer />;
@@ -53,8 +54,8 @@ class LayoutScreenContainer extends Component {
     };
 
     render() {
-        const {currentScreen} = this.state;
-        const screenToShow = this.showComponent(currentScreen);
+        const {currentScreen, key} = this.state;
+        const screenToShow = this.showComponent(currentScreen, key);
         return (
             <View style={styles.layoutContainer}>
                 <StatusBar
@@ -62,7 +63,7 @@ class LayoutScreenContainer extends Component {
                     barStyle="dark-content"
                 />
                 {screenToShow}
-                <Tabs changeScene={this.changeScene}/>
+                <Tabs changeScene={this.changeScene} />
             </View>
         )
     }

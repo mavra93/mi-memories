@@ -5,7 +5,7 @@ import globalStyles from '../../globalStyles';
 const styles = StyleSheet.create({
     layoutContainer: {
         flex: 1,
-        backgroundColor: globalStyles.primaryBackgroundColor
+        backgroundColor: globalStyles.backgroundPrimaryColor
     }
 });
 

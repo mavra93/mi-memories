@@ -70,7 +70,7 @@ export function createMemory(memory) {
                             dispatch({
                                 type: MEMORY_CREATED
                             });
-                            Actions.layoutScreen({loadHomeScreen: true});
+                            Actions.layoutScreen({refresh: true});
                         })
                 }
             });

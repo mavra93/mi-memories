@@ -15,15 +15,18 @@ class Tabs extends Component {
         activeIndex: 0,
     };
 
+    setActiveIndex = (i) => {
+        this.setState({
+            activeIndex: i
+        });
+    }
+    ;
     openModal = () => {
-        this.props.changeScene(null);
         Actions.createMemory();
     };
 
     selectTab = (screen, i) => {
-        this.setState({
-            activeIndex: i
-        });
+        this.setActiveIndex(i);
         this.props.changeScene(screen)
     };
 

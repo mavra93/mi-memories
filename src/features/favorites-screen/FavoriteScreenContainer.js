@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
-import {View, StatusBar} from 'react-native';
+import {View} from 'react-native';
 import {connect} from 'react-redux'
-import {Text} from 'native-base';
 import Carousel from 'react-native-snap-carousel-tabs';
 import {getFavoriteMemories} from '../../redux/actions/memoryActions'
 import styles from './styles';
+import globalStyles from '../../globalStyles';
 import SliderEntry from './components/SliderEntry';
 import {createdBy} from '../../helpers/createdBy'
 
@@ -31,15 +31,13 @@ class FavoriteScreenContainer extends Component {
         return (
             <View style={styles.layoutContainer}>
                 {favoriteMemories && favoriteMemories.length > 0 ?
-                    < Carousel
-                        layout={'default'} layoutCardOffset={`18`}
-                        ref={(c) => {
-                            this._carousel = c;
-                        }}
+                    <Carousel
+                        layout={'default'}
                         data={this.props.favoriteMemories}
                         renderItem={this.renderItem}
-                        sliderWidth={400}
-                        itemWidth={300}
+                        sliderWidth={globalStyles.screenWidth}
+                        itemWidth={globalStyles.screenWidth - 90}
+
                     /> : null
                 }
             </View>
