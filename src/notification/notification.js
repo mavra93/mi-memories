@@ -9,11 +9,12 @@ export function sendRemoteNotification(memory, user, users) {
                     custom_notification: {
                         title: memory.title,
                         body: memory.description,
-                        color: "#42b72a",
-                        sound: "default",
-                        priority: "high",
+                        color: '#42b72a',
+                        sound: 'default',
+                        icon: 'ic_launcher',
+                        priority: 'high',
                         show_in_foreground: true,
-                        targetScreen: "home"
+                        targetScreen: 'home'
                     }
                 },
                 priority: 10
