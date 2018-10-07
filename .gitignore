@@ -58,3 +58,4 @@ buck-out/
 src/config/
 android/gradle.properties
 android/app/my-release-key.keystore
+android/app/google-services.json

@@ -4,12 +4,11 @@ import {firebaseApp} from '../firebaseInit';
 const uuid = require('uuid/v1');
 const firebaseStorage = firebaseApp.storage();
 
-const Blob = RNFetchBlob.polyfill.Blob;
-const fs = RNFetchBlob.fs;
-const tempWindowXMLHttpRequest = window.XMLHttpRequest;
-window.Blob = Blob;
-
 export function uploadImage(image) {
+    const Blob = RNFetchBlob.polyfill.Blob;
+    const fs = RNFetchBlob.fs;
+    const tempWindowXMLHttpRequest = window.XMLHttpRequest;
+    window.Blob = Blob;
     window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest;
 
     return new Promise((resolve, reject) => {

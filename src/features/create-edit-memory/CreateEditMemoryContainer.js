@@ -98,16 +98,17 @@ class CreateEditMemoryContainer extends Component {
 
     createMemory = () => {
         const {title, description, category, imagePaths} = this.state;
+        const {user, users} = this.props;
         const memory = {
             title: title.value,
             description: description.value,
             category: category,
             imagePaths: imagePaths,
             createdAt: moment().unix(),
-            createdBy: this.props.user.uid
+            createdBy: user.uid
         };
 
-        this.props.createMemory(memory);
+        this.props.createMemory(memory, user, users);
     };
 
     render() {
@@ -172,12 +173,13 @@ class CreateEditMemoryContainer extends Component {
 const mapStateToProps = (state) => {
     return {
         user: state.user.user,
+        users: state.user.users,
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        createMemory: (memory) => dispatch(createMemory(memory))
+        createMemory: (memory, user, users) => dispatch(createMemory(memory, user, users))
     };
 };
 

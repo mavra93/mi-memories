@@ -8,6 +8,7 @@ export const USER_FETCHED = 'USER_FETCHED';
 export const SIGNED_OUT = 'SIGNED_OUT';
 export const FETCH_USERS_FINISHED = 'FETCH_USERS_FINISHED';
 export const FETCH_USERS_ERROR = 'FETCH_USERS_ERROR';
+export const UPDATE_USER_TOKEN = 'UPDATE_USER_TOKEN';
 
 const firestore = firebaseApp.firestore();
 firestore.settings({timestampsInSnapshots: true});
@@ -63,6 +64,24 @@ export function login(user) {
                 payload: err
             })
         })
+    }
+}
+
+export function updateToken(token) {
+    return dispatch => {
+        const currentUser = firebaseApp.auth().currentUser;
+        const user = {
+            displayName: currentUser.displayName,
+            email: currentUser.email,
+            id: currentUser.uid,
+            token: token
+        };
+        firestore.collection('users').doc(currentUser.uid).set(user).then(() => {
+            dispatch({
+                type: UPDATE_USER_TOKEN,
+                payload: {token}
+            })
+        });
     }
 }
 

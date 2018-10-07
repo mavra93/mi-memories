@@ -2,8 +2,9 @@ import React, {Component} from 'react';
 import {BackHandler} from 'react-native';
 import {connect} from 'react-redux';
 import {Router, Actions} from 'react-native-router-flux';
+import FCM from "react-native-fcm";
 import scenes from './scenes';
-import {getUser} from './redux/actions/userActions';
+import {getUser, updateToken} from './redux/actions/userActions';
 
 class MainContainer extends Component {
 
@@ -13,6 +14,12 @@ class MainContainer extends Component {
     }
 
     componentDidUpdate() {
+        if(this.props.isLoggedIn) {
+            FCM.requestPermissions();
+            FCM.getFCMToken().then(token => {
+                this.props.updateToken(token)
+            });
+        }
         this.redirectToInitialScene();
     }
 
@@ -21,7 +28,7 @@ class MainContainer extends Component {
     }
 
     handleBackPress = () => {
-        if(Actions.currentScene === 'authScreen' || Actions.currentScene === 'layoutScreen' || Actions.currentScene === 'splashScreen') {
+        if (Actions.currentScene === 'authScreen' || Actions.currentScene === 'layoutScreen' || Actions.currentScene === 'splashScreen') {
             return true;
         } else {
             Actions.pop({refresh: {refresh: true}});
@@ -58,7 +65,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getUser: () => dispatch(getUser())
+        getUser: () => dispatch(getUser()),
+        updateToken: (token) => dispatch(updateToken(token))
     };
 };
 

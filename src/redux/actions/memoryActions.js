@@ -2,6 +2,7 @@ import {firebaseApp} from '../../firebaseInit';
 import '@firebase/firestore';
 import {uploadImage} from '../../helpers/uploadImage';
 import {Actions} from 'react-native-router-flux';
+import {sendRemoteNotification} from '../../notification/notification';
 const clone = require('clone');
 
 export const MEMORY_CREATED = 'MEMORY_CREATED';
@@ -73,7 +74,7 @@ export function addToFavorite(memory, user) {
 }
 
 
-export function createMemory(memory) {
+export function createMemory(memory, user, users) {
     let index = 0;
     let memoryData = {
         title: memory.title,
@@ -95,6 +96,7 @@ export function createMemory(memory) {
                             dispatch({
                                 type: MEMORY_CREATED
                             });
+                            sendRemoteNotification(memoryData, user, users);
                             Actions.layoutScreen({refresh: true});
                         })
                 }

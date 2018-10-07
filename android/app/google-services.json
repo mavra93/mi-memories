@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "720373649902",
+    "firebase_url": "https://midatabase-87b13.firebaseio.com",
+    "project_id": "midatabase-87b13",
+    "storage_bucket": "midatabase-87b13.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:720373649902:android:5bc7072455e8c8dd",
+        "android_client_info": {
+          "package_name": "com.mi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "720373649902-fhng1r5ue4pbm21uop0trv5klrtemmqc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEo0mvVNtWMD4-s47LGkidKiXvlB2H-TI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
