@@ -1,15 +1,11 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import FastImage from 'react-native-fast-image';
 import moment from 'moment';
 import styles from '../styles';
 
-class MemoryBox extends Component {
-
-    shouldComponentUpdate() {
-        return false
-    }
+class MemoryBox extends React.PureComponent {
 
     openMemoryDetails = () => {
         const {memory, createdBy} = this.props;

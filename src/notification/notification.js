@@ -19,7 +19,7 @@ export function sendRemoteNotification(memory, user, users) {
                 },
                 priority: 10
             };
-            firebaseClient.send(JSON.stringify(body), "notification");
+            firebaseClient.send(JSON.stringify(body));
         }
     }
 }

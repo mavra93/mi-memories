@@ -53,9 +53,9 @@ export function getFavoriteMemories(id) {
 
 export function addToFavorite(memory, user) {
     let clonedMemory = clone(memory);
-    if(clonedMemory.favoriteIds) {
+    if (clonedMemory.favoriteIds) {
         const removeFromFavorite = clonedMemory.favoriteIds.includes(user.uid);
-        if(removeFromFavorite) {
+        if (removeFromFavorite) {
             clonedMemory.favoriteIds = clonedMemory.favoriteIds.filter(e => e !== user.uid);
         } else {
             clonedMemory.favoriteIds.push(user.uid);
@@ -67,9 +67,7 @@ export function addToFavorite(memory, user) {
     clonedMemory.createdBy = clonedMemory.createdBy.id;
 
     return dispatch => {
-        firestore.collection('memories').doc(clonedMemory.uid).update(clonedMemory).then({
-
-        })
+        firestore.collection('memories').doc(clonedMemory.uid).update(clonedMemory).then({})
     }
 }
 
@@ -105,8 +103,19 @@ export function createMemory(memory, user, users) {
     }
 }
 
-export function fetchMemories(loadMore, lastVisible) {
+function prepareMemories(querySnapshot) {
     const memories = [];
+    querySnapshot.forEach(doc => {
+        const memory = doc.data();
+        memory.uid = doc.id;
+        memories.push(memory);
+    });
+    return memories;
+}
+
+export function fetchMemories(loadMore, lastVisible, order) {
+    let memories;
+    const query = firestore.collection('memories').orderBy('createdAt', order || 'desc');
 
     return dispatch => {
         dispatch({
@@ -114,12 +123,8 @@ export function fetchMemories(loadMore, lastVisible) {
         });
         if (loadMore) {
             if (lastVisible) {
-                firestore.collection('memories').orderBy("createdAt", "desc").startAfter(lastVisible).limit(5).get().then((querySnapshot) => {
-                    querySnapshot.forEach(doc => {
-                        const memory = doc.data();
-                        memory.uid = doc.id;
-                        memories.push(memory);
-                    });
+                query.startAfter(lastVisible).limit(5).get().then((querySnapshot) => {
+                    memories = prepareMemories(querySnapshot);
                     dispatch({
                         type: FETCH_MEMORIES_FINISHED,
                         payload: {
@@ -136,12 +141,8 @@ export function fetchMemories(loadMore, lastVisible) {
                 });
             }
         } else {
-            firestore.collection('memories').orderBy("createdAt", "desc").limit(5).get().then((querySnapshot) => {
-                querySnapshot.forEach(doc => {
-                    const memory = doc.data();
-                    memory.uid = doc.id;
-                    memories.push(memory);
-                });
+            query.limit(5).get().then((querySnapshot) => {
+                memories = prepareMemories(querySnapshot);
                 dispatch({
                     type: FETCH_MEMORIES_FINISHED,
                     payload: {

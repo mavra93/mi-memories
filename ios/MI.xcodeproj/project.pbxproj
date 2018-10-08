@@ -58,6 +58,7 @@
 		F5A60449ED34473099065DF6 /* libRNFetchBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AFACB8D4C7B479BB41555B9 /* libRNFetchBlob.a */; };
 		728C039C8EFA4E0B98EFA34C /* libFastImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F44CB7281034DEC90BBA1AE /* libFastImage.a */; };
 		AB365DAB3888478D883A7B71 /* libRNFIRMessaging.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 834A9E5262884D26BE1EBF8E /* libRNFIRMessaging.a */; };
+		646BC5F84EFC47158665C3FE /* libInteractable.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A0D50E1585C4C4E968EEF0A /* libInteractable.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -391,6 +392,8 @@
 		2F44CB7281034DEC90BBA1AE /* libFastImage.a */ = {isa = PBXFileReference; name = "libFastImage.a"; path = "libFastImage.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		80C7DE6B0F334A31B8382B79 /* RNFIRMessaging.xcodeproj */ = {isa = PBXFileReference; name = "RNFIRMessaging.xcodeproj"; path = "../node_modules/react-native-fcm/ios/RNFIRMessaging.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		834A9E5262884D26BE1EBF8E /* libRNFIRMessaging.a */ = {isa = PBXFileReference; name = "libRNFIRMessaging.a"; path = "libRNFIRMessaging.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		50B3726E17E445F4B63BD64C /* Interactable.xcodeproj */ = {isa = PBXFileReference; name = "Interactable.xcodeproj"; path = "../node_modules/react-native-interactable/ios/Interactable.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		8A0D50E1585C4C4E968EEF0A /* libInteractable.a */ = {isa = PBXFileReference; name = "libInteractable.a"; path = "libInteractable.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -426,6 +429,7 @@
 				F5A60449ED34473099065DF6 /* libRNFetchBlob.a in Frameworks */,
 				728C039C8EFA4E0B98EFA34C /* libFastImage.a in Frameworks */,
 				AB365DAB3888478D883A7B71 /* libRNFIRMessaging.a in Frameworks */,
+				646BC5F84EFC47158665C3FE /* libInteractable.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -619,6 +623,7 @@
 				7F4F2964C09541469E0608EB /* RNFetchBlob.xcodeproj */,
 				0B135742AD0340AA9F9C636E /* FastImage.xcodeproj */,
 				80C7DE6B0F334A31B8382B79 /* RNFIRMessaging.xcodeproj */,
+				50B3726E17E445F4B63BD64C /* Interactable.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1289,6 +1294,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1299,6 +1305,7 @@
 					"$(SRCROOT)\..\node_modules\rn-fetch-blob\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-fast-image\ios\FastImage/**",
 					"$(SRCROOT)\..\node_modules\react-native-fcm\ios",
+					"$(SRCROOT)\..\node_modules\react-native-interactable\ios\Interactable/**",
 				);
 			};
 			name = Debug;
@@ -1326,6 +1333,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1336,6 +1344,7 @@
 					"$(SRCROOT)\..\node_modules\rn-fetch-blob\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-fast-image\ios\FastImage/**",
 					"$(SRCROOT)\..\node_modules\react-native-fcm\ios",
+					"$(SRCROOT)\..\node_modules\react-native-interactable\ios\Interactable/**",
 				);
 			};
 			name = Release;
@@ -1364,6 +1373,7 @@
 					"$(SRCROOT)\..\node_modules\rn-fetch-blob\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-fast-image\ios\FastImage/**",
 					"$(SRCROOT)\..\node_modules\react-native-fcm\ios",
+					"$(SRCROOT)\..\node_modules\react-native-interactable\ios\Interactable/**",
 				);
 			};
 			name = Debug;
@@ -1391,6 +1401,7 @@
 					"$(SRCROOT)\..\node_modules\rn-fetch-blob\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-fast-image\ios\FastImage/**",
 					"$(SRCROOT)\..\node_modules\react-native-fcm\ios",
+					"$(SRCROOT)\..\node_modules\react-native-interactable\ios\Interactable/**",
 				);
 			};
 			name = Release;
@@ -1427,6 +1438,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1437,6 +1449,7 @@
 					"$(SRCROOT)\..\node_modules\rn-fetch-blob\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-fast-image\ios\FastImage/**",
 					"$(SRCROOT)\..\node_modules\react-native-fcm\ios",
+					"$(SRCROOT)\..\node_modules\react-native-interactable\ios\Interactable/**",
 				);
 			};
 			name = Debug;
@@ -1473,6 +1486,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1483,6 +1497,7 @@
 					"$(SRCROOT)\..\node_modules\rn-fetch-blob\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-fast-image\ios\FastImage/**",
 					"$(SRCROOT)\..\node_modules\react-native-fcm\ios",
+					"$(SRCROOT)\..\node_modules\react-native-interactable\ios\Interactable/**",
 				);
 			};
 			name = Release;
@@ -1518,6 +1533,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1528,6 +1544,7 @@
 					"$(SRCROOT)\..\node_modules\rn-fetch-blob\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-fast-image\ios\FastImage/**",
 					"$(SRCROOT)\..\node_modules\react-native-fcm\ios",
+					"$(SRCROOT)\..\node_modules\react-native-interactable\ios\Interactable/**",
 				);
 			};
 			name = Debug;
@@ -1563,6 +1580,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1573,6 +1591,7 @@
 					"$(SRCROOT)\..\node_modules\rn-fetch-blob\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-fast-image\ios\FastImage/**",
 					"$(SRCROOT)\..\node_modules\react-native-fcm\ios",
+					"$(SRCROOT)\..\node_modules\react-native-interactable\ios\Interactable/**",
 				);
 			};
 			name = Release;

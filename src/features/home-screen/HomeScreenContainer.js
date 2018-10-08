@@ -1,20 +1,22 @@
 import React, {Component} from 'react';
-import {View, StatusBar, FlatList, Text, Button} from 'react-native';
+import {View, FlatList, Animated} from 'react-native';
 import {connect} from 'react-redux';
+import {Icon} from 'native-base';
+import Interactable from 'react-native-interactable';
 import {signOut} from '../../redux/actions/userActions';
 import {fetchMemories, resetMemories} from '../../redux/actions/memoryActions';
 import styles from './styles';
-import {LayoutUtil} from './components/LayoutUtil';
 import MemoryBox from "./components/MemoryBox";
 import {createdBy} from '../../helpers/createdBy'
-
-const uuid = require('uuid/v1');
+import Filters from './components/Filters';
 
 class HomeScreenContainer extends Component {
 
     state = {
-        layoutProvider: LayoutUtil.getLayoutProvider(0),
-        loadMoreReady: false
+        loadMoreReady: false,
+        deltaY: new Animated.Value(-130),
+        scrollEnabled: false,
+        order: 'desc'
     };
 
     componentDidMount() {
@@ -31,34 +33,66 @@ class HomeScreenContainer extends Component {
 
     rowRenderer = (data) => {
         const memory = data.item;
-        return <MemoryBox memory={data.item} createdBy={createdBy(memory, this.props.users)} />;
+        return <MemoryBox memory={data.item} createdBy={createdBy(memory, this.props.users)}/>;
     };
 
     handleListEnd = () => {
         const {initialLoadFinished, fetchMemories} = this.props;
         if (initialLoadFinished) {
-            fetchMemories(true, this.props.lastVisible)
+            fetchMemories(true, this.props.lastVisible, this.state.order)
         }
+    };
+
+    onSnap = () => {
+        this.setState({
+            scrollEnabled: this.state.deltaY._value <= -130
+        })
+    };
+
+    fetchByOrder = (order) => {
+        this.props.resetMemories();
+        this.setState({
+            order: order
+        });
+        this.props.fetchMemories(false, null, order);
     };
 
     render() {
         const {memories} = this.props;
+
         return (
-            <View style={{flex: 1}}>
-                {
-                    memories.length > 0 ?
-                        <View style={styles.listWrapper}>
-                            <FlatList
-                                style={styles.list}
-                                data={this.props.memories}
-                                keyExtractor={item => uuid()}
-                                renderItem={this.rowRenderer}
-                                onEndReached={this.handleListEnd}
-                                onEndReachedThreshold={0.1}
-                            />
+            <View style={styles.container}>
+                <Filters deltaY={this.state.deltaY} fetchByOrder={this.fetchByOrder} />
+                <Interactable.View
+                    verticalOnly={true}
+                    snapPoints={[{y: 0}, {y: -130}]}
+                    boundaries={{top: -200}}
+                    animatedValueY={this.state.deltaY}
+                    onSnap={this.onSnap}>
+                    <View style={styles.pullUpDown}>
+                        <View style={styles.pullUpDownIconWrapper}>
+                            <Icon style={styles.pullUpDownIcon} name="ios-menu"/>
                         </View>
-                        : null
-                }
+                    </View>
+                    {
+                        memories.length > 0 ?
+                            <Animated.View style={styles.listWrapper}>
+                                <FlatList
+                                    initialNumToRender={27}
+                                    removeClippedSubviews={true}
+                                    windowSize={41}
+                                    scrollEnabled={this.state.scrollEnabled}
+                                    style={styles.list}
+                                    data={this.props.memories}
+                                    keyExtractor={item => item.createdAt.toString()}
+                                    renderItem={this.rowRenderer}
+                                    onEndReached={this.handleListEnd}
+                                    onEndReachedThreshold={0.1}
+                                />
+                            </Animated.View>
+                            : null
+                    }
+                </Interactable.View>
             </View>
         )
     }
@@ -76,7 +110,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         signOut: () => dispatch(signOut()),
-        fetchMemories: (loadMore, lastVisible) => dispatch(fetchMemories(loadMore, lastVisible)),
+        fetchMemories: (loadMore, lastVisible, order) => dispatch(fetchMemories(loadMore, lastVisible, order)),
         resetMemories: () => dispatch(resetMemories())
     };
 };

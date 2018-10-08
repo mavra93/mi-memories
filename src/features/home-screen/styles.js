@@ -2,6 +2,10 @@ import {StyleSheet} from 'react-native';
 import globalStyles from '../../globalStyles';
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignItems: 'stretch'
+    },
     listWrapper: {
         height: globalStyles.screenHeight - 65,
     },
@@ -64,6 +68,51 @@ const styles = StyleSheet.create({
     memoryCategoryText: {
         color: globalStyles.textPrimaryColor,
         fontWeight: 'bold'
+    },
+    filterContainer: {
+        backgroundColor: globalStyles.secondaryBackgroundColor,
+        paddingTop: 10,
+    },
+    filterTop: {
+        height: 36,
+    },
+    filterField: {
+        height: 40,
+        backgroundColor: globalStyles.primaryColor,
+        marginHorizontal: 10,
+        marginBottom: 10,
+        borderRadius: 4,
+        justifyContent: 'center'
+    },
+    filterLabelText: {
+        color: globalStyles.titleColor,
+        fontSize: 14,
+        fontWeight: '500',
+        marginLeft: 30
+    },
+    filterFieldText: {
+        color: globalStyles.textPrimaryColor,
+        fontSize: 14,
+        fontWeight: '500',
+        marginLeft: 30
+    },
+    pullUpDown: {
+        padding: 5,
+        elevation: 8,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    pullUpDownIconWrapper: {
+        backgroundColor: globalStyles.primaryColor,
+        width: 30,
+        height: 30,
+        borderRadius: 15,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    pullUpDownIcon: {
+        color: globalStyles.textPrimaryColor,
+        fontSize: 20
     }
 });
 
