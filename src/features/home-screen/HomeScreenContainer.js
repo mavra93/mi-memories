@@ -9,6 +9,7 @@ import styles from './styles';
 import MemoryBox from "./components/MemoryBox";
 import {createdBy} from '../../helpers/createdBy'
 import Filters from './components/Filters';
+import Loader from '../_shared/loader/Loader';
 
 class HomeScreenContainer extends Component {
 
@@ -58,11 +59,12 @@ class HomeScreenContainer extends Component {
     };
 
     render() {
-        const {memories} = this.props;
+        const {memories, loading} = this.props;
 
         return (
             <View style={styles.container}>
-                <Filters deltaY={this.state.deltaY} fetchByOrder={this.fetchByOrder} />
+                {loading ? <Loader /> : null}
+                <Filters deltaY={this.state.deltaY} fetchByOrder={this.fetchByOrder}/>
                 <Interactable.View
                     verticalOnly={true}
                     snapPoints={[{y: 0}, {y: -130}]}
@@ -100,6 +102,7 @@ class HomeScreenContainer extends Component {
 
 const mapStateToProps = (state) => {
     return {
+        loading: state.memory.loading,
         memories: state.memory.memories,
         lastVisible: state.memory.lastVisible,
         initialLoadFinished: state.memory.initialLoadFinished,

@@ -10,7 +10,7 @@ import * as Animatable from 'react-native-animatable';
 import styles from './styles';
 import globalStyles from '../../globalStyles';
 import {createMemory} from '../../redux/actions/memoryActions';
-import isValid from '../helpers/isValid';
+import isValid from '../../helpers/isValid';
 import {capitalizeFirstLetter} from '../../helpers/capitalize';
 
 const ANIMATION_DURATION = 300;

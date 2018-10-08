@@ -4,7 +4,7 @@ import {Container, Form, Text, View, Button} from 'native-base';
 import styles from '../styles';
 import globalStyles from '../../../globalStyles';
 import * as Animatable from 'react-native-animatable';
-import isValid from '../../helpers/isValid';
+import isValid from '../../../helpers/isValid';
 import ErrorText from "../../_shared/error-text/ErrorText";
 
 const ANIMATION_DURATION = 500;

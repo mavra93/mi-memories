@@ -6,7 +6,8 @@ import {getFavoriteMemories} from '../../redux/actions/memoryActions'
 import styles from './styles';
 import globalStyles from '../../globalStyles';
 import SliderEntry from './components/SliderEntry';
-import {createdBy} from '../../helpers/createdBy'
+import {createdBy} from '../../helpers/createdBy';
+import Loader from '../_shared/loader/Loader';
 
 class FavoriteScreenContainer extends Component {
 
@@ -27,9 +28,10 @@ class FavoriteScreenContainer extends Component {
     };
 
     render() {
-        const {favoriteMemories} = this.props;
+        const {favoriteMemories, loading} = this.props;
         return (
             <View style={styles.layoutContainer}>
+                {loading ? <Loader /> : null}
                 {favoriteMemories && favoriteMemories.length > 0 ?
                     <Carousel
                         layout={'default'}
@@ -49,7 +51,8 @@ const mapStateToProps = (state) => {
     return {
         user: state.user.user,
         users: state.user.users,
-        favoriteMemories: state.memory.favoriteMemories
+        favoriteMemories: state.memory.favoriteMemories,
+        loading: state.memory.loading
     };
 };
 

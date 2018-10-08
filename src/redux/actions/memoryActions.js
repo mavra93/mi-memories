@@ -118,9 +118,6 @@ export function fetchMemories(loadMore, lastVisible, order) {
     const query = firestore.collection('memories').orderBy('createdAt', order || 'desc');
 
     return dispatch => {
-        dispatch({
-            type: FETCH_MEMORIES_BEGIN
-        });
         if (loadMore) {
             if (lastVisible) {
                 query.startAfter(lastVisible).limit(5).get().then((querySnapshot) => {
@@ -141,6 +138,9 @@ export function fetchMemories(loadMore, lastVisible, order) {
                 });
             }
         } else {
+            dispatch({
+                type: FETCH_MEMORIES_BEGIN
+            });
             query.limit(5).get().then((querySnapshot) => {
                 memories = prepareMemories(querySnapshot);
                 dispatch({
