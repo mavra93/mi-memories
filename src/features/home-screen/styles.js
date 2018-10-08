@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
         alignItems: 'stretch'
     },
     listWrapper: {
-        height: globalStyles.screenHeight - 65,
+        height: globalStyles.screenHeight - 125,
     },
     list: {
         backgroundColor: globalStyles.backgroundPrimaryColor,
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: globalStyles.titleColor,
         marginBottom: 15,
-        flex: 0.2
+        flex: 0.23
     },
     image: {
         width: '100%',
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     },
     memoryDescription: {
         fontSize: 13,
-        flex: 0.6,
+        flex: 0.57,
         color: globalStyles.borderPrimaryColor
     },
     memoryContent: {

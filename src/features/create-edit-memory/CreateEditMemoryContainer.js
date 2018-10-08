@@ -135,10 +135,11 @@ class CreateEditMemoryContainer extends Component {
                             <TextInput placeholder="Enter memory description"
                                        underlineColorAndroid="transparent"
                                        multiline={true}
-                                       numberOfLines={7}
+                                       numberOfLines={3}
                                        name="description"
                                        ref="description"
-                                       value={description.value}/>
+                                       value={description.value}
+                                       style={styles.textArea}/>
                         </View>
                         <View>
                             <Picker

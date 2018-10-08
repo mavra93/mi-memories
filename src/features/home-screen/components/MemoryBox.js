@@ -15,7 +15,7 @@ class MemoryBox extends React.PureComponent {
 
     render() {
         const {memory, createdBy} = this.props;
-        const date = moment.unix(memory.createdAt).format('LLL');
+        const date = moment.unix(memory.createdAt).fromNow();
         return (
             memory && createdBy ?
                 <TouchableOpacity style={styles.memoryBox} onPress={this.openMemoryDetails}>

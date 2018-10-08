@@ -44,6 +44,9 @@ const styles = StyleSheet.create({
         borderBottomColor: globalStyles.borderPrimaryColor,
         borderBottomWidth: 1
     },
+    textArea: {
+      height: 100
+    },
     picker: {
         marginTop: 15,
         height: 50
