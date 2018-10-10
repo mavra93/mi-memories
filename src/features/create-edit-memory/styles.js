@@ -40,10 +40,6 @@ const styles = StyleSheet.create({
     buttonText: {
         color: globalStyles.textPrimaryColor
     },
-    input: {
-        borderBottomColor: globalStyles.borderPrimaryColor,
-        borderBottomWidth: 1
-    },
     textArea: {
       height: 100
     },

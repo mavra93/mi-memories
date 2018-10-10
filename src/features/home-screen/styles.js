@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
         width: '85%',
         fontWeight: 'bold',
+        fontFamily: globalStyles.montserratExtraBold,
         color: globalStyles.titleColor,
         marginBottom: 15,
         flex: 0.23
@@ -39,6 +40,7 @@ const styles = StyleSheet.create({
     memoryDescription: {
         fontSize: 13,
         flex: 0.57,
+        fontFamily: globalStyles.montserrat,
         color: globalStyles.borderPrimaryColor
     },
     memoryContent: {
@@ -47,6 +49,7 @@ const styles = StyleSheet.create({
         padding: 15
     },
     memoryInfo: {
+        fontFamily: globalStyles.montserrat,
         color: globalStyles.borderPrimaryColor,
         flex: 0.2,
         position: 'absolute',
@@ -67,7 +70,7 @@ const styles = StyleSheet.create({
     },
     memoryCategoryText: {
         color: globalStyles.textPrimaryColor,
-        fontWeight: 'bold'
+        fontFamily: globalStyles.montserratBold,
     },
     filterContainer: {
         backgroundColor: globalStyles.secondaryBackgroundColor,
@@ -97,10 +100,12 @@ const styles = StyleSheet.create({
         marginLeft: 30
     },
     pullUpDown: {
+        backgroundColor: 'white',
+        borderBottomColor: globalStyles.borderPrimaryColor,
         padding: 5,
         elevation: 8,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     pullUpDownIconWrapper: {
         backgroundColor: globalStyles.primaryColor,

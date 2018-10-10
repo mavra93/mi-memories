@@ -15,7 +15,7 @@ class Filters extends Component {
                 transform: [{
                     translateY: deltaY.interpolate({
                         inputRange: [-130, -50],
-                        outputRange: [-33, 0],
+                        outputRange: [0, 0],
                         extrapolateRight: 'clamp'
                     })
                 }]

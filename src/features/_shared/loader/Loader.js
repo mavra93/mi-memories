@@ -3,7 +3,7 @@ import {View, Text} from 'react-native';
 import sharedStyles from '../sharedStyles';
 import Animation from 'lottie-react-native';
 
-const animationJson = require("../../../animations/loading.json");
+const animationJson = require("../../../animations/loader.json");
 
 class Loader extends React.PureComponent {
 

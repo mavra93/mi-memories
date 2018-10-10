@@ -6,6 +6,7 @@ import {sendRemoteNotification} from '../../notification/notification';
 const clone = require('clone');
 
 export const MEMORY_CREATED = 'MEMORY_CREATED';
+export const MEMORY_CREATE_STARTED = 'MEMORY_CREATE_STARTED';
 export const FETCH_MEMORIES_BEGIN = 'FETCH_MEMORIES_BEGIN';
 export const FETCH_MEMORIES_FINISHED = 'FETCH_MEMORIES_FINISHED';
 export const FETCH_MEMORIES_ERROR = 'FETCH_MEMORIES_ERROR';
@@ -83,6 +84,9 @@ export function createMemory(memory, user, users) {
         createdBy: memory.createdBy
     };
     return dispatch => {
+        dispatch({
+            type: MEMORY_CREATE_STARTED
+        });
         memory.imagePaths.forEach(image => {
             uploadImage(image).then(url => {
                 index = index + 1;

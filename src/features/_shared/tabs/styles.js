@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
         zIndex: 10,
         left: 0,
         width: SCREEN_WIDTH,
-        height: 50
+        height: 50,
     },
     centeredTab: {
         position: 'absolute',

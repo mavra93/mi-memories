@@ -15,7 +15,12 @@ const globalStyles = {
     titleColor: '#525252',
     textSecondaryColor: '#cfcfcf',
     screenWidth: SCREEN_WIDTH,
-    screenHeight: SCREEN_HEIGHT
+    screenHeight: SCREEN_HEIGHT,
+
+    //Fonts
+    montserratBold: 'Montserrat-Bold',
+    montserratExtraBold: 'Montserrat-ExtraBold',
+    montserrat: 'Montserrat-Regular'
 };
 
 export default globalStyles;

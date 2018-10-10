@@ -12,6 +12,7 @@ import globalStyles from '../../globalStyles';
 import {createMemory} from '../../redux/actions/memoryActions';
 import isValid from '../../helpers/isValid';
 import {capitalizeFirstLetter} from '../../helpers/capitalize';
+import Loader from '../_shared/loader/Loader';
 
 const ANIMATION_DURATION = 300;
 
@@ -115,6 +116,7 @@ class CreateEditMemoryContainer extends Component {
         const {title, description, category, imagePaths, formValid, categories} = this.state;
         return (
             <Container>
+                {this.props.memoryCreationStarted ? <Loader/> : null}
                 <Animated.View style={[styles.imageHeader, {opacity: this.imageSliderOpacity}]}>
                     <ImageSlider images={imagePaths}/>
                     <Button rounded title="open image picker" style={styles.addImageButton}
@@ -175,6 +177,7 @@ const mapStateToProps = (state) => {
     return {
         user: state.user.user,
         users: state.user.users,
+        memoryCreationStarted: state.memory.memoryCreationStarted
     };
 };
 

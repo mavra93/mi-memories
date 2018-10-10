@@ -31,16 +31,15 @@ class FavoriteScreenContainer extends Component {
         const {favoriteMemories, loading} = this.props;
         return (
             <View style={styles.layoutContainer}>
-                {loading ? <Loader /> : null}
-                {favoriteMemories && favoriteMemories.length > 0 ?
-                    <Carousel
-                        layout={'default'}
-                        data={this.props.favoriteMemories}
-                        renderItem={this.renderItem}
-                        sliderWidth={globalStyles.screenWidth}
-                        itemWidth={globalStyles.screenWidth - 90}
-
-                    /> : null
+                {
+                    loading ? <Loader /> :
+                        <Carousel
+                            layout={'default'}
+                            data={favoriteMemories}
+                            renderItem={this.renderItem}
+                            sliderWidth={globalStyles.screenWidth}
+                            itemWidth={globalStyles.screenWidth - 90}
+                        />
                 }
             </View>
         )

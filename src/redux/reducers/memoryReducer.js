@@ -1,9 +1,11 @@
-import {MEMORY_CREATED, FETCH_MEMORIES_BEGIN, FETCH_MEMORIES_FINISHED, RESET_MEMORIES, FETCH_FAVORITES_BEGIN, FETCH_FAVORITES_FINISHED}  from '../actions/memoryActions';
+import {MEMORY_CREATED, MEMORY_CREATE_STARTED, FETCH_MEMORIES_BEGIN, FETCH_MEMORIES_FINISHED, RESET_MEMORIES, FETCH_FAVORITES_BEGIN, FETCH_FAVORITES_FINISHED}  from '../actions/memoryActions';
 
-export default function (state = {memory: null, memories: [], memoryCreated: false, lastVisible: null, initialLoadFinished: false, favoriteMemories: [], loading: true}, action) {
+export default function (state = {memory: null, memories: [], memoryCreationStarted: false, lastVisible: null, initialLoadFinished: false, favoriteMemories: [], loading: true}, action) {
     switch(action.type) {
         case MEMORY_CREATED:
-            return { ...state, memoryCreated: true};
+            return { ...state, memoryCreationStarted: false};
+        case MEMORY_CREATE_STARTED:
+            return { ...state, memoryCreationStarted: true};
         case FETCH_MEMORIES_BEGIN: {
             return {...state, loading: true }
         }

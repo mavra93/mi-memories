@@ -50,6 +50,12 @@ class HomeScreenContainer extends Component {
         })
     };
 
+    onStop = () => {
+        this.setState({
+            scrollEnabled: this.state.deltaY._value === -130
+        })
+    };
+
     fetchByOrder = (order) => {
         this.props.resetMemories();
         this.setState({
@@ -68,14 +74,20 @@ class HomeScreenContainer extends Component {
                 <Interactable.View
                     verticalOnly={true}
                     snapPoints={[{y: 0}, {y: -130}]}
-                    boundaries={{top: -200}}
+                    boundaries={{top: -130}}
                     animatedValueY={this.state.deltaY}
-                    onSnap={this.onSnap}>
-                    <View style={styles.pullUpDown}>
+                    onSnap={this.onSnap}
+                    onStop={this.onStop}>
+                    <Animated.View style={[styles.pullUpDown, {
+                        borderBottomWidth: this.state.deltaY.interpolate({
+                            inputRange: [-130, -50],
+                            outputRange: [2, 0]
+                        })
+                    }]}>
                         <View style={styles.pullUpDownIconWrapper}>
                             <Icon style={styles.pullUpDownIcon} name="ios-menu"/>
                         </View>
-                    </View>
+                    </Animated.View>
                     {
                         memories.length > 0 ?
                             <Animated.View style={styles.listWrapper}>
