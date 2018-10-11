@@ -126,8 +126,9 @@ class CreateEditMemoryContainer extends Component {
                 </Animated.View>
                 <Animated.View style={[styles.form, {height: this.formHeight}]}>
                     <Form onChange={this.onChange}>
-                        <View style={styles.input}>
-                            <TextInput placeholder="Enter memory title"
+                        <View>
+                            <TextInput style={styles.input}
+                                       placeholder="Enter memory title"
                                        underlineColorAndroid="transparent"
                                        name="title"
                                        ref="title"

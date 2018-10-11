@@ -35,6 +35,8 @@ const styles = StyleSheet.create({
     },
     image: {
         width: '100%',
+        borderTopLeftRadius: 5,
+        borderTopRightRadius: 5,
         flex: 0.6
     },
     memoryDescription: {
@@ -87,14 +89,18 @@ const styles = StyleSheet.create({
         borderRadius: 4,
         justifyContent: 'center'
     },
+    filterButton: {
+        height: '100%',
+        justifyContent: 'center'
+    },
     filterLabelText: {
-        color: globalStyles.titleColor,
+        color: globalStyles.borderPrimaryColor,
+        fontFamily: globalStyles.montserratExtraBold,
         fontSize: 14,
-        fontWeight: '500',
-        marginLeft: 30
     },
     filterFieldText: {
         color: globalStyles.textPrimaryColor,
+        fontFamily: globalStyles.montserratExtraBold,
         fontSize: 14,
         fontWeight: '500',
         marginLeft: 30

@@ -38,7 +38,7 @@ class Filters extends Component {
                         extrapolateRight: 'clamp'
                     })
                 }]}>
-                    <TouchableOpacity onPress={() => this.selectOrder('desc')}>
+                    <TouchableOpacity style={styles.filterButton} onPress={() => this.selectOrder('desc')}>
                         <Text style={styles.filterFieldText}>Newest</Text>
                     </TouchableOpacity>
                 </Animated.View>
@@ -50,7 +50,7 @@ class Filters extends Component {
                         extrapolateRight: 'clamp'
                     })
                 }]}>
-                    <TouchableOpacity onPress={() => this.selectOrder('asc')}>
+                    <TouchableOpacity style={styles.filterButton} onPress={() => this.selectOrder('asc')}>
                         <Text style={styles.filterFieldText}>Oldest</Text>
                     </TouchableOpacity>
                 </Animated.View>

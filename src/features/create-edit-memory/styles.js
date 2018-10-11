@@ -29,6 +29,10 @@ const styles = StyleSheet.create({
     form: {
         paddingHorizontal: 10
     },
+    input: {
+        color: globalStyles.titleColor,
+        fontFamily: globalStyles.montserrat,
+    },
     button: {
         backgroundColor: globalStyles.primaryColor,
         shadowOpacity: 0,
@@ -41,7 +45,9 @@ const styles = StyleSheet.create({
         color: globalStyles.textPrimaryColor
     },
     textArea: {
-      height: 100
+        height: 100,
+        color: globalStyles.titleColor,
+        fontFamily: globalStyles.montserrat,
     },
     picker: {
         marginTop: 15,
@@ -49,6 +55,7 @@ const styles = StyleSheet.create({
     },
     pickerItem: {
         color: globalStyles.borderPrimaryColor,
+        fontFamily: globalStyles.montserrat,
     },
     footer: {
         flex: 1,
