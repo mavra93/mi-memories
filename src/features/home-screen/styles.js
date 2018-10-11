@@ -96,6 +96,7 @@ const styles = StyleSheet.create({
     filterLabelText: {
         color: globalStyles.borderPrimaryColor,
         fontFamily: globalStyles.montserratExtraBold,
+        marginLeft: 10,
         fontSize: 14,
     },
     filterFieldText: {

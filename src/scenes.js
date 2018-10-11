@@ -7,6 +7,7 @@ import LayoutScreenContainer from './features/layout-screen/LayoutScreenContaine
 import CreateEditMemoryContainer from './features/create-edit-memory/CreateEditMemoryContainer';
 import MemoryDetailsScreenContainer from './features/memory-details-screen/MemoryDetailsScreenContainer';
 import FavoriteScreenContainer from './features/favorites-screen/FavoriteScreenContainer';
+import ProfileScreenContainer from './features/profile-screen/ProfileScreenContainer';
 
 const scenes = Actions.create(
     <Scene key="root">
@@ -17,6 +18,7 @@ const scenes = Actions.create(
         <Scene key="createMemory" component={CreateEditMemoryContainer} hideNavBar={true}/>
         <Scene key="memoryDetails" component={MemoryDetailsScreenContainer} hideNavBar={true}/>
         <Scene key="favoritesScreen" component={FavoriteScreenContainer} hideNavBar={true}/>
+        <Scene key="profileScreen" component={ProfileScreenContainer} hideNavBar={true}/>
     </Scene>
 );
 

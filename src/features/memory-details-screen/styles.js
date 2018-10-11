@@ -36,13 +36,13 @@ const styles = StyleSheet.create({
     },
     title: {
         flex: 0.5,
-        fontWeight: 'bold',
+        fontFamily: globalStyles.montserratExtraBold,
         color: globalStyles.titleColor,
         fontSize: 22
     },
     category: {
         flex: 0.2,
-        fontWeight: 'bold',
+        fontFamily: globalStyles.montserratBold,
         color: globalStyles.borderPrimaryColor,
         fontSize: 18
     },
@@ -55,6 +55,7 @@ const styles = StyleSheet.create({
     },
     date: {
         color: globalStyles.primaryColor,
+        fontFamily: globalStyles.montserrat,
         fontSize: 15
     },
     bullet: {
@@ -65,6 +66,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 10
     },
     createdBy: {
+        fontFamily: globalStyles.montserrat,
         color: globalStyles.borderPrimaryColor,
         fontSize: 15
     },
@@ -73,6 +75,7 @@ const styles = StyleSheet.create({
     },
     description: {
         color: globalStyles.borderPrimaryColor,
+        fontFamily: globalStyles.montserrat,
         fontSize: 15
     },
     editIcon: {
