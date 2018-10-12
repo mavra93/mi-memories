@@ -14,6 +14,9 @@ export const RESET_MEMORIES = 'RESET_MEMORIES';
 export const FETCH_FAVORITES_BEGIN = 'FETCH_FAVORITES_BEGIN';
 export const FETCH_FAVORITES_FINISHED = 'FETCH_FAVORITES_FINISHED';
 export const FETCH_FAVORITES_ERROR = 'FETCH_FAVORITES_ERROR';
+export const FETCH_USER_MEMORIES_BEGIN = 'FETCH_USER_MEMORIES_BEGIN';
+export const FETCH_USER_MEMORIES_FINISHED = 'FETCH_USER_MEMORIES_FINISHED';
+export const FETCH_USER_MEMORIES_ERROR = 'FETCH_USER_MEMORIES_ERROR';
 
 const firestore = firebaseApp.firestore();
 firestore.settings({timestampsInSnapshots: true});
@@ -23,6 +26,31 @@ export function resetMemories() {
         dispatch({
             type: RESET_MEMORIES
         });
+    }
+}
+
+export function getUserMemories(id) {
+    const userMemories = [];
+    return dispatch => {
+        dispatch({
+            type: FETCH_USER_MEMORIES_BEGIN
+        });
+        firestore.collection('memories').where('createdBy', '==', id).get().then(querySnapshot => {
+            querySnapshot.forEach(doc => {
+                const memoryData = doc.data();
+                memoryData.uid = doc.id;
+                userMemories.push(memoryData);
+            });
+            dispatch({
+                type: FETCH_USER_MEMORIES_FINISHED,
+                payload: userMemories
+            });
+        }).catch(err => {
+            dispatch({
+                type: FETCH_USER_MEMORIES_ERROR,
+                payload: err
+            });
+        })
     }
 }
 
@@ -45,11 +73,10 @@ export function getFavoriteMemories(id) {
         }).catch(err => {
             dispatch({
                 type: FETCH_FAVORITES_ERROR,
-                payload: favorites
+                payload: err
             });
         })
     }
-
 }
 
 export function addToFavorite(memory, user) {
@@ -120,7 +147,14 @@ function prepareMemories(querySnapshot) {
 export function fetchMemories(loadMore, lastVisible, order) {
     let memories;
     const query = firestore.collection('memories').orderBy('createdAt', order || 'desc');
-
+    /*const start = 'kaj sad';
+     const end = start + '\uf8ff';
+     firestore.collection('memories')
+     .orderBy('title')
+     .limit(5)
+     .startAt(start)
+     .endAt(end)
+     */
     return dispatch => {
         if (loadMore) {
             if (lastVisible) {

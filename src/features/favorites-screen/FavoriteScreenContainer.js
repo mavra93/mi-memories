@@ -16,10 +16,6 @@ class FavoriteScreenContainer extends Component {
         getFavoriteMemories(user.uid);
     }
 
-    createdBy = (memory) => {
-        return this.props.users.find(user => user.id === memory.createdBy)
-    };
-
     renderItem = (data) => {
         const memory = data.item;
         return (

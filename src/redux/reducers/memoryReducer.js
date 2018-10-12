@@ -1,24 +1,40 @@
-import {MEMORY_CREATED, MEMORY_CREATE_STARTED, FETCH_MEMORIES_BEGIN, FETCH_MEMORIES_FINISHED, RESET_MEMORIES, FETCH_FAVORITES_BEGIN, FETCH_FAVORITES_FINISHED}  from '../actions/memoryActions';
+import {
+    MEMORY_CREATED,
+    MEMORY_CREATE_STARTED,
+    FETCH_MEMORIES_BEGIN,
+    FETCH_MEMORIES_FINISHED,
+    RESET_MEMORIES,
+    FETCH_FAVORITES_BEGIN,
+    FETCH_FAVORITES_FINISHED,
+    FETCH_USER_MEMORIES_BEGIN,
+    FETCH_USER_MEMORIES_FINISHED
+}  from '../actions/memoryActions';
 
-export default function (state = {memory: null, memories: [], memoryCreationStarted: false, lastVisible: null, initialLoadFinished: false, favoriteMemories: [], loading: true}, action) {
-    switch(action.type) {
+export default function (state = {memory: null, memories: [], memoryCreationStarted: false, lastVisible: null, initialLoadFinished: false, favoriteMemories: [], loading: true, userMemories: []}, action) {
+    switch (action.type) {
         case MEMORY_CREATED:
-            return { ...state, memoryCreationStarted: false};
+            return {...state, memoryCreationStarted: false};
         case MEMORY_CREATE_STARTED:
-            return { ...state, memoryCreationStarted: true};
+            return {...state, memoryCreationStarted: true};
         case FETCH_MEMORIES_BEGIN: {
-            return {...state, loading: true }
+            return {...state, loading: true}
         }
         case FETCH_MEMORIES_FINISHED:
-            return { ...state, memories: state.memories.concat(action.payload.memories), lastVisible: action.payload.lastVisible, initialLoadFinished: action.payload.initialLoadFinished, loading: false};
+            return {...state, memories: state.memories.concat(action.payload.memories), lastVisible: action.payload.lastVisible, initialLoadFinished: action.payload.initialLoadFinished, loading: false};
         case RESET_MEMORIES: {
-            return {...state, memories: [], initialLoadFinished: false, lastVisible: null }
+            return {...state, memories: [], initialLoadFinished: false, lastVisible: null}
         }
         case FETCH_FAVORITES_BEGIN: {
-            return {...state, loading: true }
+            return {...state, loading: true}
         }
         case FETCH_FAVORITES_FINISHED: {
             return {...state, favoriteMemories: action.payload, loading: false}
+        }
+        case FETCH_USER_MEMORIES_BEGIN: {
+            return {...state, loading: true}
+        }
+        case FETCH_USER_MEMORIES_FINISHED: {
+            return {...state, userMemories: action.payload, loading: false}
         }
         default:
             return state;
