@@ -1,5 +1,6 @@
 import {firebaseApp} from '../../firebaseInit';
 import '@firebase/firestore'
+import {uploadImage} from "../../helpers/uploadImage";
 
 export const GET_USER = 'GET_USER';
 export const AUTH_SUCCESS = 'AUTH_SUCCESS';
@@ -9,12 +10,16 @@ export const SIGNED_OUT = 'SIGNED_OUT';
 export const FETCH_USERS_FINISHED = 'FETCH_USERS_FINISHED';
 export const FETCH_USERS_ERROR = 'FETCH_USERS_ERROR';
 export const UPDATE_USER_TOKEN = 'UPDATE_USER_TOKEN';
+export const GET_USER_STARTED = 'GET_USER_STARTED';
 
 const firestore = firebaseApp.firestore();
 firestore.settings({timestampsInSnapshots: true});
 
 export function getUser() {
     return dispatch => {
+        dispatch({
+            type: GET_USER_STARTED,
+        });
         firebaseApp.auth().onAuthStateChanged(user => {
             if (user) {
                 dispatch({
@@ -96,6 +101,26 @@ function updateProfile(username) {
         firestore.collection('users').doc(currentUser.uid).set(user);
     })
 }
+
+export function editUser(data, profileImageChanged) {
+    if(profileImageChanged) {
+        uploadImage(data.profileImage, 'profileImages').then(url => {
+            let urlResponse = url;
+            data.profileImage = urlResponse;
+            firebaseApp.auth().currentUser.updateProfile({displayName: data.displayName}).then(() => {
+                const currentUser = firebaseApp.auth().currentUser;
+                const user = {
+                    displayName: currentUser.displayName,
+                    email: currentUser.email,
+                    id: currentUser.uid,
+                    profileImage: urlResponse
+                };
+                firestore.collection('users').doc(currentUser.uid).set(user);
+            })
+        });
+    }
+}
+
 
 export function signUp(user) {
     let userInfo = user;

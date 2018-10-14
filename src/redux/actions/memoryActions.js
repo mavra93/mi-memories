@@ -115,7 +115,7 @@ export function createMemory(memory, user, users) {
             type: MEMORY_CREATE_STARTED
         });
         memory.imagePaths.forEach(image => {
-            uploadImage(image).then(url => {
+            uploadImage(image, 'memories').then(url => {
                 index = index + 1;
                 memoryData.images.push(url);
                 if (index === memory.imagePaths.length) {

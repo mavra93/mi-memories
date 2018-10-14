@@ -124,7 +124,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        signOut: () => dispatch(signOut()),
         fetchMemories: (loadMore, lastVisible, order) => dispatch(fetchMemories(loadMore, lastVisible, order)),
         resetMemories: () => dispatch(resetMemories())
     };

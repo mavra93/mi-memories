@@ -4,7 +4,7 @@ import {firebaseApp} from '../firebaseInit';
 const uuid = require('uuid/v1');
 const firebaseStorage = firebaseApp.storage();
 
-export function uploadImage(image) {
+export function uploadImage(image, path) {
     const Blob = RNFetchBlob.polyfill.Blob;
     const fs = RNFetchBlob.fs;
     const tempWindowXMLHttpRequest = window.XMLHttpRequest;
@@ -15,7 +15,7 @@ export function uploadImage(image) {
         const mime = 'application/octet-stream';
         const sessionId = uuid();
         let uploadBlob = null;
-        const imageRef = firebaseStorage.ref('memories').child(`${sessionId}`);
+        const imageRef = firebaseStorage.ref(path).child(`${sessionId}`);
 
         fs.readFile(image, 'base64')
             .then((data) => {

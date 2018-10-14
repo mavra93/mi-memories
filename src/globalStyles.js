@@ -9,7 +9,7 @@ const globalStyles = {
     dividerPrimaryColor: '#FFFFFF',
     red: '#da4a4f',
     borderPrimaryColor: '#999999',
-    backgroundPrimaryColor: '#dbdbdb',
+    backgroundPrimaryColor: '#e8e8e8',
     secondaryBackgroundColor: '#fefefe',
     buttonSecondaryColor: '#ff5722',
     titleColor: '#525252',
