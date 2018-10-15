@@ -1,5 +1,6 @@
 import {firebaseApp} from '../../firebaseInit';
 import '@firebase/firestore'
+import {Actions} from 'react-native-router-flux';
 import {uploadImage} from "../../helpers/uploadImage";
 
 export const GET_USER = 'GET_USER';
@@ -78,12 +79,9 @@ export function updateToken(token) {
     return dispatch => {
         const currentUser = firebaseApp.auth().currentUser;
         const user = {
-            displayName: currentUser.displayName,
-            email: currentUser.email,
-            id: currentUser.uid,
             token: token
         };
-        firestore.collection('users').doc(currentUser.uid).set(user).then(() => {
+        firestore.collection('users').doc(currentUser.uid).update(user).then(() => {
             dispatch({
                 type: UPDATE_USER_TOKEN,
                 payload: {token}
@@ -108,7 +106,7 @@ export function editUser(data, profileImageChanged) {
     return dispatch => {
         dispatch({
             type: UPDATE_PROFILE_STARTED
-        })
+        });
         if (profileImageChanged) {
 
             uploadImage(data.profileImage, 'profileImages').then(url => {
@@ -118,14 +116,13 @@ export function editUser(data, profileImageChanged) {
                     const currentUser = firebaseApp.auth().currentUser;
                     const user = {
                         displayName: currentUser.displayName,
-                        email: currentUser.email,
-                        id: currentUser.uid,
                         profileImage: urlResponse
                     };
-                    firestore.collection('users').doc(currentUser.uid).set(user).then(() => {
+                    firestore.collection('users').doc(currentUser.uid).update(user).then(() => {
                         dispatch({
                             type: UPDATE_PROFILE_FINISHED
-                        })
+                        });
+                        Actions.profileScreen({refresh: true});
                     });
                 })
             });

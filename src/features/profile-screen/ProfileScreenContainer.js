@@ -12,6 +12,7 @@ import globalStyles from '../../globalStyles';
 import {createdBy} from '../../helpers/createdBy';
 import Loader from '../_shared/loader/Loader';
 import SliderEntry from "./components/SliderEntry";
+import {getUser} from '../../helpers/getUserFromUsers';
 
 class ProfileScreenContainer extends Component {
 
@@ -50,7 +51,8 @@ class ProfileScreenContainer extends Component {
     };
 
     render() {
-        const {user, loading, userMemories} = this.props;
+        const {loading, userMemories, users} = this.props;
+        const user = getUser(this.props.user.uid, users);
         const info = this.getInfo(userMemories);
         return (
             loading ? <Loader /> :
@@ -60,7 +62,7 @@ class ProfileScreenContainer extends Component {
                     </Button>
                     <View style={styles.profileContainer}>
                         <Icon onPress={() => this.props.signOut()} name="ios-log-out" style={styles.signOutButtonIcon}/>
-                        <FastImage style={styles.profileImage} source={require('../../assets/images/avatar.png')}/>
+                        <FastImage style={styles.profileImage} source={{uri: user.profileImage} || require('../../assets/images/avatar.png')}/>
                         <Text style={styles.displayName}>{user && user.displayName}</Text>
                     </View>
                     <View style={styles.contentContainer}>

@@ -7,6 +7,7 @@ import ImageCarousel from 'react-native-image-carousel';
 import ImagePicker from 'react-native-image-crop-picker';
 import {editUser} from '../../redux/actions/userActions';
 import {getUser} from '../../helpers/getUserFromUsers';
+import Loader from "../_shared/loader/Loader";
 
 const clone = require('clone');
 
@@ -85,10 +86,10 @@ class EditProfileContainer extends Component {
 
     render() {
         const {loading} = this.props;
-        const {user, formValid} = this.state;
+        const {user, formValid, profileImageChanged} = this.state;
 
         return (
-            user ?
+            !loading && user ?
                 <View style={styles.editProfileContainer}>
                     <View style={styles.editProfileImageHeader}>
                         <Button rounded title="open image picker" style={styles.editProfileAddImageButton}
@@ -123,8 +124,8 @@ class EditProfileContainer extends Component {
                         <View style={styles.editProfileFooter}>
                             <Animatable.View animation="fadeInUp" iterationCount={1} delay={500}
                                              duration={ANIMATION_DURATION}>
-                                <Button disabled={!formValid}
-                                        style={[styles.editProfileButton, {opacity: !formValid ? 0.5 : 1}]}
+                                <Button disabled={!formValid && !profileImageChanged}
+                                        style={[styles.editProfileButton, {opacity: !formValid && !profileImageChanged ? 0.5 : 1}]}
                                         rounded
                                         title='createMemory' onPress={() => this.saveUser()}>
                                     <Text style={styles.editProfileButtonText}>SAVE USER</Text>
@@ -132,7 +133,7 @@ class EditProfileContainer extends Component {
                             </Animatable.View>
                         </View>
                     </View>
-                </View> : null
+                </View> : <Loader/>
         )
     }
 }

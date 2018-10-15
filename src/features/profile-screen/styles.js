@@ -157,7 +157,9 @@ const styles = StyleSheet.create({
         flex: 1
     },
     editProfileImageHeader: {
-        flex: 0.4
+        flex: 0.4,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     editProfileContent: {
         flex: 0.6,

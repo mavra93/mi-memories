@@ -7,7 +7,9 @@ import {
     FETCH_USERS_FINISHED,
     FETCH_USERS_ERROR,
     UPDATE_USER_TOKEN,
-    GET_USER_STARTED
+    GET_USER_STARTED,
+    UPDATE_PROFILE_STARTED,
+    UPDATE_PROFILE_FINISHED
 }  from '../actions/userActions';
 export default function
     (state = {
@@ -49,6 +51,10 @@ export default function
                 ...action.payload
             };
             return {...state, user: updatedUser};
+        case UPDATE_PROFILE_STARTED:
+            return {...state, loading: true};
+        case UPDATE_PROFILE_FINISHED:
+            return {...state, loading: false};
         default:
             return state;
     }
