@@ -11,6 +11,8 @@ export const FETCH_USERS_FINISHED = 'FETCH_USERS_FINISHED';
 export const FETCH_USERS_ERROR = 'FETCH_USERS_ERROR';
 export const UPDATE_USER_TOKEN = 'UPDATE_USER_TOKEN';
 export const GET_USER_STARTED = 'GET_USER_STARTED';
+export const UPDATE_PROFILE_STARTED = 'UPDATE_PROFILE_STARTED';
+export const UPDATE_PROFILE_FINISHED = 'UPDATE_PROFILE_FINISHED';
 
 const firestore = firebaseApp.firestore();
 firestore.settings({timestampsInSnapshots: true});
@@ -103,21 +105,31 @@ function updateProfile(username) {
 }
 
 export function editUser(data, profileImageChanged) {
-    if(profileImageChanged) {
-        uploadImage(data.profileImage, 'profileImages').then(url => {
-            let urlResponse = url;
-            data.profileImage = urlResponse;
-            firebaseApp.auth().currentUser.updateProfile({displayName: data.displayName}).then(() => {
-                const currentUser = firebaseApp.auth().currentUser;
-                const user = {
-                    displayName: currentUser.displayName,
-                    email: currentUser.email,
-                    id: currentUser.uid,
-                    profileImage: urlResponse
-                };
-                firestore.collection('users').doc(currentUser.uid).set(user);
-            })
-        });
+    return dispatch => {
+        dispatch({
+            type: UPDATE_PROFILE_STARTED
+        })
+        if (profileImageChanged) {
+
+            uploadImage(data.profileImage, 'profileImages').then(url => {
+                let urlResponse = url;
+                data.profileImage = urlResponse;
+                firebaseApp.auth().currentUser.updateProfile({displayName: data.displayName}).then(() => {
+                    const currentUser = firebaseApp.auth().currentUser;
+                    const user = {
+                        displayName: currentUser.displayName,
+                        email: currentUser.email,
+                        id: currentUser.uid,
+                        profileImage: urlResponse
+                    };
+                    firestore.collection('users').doc(currentUser.uid).set(user).then(() => {
+                        dispatch({
+                            type: UPDATE_PROFILE_FINISHED
+                        })
+                    });
+                })
+            });
+        }
     }
 }
 
