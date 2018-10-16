@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         backgroundColor: globalStyles.primaryColor,
         left: (globalStyles.screenWidth / 2) - 75,
-        top: '27%',
+        top: 180,
         width: 150,
         height: 40,
         borderRadius: 5,
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10
     },
     contentInfoContainer: {
-        flex: 0.5,
+        flex: 0.3,
         paddingBottom: 15,
         flexDirection: 'row',
         justifyContent: 'center'
@@ -88,6 +88,14 @@ const styles = StyleSheet.create({
     },
     contentCarouselContainer: {
         flex: 0.5
+    },
+    contentCarouselContainerTitle: {
+        flex: 0.2,
+        color: globalStyles.titleColor,
+        fontFamily: globalStyles.montserratExtraBold,
+        fontSize: 20,
+        marginLeft: 20,
+        marginTop: 10
     },
     slideInnerContainer: {
         zIndex: 1,

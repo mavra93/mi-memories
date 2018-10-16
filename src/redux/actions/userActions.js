@@ -103,7 +103,7 @@ function updateProfile(username) {
 }
 
 function updateUserInDatabase(dispatch, data, imageUrl) {
-    firebaseApp.auth().currentUser.updateProfile({displayName: data.displayName}).then(() => {
+    firebaseApp.auth().currentUser.updateProfile({displayName: data.displayName.value}).then(() => {
         const currentUser = firebaseApp.auth().currentUser;
         const user = {
             displayName: currentUser.displayName,

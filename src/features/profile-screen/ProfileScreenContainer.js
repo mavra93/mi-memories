@@ -79,6 +79,7 @@ class ProfileScreenContainer extends Component {
                                 <Text style={styles.contentInfoBoxTitle}>Stories created</Text>
                             </View>
                         </View>
+                        <Text style={styles.contentCarouselContainerTitle}>My memories</Text>
                         <View style={styles.contentCarouselContainer}>
                             <Carousel
                                 layout={'default'}

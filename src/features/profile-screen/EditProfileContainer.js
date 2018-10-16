@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
-import {View, Text, Animated, Image, TextInput, Keyboard} from 'react-native';
-import {Icon, Form, Button, Container} from 'native-base';
+import {View, Text, TextInput, Keyboard} from 'react-native';
+import {Icon, Form, Button} from 'native-base';
 import {connect} from 'react-redux'
 import * as Animatable from 'react-native-animatable';
 import ImageCarousel from 'react-native-image-carousel';
@@ -9,6 +9,7 @@ import {editUser} from '../../redux/actions/userActions';
 import {getUser} from '../../helpers/getUserFromUsers';
 import Loader from "../_shared/loader/Loader";
 import styles from './styles';
+import FastImage from "react-native-fast-image";
 
 const ANIMATION_DURATION = 300;
 const AVATAR_IMAGE = require('../../assets/images/avatar.png');
@@ -37,7 +38,7 @@ class EditProfileContainer extends Component {
     renderContent = () => {
         return (
             <View style={styles.editProfileImageGalleryContainer}>
-                <Image
+                <FastImage
                     style={styles.editProfileImageGallery}
                     source={this.state.user.profileImage ? {uri: this.state.user.profileImage} : AVATAR_IMAGE}
                     resizeMode={'contain'}
@@ -73,7 +74,6 @@ class EditProfileContainer extends Component {
     saveUser = () => {
         Keyboard.dismiss();
         const {user, profileImageChanged} = this.state;
-        user.displayName = user.displayName.value;
         this.props.editProfile(user, profileImageChanged)
     };
 
@@ -98,7 +98,7 @@ class EditProfileContainer extends Component {
                                 }}
                                 renderContent={this.renderContent}
                             >
-                                <Image
+                                <FastImage
                                     style={styles.editProfileImageSlider}
                                     source={user && user.profileImage ? {uri: user.profileImage} : AVATAR_IMAGE}
                                     resizeMode={'cover'}
