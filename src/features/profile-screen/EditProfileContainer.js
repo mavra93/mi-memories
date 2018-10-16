@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {View, Text, Animated, Image, TextInput} from 'react-native';
+import {View, Text, Animated, Image, TextInput, Keyboard} from 'react-native';
 import {Icon, Form, Button, Container} from 'native-base';
 import {connect} from 'react-redux'
 import * as Animatable from 'react-native-animatable';
@@ -8,13 +8,10 @@ import ImagePicker from 'react-native-image-crop-picker';
 import {editUser} from '../../redux/actions/userActions';
 import {getUser} from '../../helpers/getUserFromUsers';
 import Loader from "../_shared/loader/Loader";
-
-const clone = require('clone');
-
 import styles from './styles';
-import isValid from "../../helpers/isValid";
 
 const ANIMATION_DURATION = 300;
+const AVATAR_IMAGE = require('../../assets/images/avatar.png');
 
 class EditProfileContainer extends Component {
 
@@ -26,7 +23,6 @@ class EditProfileContainer extends Component {
 
     componentDidMount() {
         const {user, users} = this.props;
-        this.stickyHeaderHeight = new Animated.Value(0);
         this.imageCarousel = ImageCarousel;
         const userData = getUser(user.uid, users);
         this.setState({
@@ -38,16 +34,12 @@ class EditProfileContainer extends Component {
         })
     }
 
-    selectProfileImage = () => {
-
-    }
-
     renderContent = () => {
         return (
             <View style={styles.editProfileImageGalleryContainer}>
                 <Image
                     style={styles.editProfileImageGallery}
-                    source={{uri: this.state.user.profileImage}}
+                    source={this.state.user.profileImage ? {uri: this.state.user.profileImage} : AVATAR_IMAGE}
                     resizeMode={'contain'}
                 />
             </View>
@@ -79,6 +71,7 @@ class EditProfileContainer extends Component {
     };
 
     saveUser = () => {
+        Keyboard.dismiss();
         const {user, profileImageChanged} = this.state;
         user.displayName = user.displayName.value;
         this.props.editProfile(user, profileImageChanged)
@@ -89,51 +82,53 @@ class EditProfileContainer extends Component {
         const {user, formValid, profileImageChanged} = this.state;
 
         return (
-            !loading && user ?
-                <View style={styles.editProfileContainer}>
-                    <View style={styles.editProfileImageHeader}>
-                        <Button rounded title="open image picker" style={styles.editProfileAddImageButton}
-                                onPress={() => this.openImagePicker()}>
-                            <Icon name="ios-images" style={styles.editProfileAddImageIcon}/>
-                        </Button>
-                        <ImageCarousel
-                            style={styles.editProfileImageCarousel}
-                            ref={(imageCarousel) => {
-                                this.imageCarousel = imageCarousel;
-                            }}
-                            renderContent={this.renderContent}
-                        >
-                            <Image
-                                style={styles.editProfileImageSlider}
-                                source={{uri: user.profileImage}}
-                                resizeMode={'cover'}
-                            />
-                        </ImageCarousel>
-                    </View>
-                    <View style={styles.editProfileContent}>
-                        <Form onChange={this.onChange}>
-                            <View>
-                                <TextInput style={styles.input}
+            <View style={styles.editProfileWrapper}>
+                {loading ? <Loader/> : null}
+                {user ?
+                    <View style={styles.editProfileContainer}>
+                        <View style={styles.editProfileImageHeader}>
+                            <Button rounded title="open image picker" style={styles.editProfileAddImageButton}
+                                    onPress={() => this.openImagePicker()}>
+                                <Icon name="ios-images" style={styles.editProfileAddImageIcon}/>
+                            </Button>
+                            <ImageCarousel
+                                style={styles.editProfileImageCarousel}
+                                ref={(imageCarousel) => {
+                                    this.imageCarousel = imageCarousel;
+                                }}
+                                renderContent={this.renderContent}
+                            >
+                                <Image
+                                    style={styles.editProfileImageSlider}
+                                    source={user && user.profileImage ? {uri: user.profileImage} : AVATAR_IMAGE}
+                                    resizeMode={'cover'}
+                                />
+                            </ImageCarousel>
+                        </View>
+                        <View style={styles.editProfileContent}>
+                            <Form onChange={this.onChange} style={styles.editProfileContentForm}>
+                                <TextInput style={styles.editProfileInput}
                                            placeholder="Enter your username"
                                            underlineColorAndroid="transparent"
                                            name="displayName"
                                            ref="displayName"
-                                           value={user.displayName.value}/>
+                                           value={user && user.displayName.value}/>
+                            </Form>
+                            <View style={styles.editProfileFooter}>
+                                <Animatable.View animation="fadeInUp" iterationCount={1} delay={500}
+                                                 duration={ANIMATION_DURATION}>
+                                    <Button disabled={!formValid && !profileImageChanged}
+                                            style={[styles.editProfileButton, {opacity: !formValid && !profileImageChanged ? 0.5 : 1}]}
+                                            rounded
+                                            title='createMemory' onPress={() => this.saveUser()}>
+                                        <Text style={styles.editProfileButtonText}>SAVE USER</Text>
+                                    </Button>
+                                </Animatable.View>
                             </View>
-                        </Form>
-                        <View style={styles.editProfileFooter}>
-                            <Animatable.View animation="fadeInUp" iterationCount={1} delay={500}
-                                             duration={ANIMATION_DURATION}>
-                                <Button disabled={!formValid && !profileImageChanged}
-                                        style={[styles.editProfileButton, {opacity: !formValid && !profileImageChanged ? 0.5 : 1}]}
-                                        rounded
-                                        title='createMemory' onPress={() => this.saveUser()}>
-                                    <Text style={styles.editProfileButtonText}>SAVE USER</Text>
-                                </Button>
-                            </Animatable.View>
                         </View>
-                    </View>
-                </View> : <Loader/>
+                    </View> : null}
+
+            </View>
         )
     }
 }
@@ -142,7 +137,7 @@ const mapStateToProps = (state) => {
     return {
         user: state.user.user,
         users: state.user.users,
-        loading: state.memory.loading,
+        loading: state.user.loading,
     };
 };
 

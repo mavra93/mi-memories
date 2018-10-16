@@ -108,7 +108,7 @@ class CreateEditMemoryContainer extends Component {
             createdAt: moment().unix(),
             createdBy: user.uid
         };
-
+        Keyboard.dismiss();
         this.props.createMemory(memory, user, users);
     };
 

@@ -42,7 +42,8 @@ const styles = StyleSheet.create({
         marginHorizontal: 15,
     },
     buttonText: {
-        color: globalStyles.textPrimaryColor
+        color: globalStyles.textPrimaryColor,
+        fontFamily: globalStyles.montserratBold,
     },
     textArea: {
         height: 100,

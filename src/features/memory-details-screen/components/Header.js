@@ -3,6 +3,10 @@ import {View, Text} from 'react-native';
 import {Icon} from 'native-base';
 import moment from 'moment';
 import styles from '../styles';
+import FastImage from 'react-native-fast-image';
+import {getUser} from "../../../helpers/getUserFromUsers";
+
+const AVATAR_IMAGE = require('../../../assets/images/avatar.png');
 
 class Header extends Component {
 
@@ -37,10 +41,12 @@ class Header extends Component {
     };
 
     render() {
-        const {memory} = this.props;
+        const {memory, users} = this.props;
+        const user = getUser(memory.createdBy.id, users);
         const date = moment.unix(memory.createdAt).format('LL');
         return (
             <View style={styles.header}>
+                <FastImage style={styles.avatar} source={user.profileImage ? {uri: user.profileImage} : AVATAR_IMAGE}/>
                 <Text style={styles.title} numberOfLines={2}>{memory.title}</Text>
                 <Text style={styles.category}>{memory.category.toUpperCase()}</Text>
                 <View style={styles.info}>

@@ -41,8 +41,8 @@ class MemoryDetailsScreenContainer extends Component {
     };
 
     renderHeader = () => {
-        const {memory, user} = this.props;
-        return <Header memory={memory} user={user} addToFavorite={this.addToFavorite} />
+        const {memory, user, users} = this.props;
+        return <Header memory={memory} user={user} users={users}  addToFavorite={this.addToFavorite} />
     };
 
     renderForeground = () => {
@@ -106,7 +106,8 @@ class MemoryDetailsScreenContainer extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        user: state.user.user
+        user: state.user.user,
+        users: state.user.users
     };
 };
 

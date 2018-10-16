@@ -6,7 +6,7 @@ import Carousel from 'react-native-snap-carousel-tabs';
 import {Icon, Button} from 'native-base';
 import FastImage from 'react-native-fast-image';
 import {getUserMemories} from '../../redux/actions/memoryActions'
-import {signOut} from '../../redux/actions/userActions';
+import {signOut, getUsers} from '../../redux/actions/userActions';
 import styles from './styles';
 import globalStyles from '../../globalStyles';
 import {createdBy} from '../../helpers/createdBy';
@@ -14,10 +14,13 @@ import Loader from '../_shared/loader/Loader';
 import SliderEntry from "./components/SliderEntry";
 import {getUser} from '../../helpers/getUserFromUsers';
 
+const AVATAR_IMAGE = require('../../assets/images/avatar.png');
+
 class ProfileScreenContainer extends Component {
 
     componentDidMount() {
         this.props.getUserMemories(this.props.user.uid);
+        this.props.getUsers();
     }
 
     renderItem = (data) => {
@@ -62,7 +65,7 @@ class ProfileScreenContainer extends Component {
                     </Button>
                     <View style={styles.profileContainer}>
                         <Icon onPress={() => this.props.signOut()} name="ios-log-out" style={styles.signOutButtonIcon}/>
-                        <FastImage style={styles.profileImage} source={{uri: user.profileImage} || require('../../assets/images/avatar.png')}/>
+                        <FastImage style={styles.profileImage} source={user.profileImage ? {uri: user.profileImage} : AVATAR_IMAGE}/>
                         <Text style={styles.displayName}>{user && user.displayName}</Text>
                     </View>
                     <View style={styles.contentContainer}>
@@ -103,7 +106,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         signOut: () => dispatch(signOut()),
-        getUserMemories: (id) => dispatch(getUserMemories(id))
+        getUserMemories: (id) => dispatch(getUserMemories(id)),
+        getUsers: () => dispatch(getUsers()),
+
     };
 };
 

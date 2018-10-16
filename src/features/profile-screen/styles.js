@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
         width: 150,
         height: 40,
         borderRadius: 5,
+        zIndex: 20,
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center'
@@ -152,6 +153,9 @@ const styles = StyleSheet.create({
         fontSize: 11,
         fontFamily: globalStyles.montserratBold
     },
+    editProfileWrapper: {
+        flex: 1
+    },
     editProfileContainer: {
         backgroundColor: globalStyles.secondaryBackgroundColor,
         flex: 1
@@ -166,6 +170,10 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'space-between',
         alignItems: 'center',
+    },
+    editProfileContentForm: {
+        width: '100%',
+        paddingLeft: 10
     },
     editProfileImageCarousel: {
         zIndex: 1,
@@ -210,6 +218,9 @@ const styles = StyleSheet.create({
     editProfileAddImageIcon: {
         fontSize: 22
     },
+    editProfileInput: {
+        fontFamily: globalStyles.montserrat,
+    },
     editProfileFooter: {
         flex: 0.2,
         flexDirection: 'column',
@@ -222,11 +233,13 @@ const styles = StyleSheet.create({
         shadowOpacity: 0,
         borderRadius: 5,
         borderWidth: 0,
+        paddingHorizontal: 15,
         height: 50,
         marginHorizontal: 15,
     },
     editProfileButtonText: {
-        color: globalStyles.textPrimaryColor
+        color: globalStyles.textPrimaryColor,
+        fontFamily: globalStyles.montserratExtraBold,
     },
 });
 

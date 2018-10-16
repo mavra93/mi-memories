@@ -102,30 +102,33 @@ function updateProfile(username) {
     })
 }
 
+function updateUserInDatabase(dispatch, data, imageUrl) {
+    firebaseApp.auth().currentUser.updateProfile({displayName: data.displayName}).then(() => {
+        const currentUser = firebaseApp.auth().currentUser;
+        const user = {
+            displayName: currentUser.displayName,
+            profileImage: imageUrl || data.profileImage
+        };
+        firestore.collection('users').doc(currentUser.uid).update(user).then(() => {
+            dispatch({
+                type: UPDATE_PROFILE_FINISHED
+            });
+            Actions.layoutScreen({refresh: true});
+        });
+    })
+}
+
 export function editUser(data, profileImageChanged) {
     return dispatch => {
         dispatch({
             type: UPDATE_PROFILE_STARTED
         });
         if (profileImageChanged) {
-
             uploadImage(data.profileImage, 'profileImages').then(url => {
-                let urlResponse = url;
-                data.profileImage = urlResponse;
-                firebaseApp.auth().currentUser.updateProfile({displayName: data.displayName}).then(() => {
-                    const currentUser = firebaseApp.auth().currentUser;
-                    const user = {
-                        displayName: currentUser.displayName,
-                        profileImage: urlResponse
-                    };
-                    firestore.collection('users').doc(currentUser.uid).update(user).then(() => {
-                        dispatch({
-                            type: UPDATE_PROFILE_FINISHED
-                        });
-                        Actions.profileScreen({refresh: true});
-                    });
-                })
+                updateUserInDatabase(dispatch, data, url);
             });
+        } else {
+            updateUserInDatabase(dispatch, data);
         }
     }
 }

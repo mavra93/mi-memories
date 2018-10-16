@@ -20,7 +20,8 @@ const styles = StyleSheet.create({
     header: {
         flex: 1,
         height: 150,
-        paddingVertical: 15
+        paddingVertical: 15,
+        position: 'relative'
     },
     stickyHeader: {
         flex: 1,
@@ -57,6 +58,14 @@ const styles = StyleSheet.create({
         color: globalStyles.primaryColor,
         fontFamily: globalStyles.montserrat,
         fontSize: 15
+    },
+    avatar: {
+        width: 50,
+        height: 50,
+        borderRadius: 5,
+        position: 'absolute',
+        top: 15,
+        right: 0
     },
     bullet: {
         width: 5,
