@@ -55,7 +55,7 @@ class ProfileScreenContainer extends Component {
 
     render() {
         const {loading, userMemories, users} = this.props;
-        const user = getUser(this.props.user.uid, users);
+        const user = getUser(this.props.user && this.props.user.uid, users);
         const info = this.getInfo(userMemories);
         return (
             loading ? <Loader /> :
@@ -65,7 +65,7 @@ class ProfileScreenContainer extends Component {
                     </Button>
                     <View style={styles.profileContainer}>
                         <Icon onPress={() => this.props.signOut()} name="ios-log-out" style={styles.signOutButtonIcon}/>
-                        <FastImage style={styles.profileImage} source={user.profileImage ? {uri: user.profileImage} : AVATAR_IMAGE}/>
+                        <FastImage style={styles.profileImage} source={user && user.profileImage ? {uri: user.profileImage} : AVATAR_IMAGE}/>
                         <Text style={styles.displayName}>{user && user.displayName}</Text>
                     </View>
                     <View style={styles.contentContainer}>
