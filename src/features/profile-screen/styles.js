@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10
     },
     contentInfoContainer: {
-        flex: 0.3,
+        flex: 0.5,
         paddingBottom: 15,
         flexDirection: 'row',
         justifyContent: 'center'

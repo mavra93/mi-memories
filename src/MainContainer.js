@@ -5,6 +5,7 @@ import {Router, Actions} from 'react-native-router-flux';
 import FCM from "react-native-fcm";
 import scenes from './scenes';
 import {getUser, updateToken} from './redux/actions/userActions';
+import {setLanguage} from "./helpers/setLanguage";
 
 class MainContainer extends Component {
 
@@ -40,6 +41,7 @@ class MainContainer extends Component {
     redirectToInitialScene = () => {
         const {userFetched, isLoggedIn} = this.props;
         if (isLoggedIn && userFetched) {
+            setLanguage('en');
             Actions.layoutScreen();
         } else if (!isLoggedIn && userFetched) {
             Actions.authScreen();
