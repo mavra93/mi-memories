@@ -236,6 +236,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingBottom: 15
     },
+    editProfilePicker: {
+        height: 50,
+        width: '100%'
+    },
     editProfileButton: {
         backgroundColor: globalStyles.primaryColor,
         shadowOpacity: 0,

@@ -5,6 +5,7 @@ import {Actions} from 'react-native-router-flux';
 import Carousel from 'react-native-snap-carousel-tabs';
 import {Icon, Button} from 'native-base';
 import FastImage from 'react-native-fast-image';
+import {translate} from 'react-native-translate';
 import {getUserMemories} from '../../redux/actions/memoryActions'
 import {signOut, getUsers} from '../../redux/actions/userActions';
 import styles from './styles';
@@ -61,7 +62,7 @@ class ProfileScreenContainer extends Component {
             loading ? <Loader /> :
                 <View style={styles.layoutContainer}>
                     <Button title="editButton" style={styles.editButton} onPress={() => this.openEditModal()}>
-                        <Text style={styles.editButtonText}>EDIT</Text>
+                        <Text style={styles.editButtonText}>{translate('edit').toUpperCase()}</Text>
                     </Button>
                     <View style={styles.profileContainer}>
                         <Icon onPress={() => this.props.signOut()} name="ios-log-out" style={styles.signOutButtonIcon}/>
@@ -72,11 +73,11 @@ class ProfileScreenContainer extends Component {
                         <View style={styles.contentInfoContainer}>
                             <View style={[styles.contentInfoBox, styles.contentInfoBoxFirst]}>
                                 <Text style={styles.contentInfoBoxValue}>{info.trips}</Text>
-                                <Text style={styles.contentInfoBoxTitle}>Trips created</Text>
+                                <Text style={styles.contentInfoBoxTitle}>{translate('tripsCreated')}</Text>
                             </View>
                             <View style={[styles.contentInfoBox, styles.contentInfoBoxSecond]}>
                                 <Text style={styles.contentInfoBoxValue}>{info.stories}</Text>
-                                <Text style={styles.contentInfoBoxTitle}>Stories created</Text>
+                                <Text style={styles.contentInfoBoxTitle}>{translate('storiesCreated')}</Text>
                             </View>
                         </View>
                         <View style={styles.contentCarouselContainer}>

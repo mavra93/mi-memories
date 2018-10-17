@@ -7,6 +7,7 @@ import {Icon, Form, Text, Button, Container} from 'native-base';
 import ImagePicker from 'react-native-image-crop-picker';
 import ImageSlider from 'react-native-image-slider';
 import * as Animatable from 'react-native-animatable';
+import {translate} from 'react-native-translate';
 import styles from './styles';
 import globalStyles from '../../globalStyles';
 import {createMemory} from '../../redux/actions/memoryActions';
@@ -28,8 +29,8 @@ class CreateEditMemoryContainer extends Component {
             value: null,
             type: 'text'
         },
-        categories: ['story', 'trip'],
-        category: 'story',
+        categories: [translate('story'), translate('trip')],
+        category: translate('story'),
         imagePaths: []
     };
 
@@ -128,14 +129,14 @@ class CreateEditMemoryContainer extends Component {
                     <Form onChange={this.onChange}>
                         <View>
                             <TextInput style={styles.input}
-                                       placeholder="Enter memory title"
+                                       placeholder={translate('enterMemoryTitle')}
                                        underlineColorAndroid="transparent"
                                        name="title"
                                        ref="title"
                                        value={title.value}/>
                         </View>
                         <View style={styles.input}>
-                            <TextInput placeholder="Enter memory description"
+                            <TextInput placeholder={translate('enterMemoryDesc')}
                                        underlineColorAndroid="transparent"
                                        multiline={true}
                                        numberOfLines={3}
@@ -165,7 +166,7 @@ class CreateEditMemoryContainer extends Component {
                                 style={[styles.button, {opacity: (!formValid || imagePaths.length < 1) ? 0.5 : 1}]}
                                 rounded
                                 title='createMemory' onPress={() => this.createMemory()}>
-                            <Text style={styles.buttonText}>CREATE MEMORY</Text>
+                            <Text style={styles.buttonText}>{translate('createMemory').toUpperCase()}</Text>
                         </Button>
                     </Animatable.View>
                 </View>

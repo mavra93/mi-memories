@@ -1,4 +1,14 @@
 {
   "trip": "trip",
-  "story": "story"
+  "story": "story",
+  "newest": "newest",
+  "oldest": "oldest",
+  "enterMemoryTitle": "Enter memory title",
+  "enterMemoryDesc": "Enter memory description",
+  "createMemory": "Create memory",
+  "edit": "Edit",
+  "tripsCreated": "Trips created",
+  "storiesCreated": "Stories created",
+  "enterUsername": "Enter your username",
+  "saveUser": "Save user"
 }

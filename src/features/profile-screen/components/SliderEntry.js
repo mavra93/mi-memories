@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {View, TouchableOpacity, Text} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {Actions} from 'react-native-router-flux';
+import {translate} from 'react-native-translate';
 import moment from 'moment';
 import styles from '../styles';
 
@@ -19,7 +20,7 @@ class SliderEntry extends Component {
         return (
         <View style={styles.slideWrapper}>
             <View style={styles.categoryBox}>
-                <Text style={styles.categoryBoxText}>{memory.category.toUpperCase()}</Text>
+                <Text style={styles.categoryBoxText}>{translate(memory.category).toUpperCase()}</Text>
             </View>
             <TouchableOpacity
                 activeOpacity={1}

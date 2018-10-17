@@ -1,0 +1,14 @@
+{
+  "trip": "put",
+  "story": "priča",
+  "newest": "najnoviji",
+  "oldest": "najstariji",
+  "enterMemoryTitle": "Unesi naslov uspomene",
+  "enterMemoryDesc": "Unesi opis uspomene",
+  "createMemory": "Kreiraj uspomenu",
+  "edit": "Uredi",
+  "tripsCreated": "kreiranih putovanja",
+  "storiesCreated": "kreiranih priča",
+  "enterUsername": "Unesite vaše korisničko ime",
+  "saveUser": "Spremi korisnika"
+}

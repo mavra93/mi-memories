@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
-import {BackHandler} from 'react-native';
+import {BackHandler, AsyncStorage} from 'react-native';
 import {connect} from 'react-redux';
 import {Router, Actions} from 'react-native-router-flux';
 import FCM from "react-native-fcm";
 import scenes from './scenes';
 import {getUser, updateToken} from './redux/actions/userActions';
 import {setLanguage} from "./helpers/setLanguage";
+import {getLocalData} from "./helpers/getLocalData";
 
 class MainContainer extends Component {
 
@@ -40,8 +41,10 @@ class MainContainer extends Component {
 
     redirectToInitialScene = () => {
         const {userFetched, isLoggedIn} = this.props;
+        AsyncStorage.getItem('lang').then((value) => {
+            setLanguage(value);
+        });
         if (isLoggedIn && userFetched) {
-            setLanguage('en');
             Actions.layoutScreen();
         } else if (!isLoggedIn && userFetched) {
             Actions.authScreen();

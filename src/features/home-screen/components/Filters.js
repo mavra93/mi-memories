@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Animated, Text, TouchableOpacity} from 'react-native';
+import {Translate} from 'react-native-translate';
 import styles from '../styles';
 
 class Filters extends Component {
@@ -28,7 +29,7 @@ class Filters extends Component {
                         extrapolateRight: 'clamp'
                     })
                 }]}>
-                    <Text style={styles.filterLabelText}>Sort by</Text>
+                    <Text style={styles.filterLabelText}><Translate value='oldest' /></Text>
                 </Animated.View>
                 <Animated.View style={[styles.filterField, {
                     opacity: deltaY.interpolate({
@@ -39,7 +40,7 @@ class Filters extends Component {
                     })
                 }]}>
                     <TouchableOpacity style={styles.filterButton} onPress={() => this.selectOrder('desc')}>
-                        <Text style={styles.filterFieldText}>Newest</Text>
+                        <Text style={styles.filterFieldText}><Translate value='newest' /></Text>
                     </TouchableOpacity>
                 </Animated.View>
                 <Animated.View style={[styles.filterField, {
@@ -51,7 +52,7 @@ class Filters extends Component {
                     })
                 }]}>
                     <TouchableOpacity style={styles.filterButton} onPress={() => this.selectOrder('asc')}>
-                        <Text style={styles.filterFieldText}>Oldest</Text>
+                        <Text style={styles.filterFieldText}><Translate value='oldest' /></Text>
                     </TouchableOpacity>
                 </Animated.View>
             </Animated.View>
