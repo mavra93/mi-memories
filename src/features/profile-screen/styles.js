@@ -238,7 +238,8 @@ const styles = StyleSheet.create({
     },
     editProfilePicker: {
         height: 50,
-        width: '100%'
+        width: '100%',
+        marginLeft: -5
     },
     editProfileButton: {
         backgroundColor: globalStyles.primaryColor,

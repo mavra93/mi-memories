@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {TouchableOpacity, TextInput} from 'react-native';
 import {Container, Form, Text, View, Button} from 'native-base';
+import {translate} from 'react-native-translate';
 import styles from '../styles';
 import globalStyles from '../../../globalStyles';
 import * as Animatable from 'react-native-animatable';
@@ -51,35 +52,34 @@ class LoginComponent extends Component {
                 <Form onChange={this.onChange}>
                     <TouchableOpacity onPress={() => onInputClick(this.refs.email)}>
                         <View pointerEvents="none" style={styles.fakeInput}>
-                            <TextInput placeholder="Enter your email"
+                            <TextInput placeholder={translate('enterEmail')}
                                        underlineColorAndroid="transparent"
                                        name="email"
                                        ref="email"
                                        value={email.value}/>
-                            {!email.isValid && email.value ? <ErrorText text="Email is not valid"/> : null}
+                            {!email.isValid && email.value ? <ErrorText text={translate('emailNotValid')} /> : null}
                         </View>
                     </TouchableOpacity>
                     <View style={styles.input}>
-                        <TextInput placeholder="Enter your password"
+                        <TextInput placeholder={translate('enterPassword')}
                                    underlineColorAndroid="transparent"
                                    name="password"
                                    ref="password"
                                    secureTextEntry={true}
                                    value={password.value}/>
-                        {!password.isValid && password.value ? <ErrorText text="Password must be at least 6 characters"/> : null}
+                        {!password.isValid && password.value ? <ErrorText text={translate('passwordNotValid')} /> : null}
                     </View>
                 </Form>
                 <View style={styles.buttonsWrapper}>
                     <Animatable.View animation="fadeInUp" iterationCount={1} delay={100} duration={ANIMATION_DURATION}>
                         <Button disabled={!formValid} rounded title='Login' onPress={() => this.handleLogin()}
                                 style={[styles.button, {opacity: !formValid ? 0.5 : 1}]}>
-                            <Text style={styles.buttonText}>LOGIN</Text>
+                            <Text style={styles.buttonText}>{translate('login').toUpperCase()}</Text>
                         </Button>
                     </Animatable.View>
                     <Animatable.Text animation="fadeInUp" iterationCount={1} delay={300} duration={ANIMATION_DURATION}
                                      style={styles.greenText}
-                                     onPress={() => this.goToRegisterScreen()}>Don't have an
-                        account</Animatable.Text>
+                                     onPress={() => this.goToRegisterScreen()}>{translate('dontHaveAccount')}</Animatable.Text>
                 </View>
             </Container>
         )

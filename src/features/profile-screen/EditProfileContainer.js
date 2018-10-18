@@ -125,21 +125,21 @@ class EditProfileContainer extends Component {
                                            name="displayName"
                                            ref="displayName"
                                            value={user && user.displayName.value}/>
+                                {language ?
+                                    <Picker
+                                        selectedValue={language}
+                                        style={styles.editProfilePicker}
+                                        onValueChange={(itemValue, itemIndex) => this.setState({language: itemValue, languageChanged: true})}>
+                                        {languages.map((language, i) => {
+                                            return (
+                                                <Picker.Item key={i} label={language}
+                                                             value={language}
+                                                             color={globalStyles.primaryColor}/>
+                                            )
+                                        })}
+                                    </Picker> : null
+                                }
                             </Form>
-                            {language ?
-                                <Picker
-                                    selectedValue={language}
-                                    style={styles.editProfilePicker}
-                                    onValueChange={(itemValue, itemIndex) => this.setState({language: itemValue, languageChanged: true})}>
-                                    {languages.map((language, i) => {
-                                        return (
-                                            <Picker.Item key={i} label={language}
-                                                         value={language}
-                                                         color={globalStyles.borderPrimaryColor}/>
-                                        )
-                                    })}
-                                </Picker> : null
-                            }
                             <View style={styles.editProfileFooter}>
                                 <Animatable.View animation="fadeInUp" iterationCount={1} delay={500}
                                                  duration={ANIMATION_DURATION}>

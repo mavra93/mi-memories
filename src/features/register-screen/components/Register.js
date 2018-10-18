@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {View, TextInput} from 'react-native';
 import {Container, Form, Button, Text} from 'native-base';
+import {translate} from 'react-native-translate';
 import ErrorText from '../../_shared/error-text/ErrorText'
 import styles from '../styles';
 import * as Animatable from 'react-native-animatable';
@@ -53,31 +54,31 @@ class RegisterComponent extends Component {
             <Container>
                 <Form onChange={this.onChange}>
                     <View style={styles.fakeInput}>
-                        <TextInput name="username" placeholder="Enter your username"
+                        <TextInput name="username" placeholder={translate('enterUsername')}
                                    underlineColorAndroid="transparent"
                                    value={username.value}/>
-                        {!username.isValid && username.value ? <ErrorText text="Username is required"/> : null}
+                        {!username.isValid && username.value ? <ErrorText text={translate('usernameRequired')} /> : null}
                     </View>
 
                     <View style={styles.input}>
-                        <TextInput name="email" placeholder="Enter your email" underlineColorAndroid="transparent"
+                        <TextInput name="email" placeholder={translate('enterEmail')} underlineColorAndroid="transparent"
                                    value={email.value}/>
-                        {!email.isValid && email.value ? <ErrorText text="Email is not valid"/> : null}
+                        {!email.isValid && email.value ? <ErrorText text={translate('emailNotValid')} /> : null}
                     </View>
                     <View style={styles.input}>
-                        <TextInput name="password" placeholder="Enter your password" underlineColorAndroid="transparent"
+                        <TextInput name="password" placeholder={translate('enterPassword')} underlineColorAndroid="transparent"
                                    secureTextEntry={true}
                                    value={password.value}/>
-                        {!password.isValid && password.value ? <ErrorText text="Password must be at least 6 characters"/> : null}
+                        {!password.isValid && password.value ? <ErrorText text={translate('passwordNotValid')} /> : null}
                     </View>
                 </Form>
                 <View style={styles.buttonsWrapper}>
                     <Animatable.View animation="fadeInUp" iterationCount={1} delay={100} duration={ANIMATION_DURATION}>
                         <Button disabled={!formValid} rounded title='Login' onPress={() => this.handleSignUp()} style={[styles.button, {opacity: !formValid ? 0.5 : 1}]}>
-                            <Text style={styles.buttonText}>REGISTER</Text>
+                            <Text style={styles.buttonText}>{translate('register').toUpperCase()}</Text>
                         </Button>
                     </Animatable.View>
-                    <Animatable.Text animation="fadeInUp" iterationCount={1} delay={300} duration={ANIMATION_DURATION} style={styles.greenText} onPress={() => this.goToLoginScreen()}>Go back to Login</Animatable.Text>
+                    <Animatable.Text animation="fadeInUp" iterationCount={1} delay={300} duration={ANIMATION_DURATION} style={styles.greenText} onPress={() => this.goToLoginScreen()}>{translate('backToLogin')}</Animatable.Text>
                 </View>
             </Container>
         )

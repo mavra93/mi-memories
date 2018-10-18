@@ -10,5 +10,14 @@
   "tripsCreated": "kreiranih putovanja",
   "storiesCreated": "kreiranih priča",
   "enterUsername": "Unesite vaše korisničko ime",
-  "saveUser": "Spremi korisnika"
+  "saveUser": "Spremi korisnika",
+  "enterEmail": "Unesi email",
+  "enterPassword": "Unesi lozinku",
+  "login": "Prijava",
+  "dontHaveAccount": "Nemaš račun ?",
+  "emailNotValid": "Email nije validan",
+  "passwordNotValid": "Lozinka mora sadržavati najmanje 6 znakova",
+  "usernameRequired": "Korisničko ime je obavezno",
+  "register": "Registracija",
+  "backToLogin": "Vrati se na prijavu"
 }
