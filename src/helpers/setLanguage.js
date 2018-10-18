@@ -6,11 +6,12 @@ import 'moment/min/locales';
 import moment from 'moment'
 
 export function setLanguage(language) {
-    if(language === 'en') {
-        setLocalization(en);
-    } else {
+    const selectedLanguage = language || 'en';
+    if(selectedLanguage === 'hr') {
         setLocalization(hr);
+    } else {
+        setLocalization(en);
     }
-    moment.locale(language);
-    AsyncStorage.setItem('lang', language);
+    moment.locale(selectedLanguage);
+    AsyncStorage.setItem('lang', selectedLanguage);
 }

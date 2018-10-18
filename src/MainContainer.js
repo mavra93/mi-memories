@@ -44,14 +44,14 @@ class MainContainer extends Component {
         const {userFetched, isLoggedIn} = this.props;
         AsyncStorage.getItem('lang').then((value) => {
             setLanguage(value);
+            if (isLoggedIn && userFetched) {
+                Actions.layoutScreen();
+            } else if (!isLoggedIn && userFetched) {
+                Actions.authScreen();
+            } else {
+                Actions.splashScreen();
+            }
         });
-        if (isLoggedIn && userFetched) {
-            Actions.layoutScreen();
-        } else if (!isLoggedIn && userFetched) {
-            Actions.authScreen();
-        } else {
-            Actions.splashScreen();
-        }
     };
 
     getUser = () => {

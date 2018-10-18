@@ -14,7 +14,7 @@
   "enterEmail": "Enter your email",
   "enterPassword": "Enter your password",
   "login": "Login",
-  "dontHaveAccount": "Don't have an account ?ivek",
+  "dontHaveAccount": "Don't have an account ?",
   "emailNotValid": "Email is not valid",
   "passwordNotValid": "Password must be at least 6 characters",
   "usernameRequired": "Username is required",
