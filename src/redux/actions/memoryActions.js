@@ -17,6 +17,7 @@ export const FETCH_FAVORITES_ERROR = 'FETCH_FAVORITES_ERROR';
 export const FETCH_USER_MEMORIES_BEGIN = 'FETCH_USER_MEMORIES_BEGIN';
 export const FETCH_USER_MEMORIES_FINISHED = 'FETCH_USER_MEMORIES_FINISHED';
 export const FETCH_USER_MEMORIES_ERROR = 'FETCH_USER_MEMORIES_ERROR';
+export const REMOVE_FAVORITE_MEMORY = 'REMOVE_FAVORITE_MEMORY';
 
 const firestore = firebaseApp.firestore();
 firestore.settings({timestampsInSnapshots: true});
@@ -81,8 +82,9 @@ export function getFavoriteMemories(id) {
 
 export function addToFavorite(memory, user) {
     let clonedMemory = clone(memory);
+    let removeFromFavorite;
     if (clonedMemory.favoriteIds) {
-        const removeFromFavorite = clonedMemory.favoriteIds.includes(user.uid);
+        removeFromFavorite = clonedMemory.favoriteIds.includes(user.uid);
         if (removeFromFavorite) {
             clonedMemory.favoriteIds = clonedMemory.favoriteIds.filter(e => e !== user.uid);
         } else {
@@ -95,10 +97,15 @@ export function addToFavorite(memory, user) {
     clonedMemory.createdBy = clonedMemory.createdBy.id;
 
     return dispatch => {
-        firestore.collection('memories').doc(clonedMemory.uid).update(clonedMemory).then({})
+        if(removeFromFavorite) {
+            dispatch({
+                type: REMOVE_FAVORITE_MEMORY,
+                payload: clonedMemory
+            });
+        }
+        firestore.collection('memories').doc(clonedMemory.uid).update(clonedMemory);
     }
 }
-
 
 export function createMemory(memory, user, users) {
     let index = 0;

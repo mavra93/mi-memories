@@ -19,5 +19,6 @@
   "passwordNotValid": "Lozinka mora sadržavati najmanje 6 znakova",
   "usernameRequired": "Korisničko ime je obavezno",
   "register": "Registracija",
-  "backToLogin": "Vrati se na prijavu"
+  "backToLogin": "Vrati se na prijavu",
+  "editMemory": "Uredi uspomenu"
 }

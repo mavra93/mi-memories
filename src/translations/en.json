@@ -19,5 +19,6 @@
   "passwordNotValid": "Password must be at least 6 characters",
   "usernameRequired": "Username is required",
   "register": "Register",
-  "backToLogin": "Go back to login"
+  "backToLogin": "Go back to login",
+  "editMemory": "Edit memory"
 }

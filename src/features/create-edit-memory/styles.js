@@ -29,10 +29,6 @@ const styles = StyleSheet.create({
     form: {
         paddingHorizontal: 10
     },
-    input: {
-        color: globalStyles.titleColor,
-        fontFamily: globalStyles.montserrat,
-    },
     button: {
         backgroundColor: globalStyles.primaryColor,
         shadowOpacity: 0,

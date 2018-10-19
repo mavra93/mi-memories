@@ -7,10 +7,13 @@ import {
     FETCH_FAVORITES_BEGIN,
     FETCH_FAVORITES_FINISHED,
     FETCH_USER_MEMORIES_BEGIN,
-    FETCH_USER_MEMORIES_FINISHED
+    FETCH_USER_MEMORIES_FINISHED,
+    REMOVE_FAVORITE_MEMORY,
 }  from '../actions/memoryActions';
 
-export default function (state = {memory: null, memories: [], memoryCreationStarted: false, lastVisible: null, initialLoadFinished: false, favoriteMemories: [], loading: true, userMemories: []}, action) {
+const clone = require('clone');
+
+export default function (state = {memory: null, memories: [], memoryCreationStarted: false, lastVisible: null, initialLoadFinished: false, favoriteMemories: [], loading: true, reRender: false, userMemories: []}, action) {
     switch (action.type) {
         case MEMORY_CREATED:
             return {...state, memoryCreationStarted: false};
@@ -35,6 +38,11 @@ export default function (state = {memory: null, memories: [], memoryCreationStar
         }
         case FETCH_USER_MEMORIES_FINISHED: {
             return {...state, userMemories: action.payload, loading: false}
+        }
+        case REMOVE_FAVORITE_MEMORY: {
+            let cloneFavoriteMemories = clone(state.favoriteMemories);
+            cloneFavoriteMemories = cloneFavoriteMemories.filter(e => e.uid !== action.payload.uid);
+            return {...state, favoriteMemories: cloneFavoriteMemories}
         }
         default:
             return state;

@@ -6,7 +6,6 @@ import FCM from "react-native-fcm";
 import scenes from './scenes';
 import {getUser, updateToken} from './redux/actions/userActions';
 import {setLanguage} from "./helpers/setLanguage";
-import {getLocalData} from "./helpers/getLocalData";
 
 class MainContainer extends Component {
 

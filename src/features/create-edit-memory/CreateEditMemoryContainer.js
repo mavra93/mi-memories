@@ -21,6 +21,7 @@ class CreateEditMemoryContainer extends Component {
 
     state = {
         formValid: false,
+        editMode: false,
         title: {
             value: null,
             type: 'text'
@@ -39,12 +40,30 @@ class CreateEditMemoryContainer extends Component {
         this.formHeight = new Animated.Value(200);
         this.keyboardWillShowSub = Keyboard.addListener('keyboardDidShow', this.keyboardDidShow);
         this.keyboardWillHideSub = Keyboard.addListener('keyboardDidHide', this.keyboardDidHide);
+        this.prepareMemory(this.props.memory)
     }
 
     componentWillUnmount() {
         this.keyboardWillShowSub.remove();
         this.keyboardWillHideSub.remove();
     }
+
+    prepareMemory = (memory) => {
+        console.log(memory)
+        this.setState({
+            editMode: true,
+            title: {
+                value: memory.title,
+                type: 'text'
+            },
+            description: {
+                value: memory.description,
+                type: 'text'
+            },
+            imagePaths: memory.images,
+            category: translate(memory.category),
+        })
+    };
 
     keyboardDidShow = () => {
         Animated.timing(this.imageSliderOpacity, {
@@ -98,8 +117,8 @@ class CreateEditMemoryContainer extends Component {
         });
     };
 
-    createMemory = () => {
-        const {title, description, category, imagePaths} = this.state;
+    createEditMemory = () => {
+        const {title, description, category, imagePaths, editMemory} = this.state;
         const {user, users} = this.props;
         const memory = {
             title: title.value,
@@ -110,11 +129,15 @@ class CreateEditMemoryContainer extends Component {
             createdBy: user.uid
         };
         Keyboard.dismiss();
-        this.props.createMemory(memory, user, users);
+        if(editMemory) {
+            this.props.editMemory(memory, user, users);
+        } else {
+            this.props.createMemory(memory, user, users);
+        }
     };
 
     render() {
-        const {title, description, category, imagePaths, formValid, categories} = this.state;
+        const {title, description, category, imagePaths, formValid, categories, editMode} = this.state;
         return (
             <Container>
                 {this.props.memoryCreationStarted ? <Loader/> : null}
@@ -165,8 +188,8 @@ class CreateEditMemoryContainer extends Component {
                         <Button disabled={!formValid || imagePaths.length < 1}
                                 style={[styles.button, {opacity: (!formValid || imagePaths.length < 1) ? 0.5 : 1}]}
                                 rounded
-                                title='createMemory' onPress={() => this.createMemory()}>
-                            <Text style={styles.buttonText}>{translate('createMemory').toUpperCase()}</Text>
+                                title='createEditMemory' onPress={() => this.createEditMemory()}>
+                            <Text style={styles.buttonText}>{translate(editMode ? 'editMemory' : 'createMemory').toUpperCase()}</Text>
                         </Button>
                     </Animatable.View>
                 </View>

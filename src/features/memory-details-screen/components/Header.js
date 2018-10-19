@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {View, Text} from 'react-native';
 import {Icon} from 'native-base';
+import {Actions} from 'react-native-router-flux';
 import moment from 'moment';
 import styles from '../styles';
 import FastImage from 'react-native-fast-image';
@@ -28,12 +29,16 @@ class Header extends Component {
         this.props.addToFavorite()
     };
 
+    openEdit = () => {
+        Actions.createEditMemory({memory: this.props.memory});
+    };
+
     calculateOptions = () => {
         let showComponent = null;
         const {user, memory} = this.props;
         const {isFavorite} = this.state;
         if (user.uid === memory.createdBy.id) {
-            showComponent = <Icon name="ios-create" style={styles.editIcon}/>
+            showComponent = <Icon name="ios-create" style={styles.editIcon} onPress={() => this.openEdit()}/>
         } else {
             showComponent = <Icon onPress={() => this.addToFavorite()} name="ios-heart" style={[styles.favoriteIcon, isFavorite && styles.favoriteIconActive]}/>
         }

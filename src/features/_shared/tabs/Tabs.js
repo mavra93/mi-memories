@@ -22,7 +22,7 @@ class Tabs extends Component {
     }
     ;
     openModal = () => {
-        Actions.createMemory();
+        Actions.createEditMemory();
     };
 
     selectTab = (screen, i) => {
