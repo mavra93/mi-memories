@@ -1,6 +1,6 @@
 import {
-    MEMORY_CREATED,
-    MEMORY_CREATE_STARTED,
+    MEMORY_CREATE_EDIT_STARTED,
+    MEMORY_CREATE_EDIT_FINISHED,
     FETCH_MEMORIES_BEGIN,
     FETCH_MEMORIES_FINISHED,
     RESET_MEMORIES,
@@ -9,15 +9,16 @@ import {
     FETCH_USER_MEMORIES_BEGIN,
     FETCH_USER_MEMORIES_FINISHED,
     REMOVE_FAVORITE_MEMORY,
+    UPDATE_MEMORY
 }  from '../actions/memoryActions';
 
 const clone = require('clone');
 
 export default function (state = {memory: null, memories: [], memoryCreationStarted: false, lastVisible: null, initialLoadFinished: false, favoriteMemories: [], loading: true, reRender: false, userMemories: []}, action) {
     switch (action.type) {
-        case MEMORY_CREATED:
+        case MEMORY_CREATE_EDIT_FINISHED:
             return {...state, memoryCreationStarted: false};
-        case MEMORY_CREATE_STARTED:
+        case MEMORY_CREATE_EDIT_STARTED:
             return {...state, memoryCreationStarted: true};
         case FETCH_MEMORIES_BEGIN: {
             return {...state, loading: true}
@@ -43,6 +44,23 @@ export default function (state = {memory: null, memories: [], memoryCreationStar
             let cloneFavoriteMemories = clone(state.favoriteMemories);
             cloneFavoriteMemories = cloneFavoriteMemories.filter(e => e.uid !== action.payload.uid);
             return {...state, favoriteMemories: cloneFavoriteMemories}
+        }
+        case UPDATE_MEMORY: {
+            const {memory, memoryData} = action.payload;
+            const cloneMemories = clone(state.memories);
+            const cloneUserMemories = clone(state.userMemories);
+            const newMemory = { ...memoryData, uid: memory.uid, createdAt: memory.createdAt, createdBy: memory.createdBy.id};
+
+            if(cloneMemories.length > 0) {
+                const memoryIndex = cloneMemories.findIndex(item => item.uid === memory.uid);
+                cloneMemories[memoryIndex] = newMemory;
+            }
+            if(cloneUserMemories.length > 0) {
+                const userMemoryIndex = cloneUserMemories.findIndex(item => item.uid === memory.uid);
+                cloneUserMemories[userMemoryIndex] = newMemory;
+            }
+
+            return {...state, userMemories: cloneUserMemories, memories: cloneMemories}
         }
         default:
             return state;

@@ -10,7 +10,7 @@ import * as Animatable from 'react-native-animatable';
 import {translate} from 'react-native-translate';
 import styles from './styles';
 import globalStyles from '../../globalStyles';
-import {createMemory} from '../../redux/actions/memoryActions';
+import {createMemory, editMemory} from '../../redux/actions/memoryActions';
 import isValid from '../../helpers/isValid';
 import {capitalizeFirstLetter} from '../../helpers/capitalize';
 import Loader from '../_shared/loader/Loader';
@@ -49,20 +49,22 @@ class CreateEditMemoryContainer extends Component {
     }
 
     prepareMemory = (memory) => {
-        console.log(memory)
-        this.setState({
-            editMode: true,
-            title: {
-                value: memory.title,
-                type: 'text'
-            },
-            description: {
-                value: memory.description,
-                type: 'text'
-            },
-            imagePaths: memory.images,
-            category: translate(memory.category),
-        })
+        if(memory) {
+            this.setState({
+                editMode: true,
+                formValid: true,
+                title: {
+                    value: memory.title,
+                    type: 'text'
+                },
+                description: {
+                    value: memory.description,
+                    type: 'text'
+                },
+                imagePaths: memory.images,
+                category: translate(memory.category)
+            })
+        }
     };
 
     keyboardDidShow = () => {
@@ -118,9 +120,9 @@ class CreateEditMemoryContainer extends Component {
     };
 
     createEditMemory = () => {
-        const {title, description, category, imagePaths, editMemory} = this.state;
-        const {user, users} = this.props;
-        const memory = {
+        const {title, description, category, imagePaths, editMode} = this.state;
+        const {user, users, memory} = this.props;
+        const memoryObj = {
             title: title.value,
             description: description.value,
             category: category,
@@ -129,10 +131,13 @@ class CreateEditMemoryContainer extends Component {
             createdBy: user.uid
         };
         Keyboard.dismiss();
-        if(editMemory) {
-            this.props.editMemory(memory, user, users);
+        if(editMode) {
+            memoryObj.uid = memory.uid;
+            memoryObj.createdAt = memory.createdAt;
+            memoryObj.createdBy = memory.createdBy;
+            this.props.editMemory(memoryObj);
         } else {
-            this.props.createMemory(memory, user, users);
+            this.props.createMemory(memoryObj, user, users);
         }
     };
 
@@ -208,7 +213,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        createMemory: (memory, user, users) => dispatch(createMemory(memory, user, users))
+        createMemory: (memory, user, users) => dispatch(createMemory(memory, user, users)),
+        editMemory: (memory) => dispatch(editMemory(memory))
     };
 };
 

@@ -5,8 +5,8 @@ import {Actions} from 'react-native-router-flux';
 import {sendRemoteNotification} from '../../notification/notification';
 const clone = require('clone');
 
-export const MEMORY_CREATED = 'MEMORY_CREATED';
-export const MEMORY_CREATE_STARTED = 'MEMORY_CREATE_STARTED';
+export const MEMORY_CREATE_EDIT_FINISHED = 'MEMORY_CREATE_EDIT_FINISHED';
+export const MEMORY_CREATE_EDIT_STARTED = 'MEMORY_CREATE_EDIT_STARTED';
 export const FETCH_MEMORIES_BEGIN = 'FETCH_MEMORIES_BEGIN';
 export const FETCH_MEMORIES_FINISHED = 'FETCH_MEMORIES_FINISHED';
 export const FETCH_MEMORIES_ERROR = 'FETCH_MEMORIES_ERROR';
@@ -18,6 +18,7 @@ export const FETCH_USER_MEMORIES_BEGIN = 'FETCH_USER_MEMORIES_BEGIN';
 export const FETCH_USER_MEMORIES_FINISHED = 'FETCH_USER_MEMORIES_FINISHED';
 export const FETCH_USER_MEMORIES_ERROR = 'FETCH_USER_MEMORIES_ERROR';
 export const REMOVE_FAVORITE_MEMORY = 'REMOVE_FAVORITE_MEMORY';
+export const UPDATE_MEMORY = 'UPDATE_MEMORY';
 
 const firestore = firebaseApp.firestore();
 firestore.settings({timestampsInSnapshots: true});
@@ -107,6 +108,54 @@ export function addToFavorite(memory, user) {
     }
 }
 
+function updateMemoryInDatabase(index, memory, memoryData, dispatch) {
+    if (index === memory.imagePaths.length) {
+        firestore.collection('memories')
+            .doc(memory.uid).update(memoryData)
+            .then(() => {
+                dispatch({
+                    type: UPDATE_MEMORY,
+                    payload: {memory, memoryData}
+                });
+                dispatch({
+                    type: MEMORY_CREATE_EDIT_FINISHED
+                });
+                memoryData.uid = memory.uid;
+                memoryData.createdAt = memory.createdAt;
+                memoryData.createdBy = memory.createdBy;
+                Actions.pop({refresh: {refresh: true, memory: memoryData}});
+            })
+    }
+}
+
+export function editMemory(memory) {
+    let index = 0;
+    let memoryData = {
+        title: memory.title,
+        description: memory.description,
+        category: memory.category,
+        images: [],
+    };
+    return dispatch => {
+        dispatch({
+            type: MEMORY_CREATE_EDIT_STARTED
+        });
+        memory.imagePaths.forEach(image => {
+            const isNewImage = image.includes('file');
+            index = index + 1;
+            if(isNewImage) {
+                uploadImage(image, 'memories').then(url => {
+                    memoryData.images.push(url);
+                    updateMemoryInDatabase(index, memory, memoryData, dispatch);
+                });
+            } else {
+                memoryData.images.push(image);
+                updateMemoryInDatabase(index, memory, memoryData, dispatch);
+            }
+        });
+    }
+}
+
 export function createMemory(memory, user, users) {
     let index = 0;
     let memoryData = {
@@ -119,7 +168,7 @@ export function createMemory(memory, user, users) {
     };
     return dispatch => {
         dispatch({
-            type: MEMORY_CREATE_STARTED
+            type: MEMORY_CREATE_EDIT_STARTED
         });
         memory.imagePaths.forEach(image => {
             uploadImage(image, 'memories').then(url => {
@@ -130,7 +179,7 @@ export function createMemory(memory, user, users) {
                         .add(memoryData)
                         .then(() => {
                             dispatch({
-                                type: MEMORY_CREATED
+                                type: MEMORY_CREATE_EDIT_FINISHED
                             });
                             sendRemoteNotification(memoryData, user, users);
                             Actions.layoutScreen({refresh: true});
