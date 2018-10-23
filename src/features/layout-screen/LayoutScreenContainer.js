@@ -6,6 +6,7 @@ import {signOut, getUsers} from '../../redux/actions/userActions'
 import HomeScreenContainer from "../home-screen/HomeScreenContainer";
 import FavoriteScreenContainer from '../favorites-screen/FavoriteScreenContainer';
 import ProfileScreenContainer from '../profile-screen/ProfileScreenContainer';
+import NotificationScreenContainer from '../notification-screens/NotificationScreenContainer';
 import Tabs from '../_shared/tabs/Tabs';
 import {homeScreen, favoriteScreen, notificationsScreen, profileScreen} from '../_shared/tabs/Tabs';
 import styles from './styles';
@@ -45,7 +46,7 @@ class LayoutScreenContainer extends Component {
                 currentComponent = <FavoriteScreenContainer key={key} />;
                 break;
             case notificationsScreen:
-                currentComponent = <Text>notifications</Text>;
+                currentComponent = <NotificationScreenContainer key={key} />;
                 break;
             case profileScreen:
                 currentComponent = <ProfileScreenContainer key={key} />;

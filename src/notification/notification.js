@@ -1,8 +1,10 @@
 import firebaseClient from "./FirebaseClient";
+import {getUser} from '../helpers/getUserFromUsers';
 
 export function sendRemoteNotification(memory, user, users) {
+    const currentUser = getUser(user.uid, users);
     for (let value of users) {
-        if (value.id !== user.uid && value.token !== user.token) {
+        if (value.id !== user.uid && value.token !== currentUser.token) {
             const body = {
                 to: value.token,
                 data: {

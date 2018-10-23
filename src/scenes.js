@@ -9,6 +9,8 @@ import MemoryDetailsScreenContainer from './features/memory-details-screen/Memor
 import FavoriteScreenContainer from './features/favorites-screen/FavoriteScreenContainer';
 import ProfileScreenContainer from './features/profile-screen/ProfileScreenContainer';
 import EditProfileContainer from './features/profile-screen/EditProfileContainer';
+import NotificationScreenContainer from './features/notification-screens/NotificationScreenContainer'
+import CreateNotificationScreenContainer from './features/notification-screens/CreateNotificationScreenContainer'
 
 const scenes = Actions.create(
     <Scene key="root">
@@ -21,6 +23,8 @@ const scenes = Actions.create(
         <Scene key="favoritesScreen" component={FavoriteScreenContainer} hideNavBar={true}/>
         <Scene key="profileScreen" component={ProfileScreenContainer} hideNavBar={true}/>
         <Scene key="editProfile" component={EditProfileContainer} hideNavBar={true}/>
+        <Scene key='notificationScreen' component={NotificationScreenContainer} hideNavBar={true}/>
+        <Scene key='createNotificationScreen' component={CreateNotificationScreenContainer} hideNavBar={true}/>
     </Scene>
 );
 

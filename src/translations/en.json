@@ -21,5 +21,7 @@
   "register": "Register",
   "backToLogin": "Go back to login",
   "editMemory": "Edit memory",
-  "searchByTitle": "Search memories by title"
+  "searchByTitle": "Search memories by title",
+  "created": "Created",
+  "delivered": "Delivered"
 }

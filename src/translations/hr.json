@@ -21,5 +21,7 @@
   "register": "Registracija",
   "backToLogin": "Vrati se na prijavu",
   "editMemory": "Uredi uspomenu",
-  "searchByTitle": "Pretraži uspomene po naslovu"
+  "searchByTitle": "Pretraži uspomene po naslovu",
+  "created": "Kreirane",
+  "delivered": "Primljene"
 }
