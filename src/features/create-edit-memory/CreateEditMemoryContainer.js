@@ -30,8 +30,8 @@ class CreateEditMemoryContainer extends Component {
             value: null,
             type: 'text'
         },
-        categories: [translate('story'), translate('trip')],
-        category: translate('story'),
+        categories: ['story', 'trip'],
+        category: 'story',
         imagePaths: []
     };
 
@@ -180,7 +180,7 @@ class CreateEditMemoryContainer extends Component {
                                 onValueChange={(itemValue, itemIndex) => this.setState({category: itemValue})}>
                                 {categories.map((category, i) => {
                                     return (
-                                        <Picker.Item key={i} label={capitalizeFirstLetter(category)} value={category}
+                                        <Picker.Item key={i} label={capitalizeFirstLetter(translate(category))} value={category}
                                                      color={globalStyles.borderPrimaryColor}/>
                                     )
                                 })}

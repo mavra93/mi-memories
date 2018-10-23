@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
-import {View, FlatList, Animated} from 'react-native';
+import {View, FlatList, Animated, Keyboard} from 'react-native';
 import {connect} from 'react-redux';
 import {Icon} from 'native-base';
 import Interactable from 'react-native-interactable';
+import debounce from 'lodash/debounce';
 import {signOut} from '../../redux/actions/userActions';
-import {fetchMemories, resetMemories} from '../../redux/actions/memoryActions';
+import {fetchMemories, resetMemories, searchMemories} from '../../redux/actions/memoryActions';
 import styles from './styles';
 import MemoryBox from "./components/MemoryBox";
 import {createdBy} from '../../helpers/createdBy'
@@ -12,7 +13,6 @@ import Filters from './components/Filters';
 import Loader from '../_shared/loader/Loader';
 
 class HomeScreenContainer extends Component {
-
     state = {
         loadMoreReady: false,
         deltaY: new Animated.Value(-130),
@@ -56,6 +56,16 @@ class HomeScreenContainer extends Component {
         })
     };
 
+    handleSearch = debounce((text) => {
+        if(text.length === 0) {
+            this.props.resetMemories();
+            this.props.fetchMemories();
+        } else {
+            this.props.searchMemories(text);
+        }
+        Keyboard.dismiss();
+    }, 800);
+
     fetchByOrder = (order) => {
         this.props.resetMemories();
         this.setState({
@@ -70,7 +80,7 @@ class HomeScreenContainer extends Component {
         return (
             <View style={styles.container}>
                 {loading ? <Loader /> : null}
-                <Filters deltaY={this.state.deltaY} fetchByOrder={this.fetchByOrder}/>
+                <Filters deltaY={this.state.deltaY} fetchByOrder={this.fetchByOrder} handleSearch={this.handleSearch}/>
                 <Interactable.View
                     verticalOnly={true}
                     snapPoints={[{y: 0}, {y: -130}]}
@@ -125,6 +135,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchMemories: (loadMore, lastVisible, order) => dispatch(fetchMemories(loadMore, lastVisible, order)),
+        searchMemories: (text) => dispatch(searchMemories(text)),
         resetMemories: () => dispatch(resetMemories())
     };
 };

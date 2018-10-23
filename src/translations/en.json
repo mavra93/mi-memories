@@ -20,5 +20,6 @@
   "usernameRequired": "Username is required",
   "register": "Register",
   "backToLogin": "Go back to login",
-  "editMemory": "Edit memory"
+  "editMemory": "Edit memory",
+  "searchByTitle": "Search memories by title"
 }

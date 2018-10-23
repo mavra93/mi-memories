@@ -3,12 +3,14 @@ import {
     MEMORY_CREATE_EDIT_FINISHED,
     FETCH_MEMORIES_BEGIN,
     FETCH_MEMORIES_FINISHED,
+    SEARCH_MEMORIES_BEGIN,
+    SEARCH_MEMORIES_FINISHED,
     RESET_MEMORIES,
     FETCH_FAVORITES_BEGIN,
     FETCH_FAVORITES_FINISHED,
     FETCH_USER_MEMORIES_BEGIN,
     FETCH_USER_MEMORIES_FINISHED,
-    REMOVE_FAVORITE_MEMORY,
+    HANDLE_FAVORITE_MEMORY,
     UPDATE_MEMORY
 }  from '../actions/memoryActions';
 
@@ -25,6 +27,11 @@ export default function (state = {memory: null, memories: [], memoryCreationStar
         }
         case FETCH_MEMORIES_FINISHED:
             return {...state, memories: state.memories.concat(action.payload.memories), lastVisible: action.payload.lastVisible, initialLoadFinished: action.payload.initialLoadFinished, loading: false};
+        case SEARCH_MEMORIES_BEGIN: {
+            return {...state, loading: true}
+        }
+        case SEARCH_MEMORIES_FINISHED:
+            return {...state, memories: action.payload, initialLoadFinished: false, lastVisible: null, loading: false};
         case RESET_MEMORIES: {
             return {...state, memories: [], initialLoadFinished: false, lastVisible: null}
         }
@@ -40,10 +47,20 @@ export default function (state = {memory: null, memories: [], memoryCreationStar
         case FETCH_USER_MEMORIES_FINISHED: {
             return {...state, userMemories: action.payload, loading: false}
         }
-        case REMOVE_FAVORITE_MEMORY: {
+        case HANDLE_FAVORITE_MEMORY: {
+            const {clonedMemory, removeFromFavorite} = action.payload;
             let cloneFavoriteMemories = clone(state.favoriteMemories);
-            cloneFavoriteMemories = cloneFavoriteMemories.filter(e => e.uid !== action.payload.uid);
-            return {...state, favoriteMemories: cloneFavoriteMemories}
+
+            /* Remove memory from favorites if removeFromFavorite === true */
+            if(removeFromFavorite) {
+                cloneFavoriteMemories = cloneFavoriteMemories.filter(e => e.uid !== action.payload.uid);
+            }
+            /* Replace with new memory data */
+            let cloneMemories = clone(state.memories);
+            const memoryIndex = cloneMemories.findIndex(item => item.uid === clonedMemory.uid);
+            cloneMemories[memoryIndex] = clonedMemory;
+
+            return {...state, favoriteMemories: cloneFavoriteMemories, memories: cloneMemories}
         }
         case UPDATE_MEMORY: {
             const {memory, memoryData} = action.payload;

@@ -1,16 +1,28 @@
 import React, {Component} from 'react';
-import {Animated, Text, TouchableOpacity} from 'react-native';
-import {Translate} from 'react-native-translate';
+import {Animated, Text, TouchableOpacity, TextInput} from 'react-native';
+import {Translate, translate} from 'react-native-translate';
 import styles from '../styles';
 
 class Filters extends Component {
+
+    state = {
+        searchText: null
+    };
 
     selectOrder = (order) => {
         this.props.fetchByOrder(order);
     };
 
+    handleSearch = (text) => {
+        this.setState({
+            searchText: text
+        });
+        this.props.handleSearch(text);
+    };
+
     render() {
         const {deltaY} = this.props;
+        const {searchText} = this.state;
         return (
             <Animated.View style={[styles.filterContainer, {
                 transform: [{
@@ -29,6 +41,13 @@ class Filters extends Component {
                         extrapolateRight: 'clamp'
                     })
                 }]}>
+                    <TextInput placeholder={translate('searchByTitle')}
+                               underlineColorAndroid="transparent"
+                               name="searchMemories"
+                               ref="searchMemories"
+                               value={searchText}
+                               onChangeText={this.handleSearch}
+                               style={styles.filterInput}/>
                     <Text style={styles.filterLabelText}><Translate value='oldest' /></Text>
                 </Animated.View>
                 <Animated.View style={[styles.filterField, {

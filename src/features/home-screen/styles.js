@@ -81,6 +81,11 @@ const styles = StyleSheet.create({
     filterTop: {
         height: 36,
     },
+    filterInput: {
+        paddingLeft: 10,
+        fontFamily: globalStyles.montserrat,
+        color: globalStyles.titleColor
+    },
     filterField: {
         height: 40,
         backgroundColor: globalStyles.primaryColor,

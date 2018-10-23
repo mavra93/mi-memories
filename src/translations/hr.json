@@ -20,5 +20,6 @@
   "usernameRequired": "Korisničko ime je obavezno",
   "register": "Registracija",
   "backToLogin": "Vrati se na prijavu",
-  "editMemory": "Uredi uspomenu"
+  "editMemory": "Uredi uspomenu",
+  "searchByTitle": "Pretraži uspomene po naslovu"
 }

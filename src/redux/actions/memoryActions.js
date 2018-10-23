@@ -17,8 +17,10 @@ export const FETCH_FAVORITES_ERROR = 'FETCH_FAVORITES_ERROR';
 export const FETCH_USER_MEMORIES_BEGIN = 'FETCH_USER_MEMORIES_BEGIN';
 export const FETCH_USER_MEMORIES_FINISHED = 'FETCH_USER_MEMORIES_FINISHED';
 export const FETCH_USER_MEMORIES_ERROR = 'FETCH_USER_MEMORIES_ERROR';
-export const REMOVE_FAVORITE_MEMORY = 'REMOVE_FAVORITE_MEMORY';
+export const HANDLE_FAVORITE_MEMORY = 'HANDLE_FAVORITE_MEMORY';
 export const UPDATE_MEMORY = 'UPDATE_MEMORY';
+export const SEARCH_MEMORIES_BEGIN = 'SEARCH_MEMORIES_BEGIN';
+export const SEARCH_MEMORIES_FINISHED = 'SEARCH_MEMORIES_FINISHED';
 
 const firestore = firebaseApp.firestore();
 firestore.settings({timestampsInSnapshots: true});
@@ -98,13 +100,12 @@ export function addToFavorite(memory, user) {
     clonedMemory.createdBy = clonedMemory.createdBy.id;
 
     return dispatch => {
-        if(removeFromFavorite) {
+        firestore.collection('memories').doc(clonedMemory.uid).update(clonedMemory).then(() => {
             dispatch({
-                type: REMOVE_FAVORITE_MEMORY,
-                payload: clonedMemory
+                type: HANDLE_FAVORITE_MEMORY,
+                payload: {clonedMemory, removeFromFavorite}
             });
-        }
-        firestore.collection('memories').doc(clonedMemory.uid).update(clonedMemory);
+        });
     }
 }
 
@@ -200,17 +201,28 @@ function prepareMemories(querySnapshot) {
     return memories;
 }
 
+export function searchMemories(text) {
+    let memories;
+    const end = text + '\uf8ff';
+    const query =  firestore.collection('memories').orderBy('title').startAt(text).endAt(end);
+
+    return dispatch => {
+            dispatch({
+                type: SEARCH_MEMORIES_BEGIN
+            });
+            query.get().then((querySnapshot) => {
+                memories = prepareMemories(querySnapshot);
+                dispatch({
+                    type: SEARCH_MEMORIES_FINISHED,
+                    payload: memories
+                });
+            })
+    }
+}
+
 export function fetchMemories(loadMore, lastVisible, order) {
     let memories;
     const query = firestore.collection('memories').orderBy('createdAt', order || 'desc');
-    /*const start = 'kaj sad';
-     const end = start + '\uf8ff';
-     firestore.collection('memories')
-     .orderBy('title')
-     .limit(5)
-     .startAt(start)
-     .endAt(end)
-     */
     return dispatch => {
         if (loadMore) {
             if (lastVisible) {
