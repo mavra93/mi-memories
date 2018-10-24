@@ -41,6 +41,10 @@ const styles = StyleSheet.create({
         color: globalStyles.textPrimaryColor,
         fontFamily: globalStyles.montserratBold,
     },
+    input: {
+        color: globalStyles.titleColor,
+        fontFamily: globalStyles.montserrat,
+    },
     textArea: {
         height: 100,
         color: globalStyles.titleColor,
