@@ -7,7 +7,6 @@ import calendarHr from '../../../translations/calendarHr.json';
 
 import styles from '../styles';
 
-
 class CalendarComponent extends Component {
 
     state = {
@@ -60,11 +59,12 @@ class CalendarComponent extends Component {
                 futureScrollRange={50}
                 markedDates={markedDates}
                 theme={{
+                    backgroundColor: globalStyles.secondaryBackgroundColor,
+                    calendarBackground: globalStyles.secondaryBackgroundColor,
                     selectedDayTextColor: globalStyles.textPrimaryColor,
                     todayTextColor: globalStyles.primaryColor,
-                    dayTextColor: globalStyles.titleColor,
-                    arrowColor: 'orange',
-                    monthTextColor: globalStyles.titleColor,
+                    dayTextColor: globalStyles.textPrimaryColor,
+                    monthTextColor: globalStyles.textPrimaryColor,
                     textDayFontFamily: globalStyles.montserratBold,
                     textMonthFontFamily: globalStyles.montserratBold,
                     textDayHeaderFontFamily: globalStyles.montserratBold,

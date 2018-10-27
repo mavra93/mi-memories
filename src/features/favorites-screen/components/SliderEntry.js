@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {View, TouchableOpacity, Text} from 'react-native';
-import {Translate} from 'react-native-translate';
+import {translate} from 'react-native-translate';
 import FastImage from 'react-native-fast-image';
 import {Actions} from 'react-native-router-flux';
 import moment from 'moment';
@@ -31,7 +31,7 @@ class SliderEntry  extends Component {
                     <View style={styles.contentWrapper}>
                         <View style={styles.textContainer}>
                             <Text style={styles.title} numberOfLines={2}>{memory.title}</Text>
-                            <Text style={styles.category}><Translate value={memory.category} /></Text>
+                            <Text style={styles.category}>{translate(memory.category).toUpperCase()}</Text>
                             <View style={styles.info}>
                                 <Text style={styles.date}>{date}</Text>
                                 <View style={styles.bullet}></View>

@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {View, StatusBar} from 'react-native';
 import {connect} from 'react-redux'
-import {Text} from 'native-base';
 import {signOut, getUsers} from '../../redux/actions/userActions'
 import HomeScreenContainer from "../home-screen/HomeScreenContainer";
 import FavoriteScreenContainer from '../favorites-screen/FavoriteScreenContainer';
@@ -10,6 +9,7 @@ import NotificationScreenContainer from '../notification-screens/NotificationScr
 import Tabs from '../_shared/tabs/Tabs';
 import {homeScreen, favoriteScreen, notificationsScreen, profileScreen} from '../_shared/tabs/Tabs';
 import styles from './styles';
+import globalStyles from '../../globalStyles';
 
 class LayoutScreenContainer extends Component {
 
@@ -61,8 +61,8 @@ class LayoutScreenContainer extends Component {
         return (
             <View style={styles.layoutContainer}>
                 <StatusBar
-                    backgroundColor="white"
-                    barStyle="dark-content"
+                    backgroundColor={globalStyles.secondaryBackgroundColor}
+                    barStyle="light-content"
                 />
                 {screenToShow}
                 <Tabs changeScene={this.changeScene} />

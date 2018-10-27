@@ -42,21 +42,19 @@ const styles = StyleSheet.create({
         fontFamily: globalStyles.montserratBold,
     },
     input: {
-        color: globalStyles.titleColor,
+        color: globalStyles.textPrimaryColor,
         fontFamily: globalStyles.montserrat,
     },
     textArea: {
         height: 100,
-        color: globalStyles.titleColor,
+        color: globalStyles.textPrimaryColor,
         fontFamily: globalStyles.montserrat,
     },
     picker: {
+        color: globalStyles.textPrimaryColor,
+        fontFamily: globalStyles.montserrat,
         marginTop: 15,
         height: 50
-    },
-    pickerItem: {
-        color: globalStyles.borderPrimaryColor,
-        fontFamily: globalStyles.montserrat,
     },
     footer: {
         flex: 1,

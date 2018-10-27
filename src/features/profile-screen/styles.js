@@ -24,10 +24,10 @@ const styles = StyleSheet.create({
         fontSize: 15
     },
     profileContainer: {
+        backgroundColor: globalStyles.secondaryBackgroundColor,
         flex: 0.5,
         maxHeight: 200,
         marginBottom: 40,
-        backgroundColor: 'white',
         alignItems: 'center',
         justifyContent: 'center'
     },
@@ -64,8 +64,8 @@ const styles = StyleSheet.create({
     contentInfoBox: {
         width: globalStyles.screenWidth / 2 - 40,
         height: 100,
-        backgroundColor: 'white',
-        elevation: 2,
+        backgroundColor: globalStyles.secondaryBackgroundColor,
+        elevation: 1,
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 5
@@ -79,12 +79,12 @@ const styles = StyleSheet.create({
     contentInfoBoxTitle: {
         fontSize: 14,
         fontFamily: globalStyles.montserrat,
-        color: globalStyles.borderPrimaryColor
+        color: globalStyles.titleColor
     },
     contentInfoBoxValue: {
         fontSize: 20,
         fontFamily: globalStyles.montserratExtraBold,
-        color: globalStyles.titleColor,
+        color: globalStyles.textPrimaryColor,
     },
     contentCarouselContainer: {
         flex: 0.5
@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         zIndex: 10,
         right: 5,
-        top: 60,
+        top: '35%',
         width: 60,
         height: 60,
         backgroundColor: globalStyles.primaryColor,
@@ -227,6 +227,7 @@ const styles = StyleSheet.create({
         fontSize: 22
     },
     editProfileInput: {
+        color: globalStyles.textPrimaryColor,
         fontFamily: globalStyles.montserrat,
     },
     editProfileFooter: {

@@ -120,6 +120,7 @@ class EditProfileContainer extends Component {
                         <View style={styles.editProfileContent}>
                             <Form onChange={this.onChange} style={styles.editProfileContentForm}>
                                 <TextInput style={styles.editProfileInput}
+                                           placeholderTextColor={globalStyles.textPrimaryColor}
                                            placeholder={translate('enterUsername')}
                                            underlineColorAndroid="transparent"
                                            name="displayName"

@@ -3,6 +3,7 @@ import {View, TouchableOpacity} from 'react-native';
 import {Icon} from 'native-base'
 import {Actions} from 'react-native-router-flux';
 import styles from './styles';
+import globalStyles from '../../../globalStyles';
 
 export const homeScreen = 'home';
 export const favoriteScreen = 'favorite';
@@ -71,7 +72,7 @@ class Tabs extends Component {
                         }
                         return(
                             <TouchableOpacity onPress={() => this.selectTab(tab.screen, i)} style={tabStyles} key={i}>
-                                <Icon type="FontAwesome" name={tab.icon} style={{color: activeIndex === i ? '#42b72a' : '#525252'}}/>
+                                <Icon type="FontAwesome" name={tab.icon} style={{color: activeIndex === i ? globalStyles.primaryColor : globalStyles.iconsColor}}/>
                             </TouchableOpacity>
                         )
                     })}

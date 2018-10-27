@@ -46,13 +46,13 @@ class HomeScreenContainer extends Component {
 
     onSnap = () => {
         this.setState({
-            scrollEnabled: this.state.deltaY._value <= -130
+            scrollEnabled: this.state.deltaY._value <= -130 || this.props.memories.length < 1
         })
     };
 
     onStop = () => {
         this.setState({
-            scrollEnabled: this.state.deltaY._value === -130
+            scrollEnabled: this.state.deltaY._value === -130 || this.props.memories.length < 1
         })
     };
 

@@ -5,6 +5,7 @@ import {Actions} from 'react-native-router-flux';
 import moment from 'moment';
 import styles from '../styles';
 import FastImage from 'react-native-fast-image';
+import {translate} from 'react-native-translate';
 import {getUser} from "../../../helpers/getUserFromUsers";
 
 const AVATAR_IMAGE = require('../../../assets/images/avatar.png');
@@ -53,7 +54,7 @@ class Header extends Component {
             <View style={styles.header}>
                 <FastImage style={styles.avatar} source={user.profileImage ? {uri: user.profileImage} : AVATAR_IMAGE}/>
                 <Text style={styles.title} numberOfLines={2}>{memory.title}</Text>
-                <Text style={styles.category}>{memory.category.toUpperCase()}</Text>
+                <Text style={styles.category}>{translate(memory.category).toUpperCase()}</Text>
                 <View style={styles.info}>
                     <Text style={styles.date}>{date}</Text>
                     <View style={styles.bullet}></View>

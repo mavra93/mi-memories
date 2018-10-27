@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     tabsWrapper: {
-        backgroundColor: globalStyles.secondaryBackgroundColor,
+        backgroundColor: globalStyles.tabsBackground,
         flexDirection: 'row',
         justifyContent: 'space-between',
         position: 'absolute',

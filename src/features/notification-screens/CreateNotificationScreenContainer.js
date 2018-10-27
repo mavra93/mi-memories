@@ -10,6 +10,7 @@ import isValid from '../../helpers/isValid';
 import {createNotification} from '../../redux/actions/notificationActions'
 import CalendarComponent from './components/CalendarComponent';
 import SelectUser from './components/SelectUser';
+import globalStyles from '../../globalStyles';
 
 const ANIMATION_DURATION = 300;
 
@@ -114,6 +115,7 @@ class CreateNotificationScreenContainer extends Component {
                         <View>
                             <TextInput style={styles.input}
                                        placeholder={translate('enterNotificationTitle')}
+                                       placeholderTextColor={globalStyles.textPrimaryColor}
                                        underlineColorAndroid="transparent"
                                        name="title"
                                        ref="title"
@@ -121,6 +123,7 @@ class CreateNotificationScreenContainer extends Component {
                         </View>
                         <View>
                             <TextInput placeholder={translate('enterNotificationDesc')}
+                                       placeholderTextColor={globalStyles.textPrimaryColor}
                                        underlineColorAndroid="transparent"
                                        multiline={true}
                                        numberOfLines={3}

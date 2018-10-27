@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Animated, Text, TouchableOpacity, TextInput} from 'react-native';
 import {Translate, translate} from 'react-native-translate';
 import styles from '../styles';
+import globalStyles from '../../../globalStyles';
 
 class Filters extends Component {
 
@@ -42,6 +43,7 @@ class Filters extends Component {
                     })
                 }]}>
                     <TextInput placeholder={translate('searchByTitle')}
+                               placeholderTextColor={globalStyles.textPrimaryColor}
                                underlineColorAndroid="transparent"
                                name="searchMemories"
                                ref="searchMemories"

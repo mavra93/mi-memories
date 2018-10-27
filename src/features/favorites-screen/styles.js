@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     },
     category: {
         flex: 0.2,
-        color: globalStyles.borderPrimaryColor,
+        color: globalStyles.textPrimaryColor,
         fontFamily: globalStyles.montserratExtraBold,
         fontSize: 18
     },
@@ -62,11 +62,11 @@ const styles = StyleSheet.create({
         width: 5,
         height: 5,
         borderRadius: 2.5,
-        backgroundColor: globalStyles.borderPrimaryColor,
+        backgroundColor: globalStyles.iconsColor,
         marginHorizontal: 10
     },
     createdBy: {
-        color: globalStyles.borderPrimaryColor,
+        color: globalStyles.iconsColor,
         fontFamily: globalStyles.montserrat,
         fontSize: 15
     },
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
         flex: 0.5,
     },
     description: {
-        color: globalStyles.borderPrimaryColor,
+        color: globalStyles.textPrimaryColor,
         fontFamily: globalStyles.montserrat,
         fontSize: 15
     }

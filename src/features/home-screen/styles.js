@@ -19,10 +19,10 @@ const styles = StyleSheet.create({
         height: 350,
         position: 'relative',
         width: '100%',
-        backgroundColor: globalStyles.dividerPrimaryColor,
+        backgroundColor: globalStyles.secondaryBackgroundColor,
         marginBottom: 20,
         borderRadius: 5,
-        elevation: 3
+        elevation: 1
     },
     memoryTitle: {
         fontSize: 20,
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
         fontSize: 13,
         flex: 0.57,
         fontFamily: globalStyles.montserrat,
-        color: globalStyles.borderPrimaryColor
+        color: globalStyles.textPrimaryColor
     },
     memoryContent: {
         flex: 0.4,
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     },
     memoryInfo: {
         fontFamily: globalStyles.montserrat,
-        color: globalStyles.borderPrimaryColor,
+        color: globalStyles.textPrimaryColor,
         flex: 0.2,
         position: 'absolute',
         bottom: 15,
@@ -84,6 +84,7 @@ const styles = StyleSheet.create({
     filterInput: {
         paddingLeft: 10,
         fontFamily: globalStyles.montserrat,
+        textAlign: 'center',
         color: globalStyles.titleColor
     },
     filterField: {
@@ -112,10 +113,9 @@ const styles = StyleSheet.create({
         marginLeft: 30
     },
     pullUpDown: {
-        backgroundColor: 'white',
+        backgroundColor: globalStyles.secondaryBackgroundColor,
         borderBottomColor: globalStyles.borderPrimaryColor,
         padding: 5,
-        elevation: 8,
         alignItems: 'center',
         justifyContent: 'center',
     },

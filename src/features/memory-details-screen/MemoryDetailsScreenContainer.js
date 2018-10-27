@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import ImageCarousel from 'react-native-image-carousel';
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
 import {addToFavorite} from '../../redux/actions/memoryActions';
+import globalStyles from '../../globalStyles';
 
 import styles from './styles';
 import Header from './components/Header';
@@ -90,6 +91,7 @@ class MemoryDetailsScreenContainer extends Component {
         return (
             <View style={styles.container}>
                 <ParallaxScrollView
+                    contentBackgroundColor={globalStyles.secondaryBackgroundColor}
                     parallaxHeaderHeight={HEADER_MAX_HEIGHT}
                     renderFixedHeader={this.renderFixedHeader}
                     scrollEvent={this.onScroll}

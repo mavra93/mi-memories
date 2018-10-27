@@ -144,7 +144,7 @@ class CreateEditMemoryContainer extends Component {
     render() {
         const {title, description, category, imagePaths, formValid, categories, editMode} = this.state;
         return (
-            <Container>
+            <Container style={styles.container}>
                 {this.props.memoryCreationStarted ? <Loader/> : null}
                 <Animated.View style={[styles.imageHeader, {opacity: this.imageSliderOpacity}]}>
                     <ImageSlider images={imagePaths}/>
@@ -158,6 +158,7 @@ class CreateEditMemoryContainer extends Component {
                         <View>
                             <TextInput style={styles.input}
                                        placeholder={translate('enterMemoryTitle')}
+                                       placeholderTextColor={globalStyles.textPrimaryColor}
                                        underlineColorAndroid="transparent"
                                        name="title"
                                        ref="title"
@@ -165,6 +166,7 @@ class CreateEditMemoryContainer extends Component {
                         </View>
                         <View style={styles.input}>
                             <TextInput placeholder={translate('enterMemoryDesc')}
+                                       placeholderTextColor={globalStyles.textPrimaryColor}
                                        underlineColorAndroid="transparent"
                                        multiline={true}
                                        numberOfLines={3}
@@ -181,7 +183,7 @@ class CreateEditMemoryContainer extends Component {
                                 {categories.map((category, i) => {
                                     return (
                                         <Picker.Item key={i} label={capitalizeFirstLetter(translate(category))} value={category}
-                                                     color={globalStyles.borderPrimaryColor}/>
+                                                     color={globalStyles.primaryColor}/>
                                     )
                                 })}
                             </Picker>

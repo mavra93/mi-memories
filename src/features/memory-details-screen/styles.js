@@ -3,7 +3,11 @@ import globalStyles from '../../globalStyles';
 
 const styles = StyleSheet.create({
     container: {
+        backgroundColor: globalStyles.secondaryBackgroundColor,
         flex: 1
+    },
+    parallax: {
+        backgroundColor: globalStyles.secondaryBackgroundColor,
     },
     imageCarousel: {
         width: globalStyles.screenWidth,
@@ -26,11 +30,11 @@ const styles = StyleSheet.create({
     stickyHeader: {
         flex: 1,
         paddingHorizontal: 15,
-        backgroundColor: globalStyles.dividerPrimaryColor,
+        backgroundColor: globalStyles.secondaryBackgroundColor,
         width: globalStyles.screenWidth
     },
     contentWrapper: {
-        backgroundColor: globalStyles.dividerPrimaryColor,
+        backgroundColor: globalStyles.secondaryBackgroundColor,
         flex: 1,
         paddingHorizontal: 15,
         paddingBottom: 15,
@@ -44,7 +48,7 @@ const styles = StyleSheet.create({
     category: {
         flex: 0.2,
         fontFamily: globalStyles.montserratBold,
-        color: globalStyles.borderPrimaryColor,
+        color: globalStyles.textPrimaryColor,
         fontSize: 18
     },
     info: {
@@ -71,32 +75,32 @@ const styles = StyleSheet.create({
         width: 5,
         height: 5,
         borderRadius: 2.5,
-        backgroundColor: globalStyles.borderPrimaryColor,
+        backgroundColor: globalStyles.iconsColor,
         marginHorizontal: 10
     },
     createdBy: {
         fontFamily: globalStyles.montserrat,
-        color: globalStyles.borderPrimaryColor,
+        color: globalStyles.textPrimaryColor,
         fontSize: 15
     },
     descriptionContainer: {
         flex: 0.5,
     },
     description: {
-        color: globalStyles.borderPrimaryColor,
+        color: globalStyles.textPrimaryColor,
         fontFamily: globalStyles.montserrat,
         fontSize: 15
     },
     editIcon: {
         position: 'absolute',
-        color: globalStyles.borderPrimaryColor,
+        color: globalStyles.iconsColor,
         fontSize: 40,
         right: 0,
         bottom: 0,
     },
     favoriteIcon: {
         position: 'absolute',
-        color: globalStyles.borderPrimaryColor,
+        color: globalStyles.iconsColor,
         fontSize: 40,
         right: 0,
         bottom: 0,

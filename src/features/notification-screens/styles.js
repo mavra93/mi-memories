@@ -28,10 +28,11 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     createNewButtonIcon: {
-        fontSize: 28,
-        color: globalStyles.secondaryBackgroundColor
+        fontSize: 30,
+        color: globalStyles.textPrimaryColor
     },
     createContainer: {
+        backgroundColor: globalStyles.secondaryBackgroundColor,
         flex: 1,
     },
     header: {
@@ -56,12 +57,12 @@ const styles = StyleSheet.create({
         fontFamily: globalStyles.montserratBold,
     },
     input: {
-        color: globalStyles.titleColor,
+        color: globalStyles.textPrimaryColor,
         fontFamily: globalStyles.montserrat,
     },
     textArea: {
         height: 100,
-        color: globalStyles.titleColor,
+        color: globalStyles.textPrimaryColor,
         fontFamily: globalStyles.montserrat,
     },
     footer: {
@@ -93,7 +94,7 @@ const styles = StyleSheet.create({
     },
     notifyBox: {
         borderRadius: 5,
-        backgroundColor: globalStyles.titleColor,
+        backgroundColor: globalStyles.secondaryBackgroundColor,
         height: 150,
         flex: 1,
         flexDirection: 'row',
@@ -115,7 +116,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     notifyBoxTitle: {
-        color: globalStyles.textPrimaryColor,
+        color: globalStyles.titleColor,
         fontFamily: globalStyles.montserratBold
     },
     notifyBoxMessage: {
@@ -133,7 +134,7 @@ const styles = StyleSheet.create({
         fontFamily: globalStyles.montserrat
     },
     notifyBoxMessageCreatedDate: {
-        color: globalStyles.borderPrimaryColor,
+        color: globalStyles.textPrimaryColor,
         fontFamily: globalStyles.montserrat,
         fontSize: 12
     }
