@@ -23,5 +23,8 @@
   "editMemory": "Uredi uspomenu",
   "searchByTitle": "Pretraži uspomene po naslovu",
   "created": "Kreirane",
-  "delivered": "Primljene"
+  "delivered": "Primljene",
+  "enterNotificationTitle": "Unesi naslov notifikacije",
+  "enterNotificationDesc": "Unesi opis notifikacije",
+  "crateNotification": "Kreiraj notifikaciju"
 }

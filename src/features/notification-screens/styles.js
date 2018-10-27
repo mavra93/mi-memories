@@ -49,6 +49,7 @@ const styles = StyleSheet.create({
         borderWidth: 0,
         height: 50,
         marginHorizontal: 15,
+        paddingHorizontal: 10
     },
     buttonText: {
         color: globalStyles.textPrimaryColor,

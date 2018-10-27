@@ -7,9 +7,9 @@ import {translate} from 'react-native-translate';
 import moment from 'moment';
 import styles from './styles';
 import isValid from '../../helpers/isValid';
+import {createNotification} from '../../redux/actions/notificationActions'
 import CalendarComponent from './components/CalendarComponent';
 import SelectUser from './components/SelectUser';
-import {getRandomHour} from '../../helpers/getRandomHour';
 
 const ANIMATION_DURATION = 300;
 
@@ -26,6 +26,7 @@ class CreateNotificationScreenContainer extends Component {
             value: null,
             type: 'text'
         },
+        sendAt: null
     };
 
     componentWillMount() {
@@ -66,14 +67,24 @@ class CreateNotificationScreenContainer extends Component {
         })
     };
 
-    onDayPress = (day) => {
-        let date = moment.unix(day.timestamp / 1000);
-        date.hour(getRandomHour());
-        console.log(date);
+    onDayPress = (date) => {
+        this.setState({
+            sendAt: date.unix()
+        })
     };
 
     createNotification = () => {
-
+        const {title, description, selectedUser, sendAt} = this.state;
+        const notification = {
+            title: title.value,
+            description: description.value,
+            to: selectedUser,
+            sendAt: sendAt,
+            createdBy: this.props.user.uid,
+            createdAt: moment().unix(),
+            delivered: false
+        };
+        this.props.createNotification(notification);
     };
 
     onChange = (e) => {
@@ -95,10 +106,10 @@ class CreateNotificationScreenContainer extends Component {
         return (
             <View style={styles.createContainer}>
                 <Animated.View style={[styles.header, {opacity: this.calendarOpacity}]}>
-                    <CalendarComponent onDayPress={this.onDayPress} />
+                    <CalendarComponent onDayPress={this.onDayPress}/>
                 </Animated.View>
                 <Animated.View style={[styles.form, {height: this.formHeight}]}>
-                    <SelectUser user={user} users={users} selectUser={this.selectUser} />
+                    <SelectUser user={user} users={users} selectUser={this.selectUser}/>
                     <Form onChange={this.onChange} style={styles.formWrapper}>
                         <View>
                             <TextInput style={styles.input}
@@ -123,7 +134,7 @@ class CreateNotificationScreenContainer extends Component {
                 <View style={styles.footer}>
                     <Animatable.View animation="fadeInUp" iterationCount={1} delay={500} duration={ANIMATION_DURATION}>
                         <Button disabled={!formValid}
-                                style={[styles.button, {opacity: formValid ? 0.5 : 1}]}
+                                style={[styles.button, {opacity: !formValid ? 0.5 : 1}]}
                                 rounded
                                 title='crateNotification' onPress={() => this.createNotification()}>
                             <Text style={styles.buttonText}>{translate('crateNotification').toUpperCase()}</Text>
@@ -143,7 +154,9 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-    return {};
+    return {
+        createNotification: (notification) => dispatch(createNotification(notification))
+    };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateNotificationScreenContainer)

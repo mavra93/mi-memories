@@ -10,6 +10,12 @@ class SelectUser extends Component {
         selectedUser: null
     };
 
+    componentDidMount() {
+        const {user, users} = this.props;
+        const data = users.filter(item => item.id !== user.uid);
+        this.props.selectUser(data[0].id);
+    }
+
     selectUser = (uid) => {
         this.props.selectUser(uid);
     };

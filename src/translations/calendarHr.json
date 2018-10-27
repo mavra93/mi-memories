@@ -1,0 +1,6 @@
+{
+  "monthNames": ["Siječanj", "Veljača", "Ožujak", "Travanj", "Svibanj", "Lipanj", "Srpanj", "Kolovoz", "Rujan", "Listopad", "Studeni", "Prosinac"],
+  "monthNamesShort": ["Siječ.", "Veljač.", "Ožuja.", "Trav.", "Svib.", "Lip.", "Srp.", "Kol.", "Ruj.", "List.", "Stud.", "Pros."],
+  "dayNames": ["Nedjelja", "Ponedjeljak", "Utorak", "Srijeda", "Četvrtak", "Petak", "Subota"],
+  "dayNamesShort": ["Ned.", "Pon.", "Uto.", "Sri.", "Čet.", "Pet.", "Sub."]
+}

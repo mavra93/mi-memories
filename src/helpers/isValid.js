@@ -17,7 +17,7 @@ const checkItem = (item) => {
 const generateArray = (formElements) => {
     let generatedArray = [];
     Object.entries(formElements).forEach(([key, val]) => {
-        if (val.hasOwnProperty('value') && val.hasOwnProperty('type')) {
+        if (val && val.hasOwnProperty('value') && val.hasOwnProperty('type')) {
             generatedArray.push(val);
         }
     });
