@@ -7,6 +7,11 @@ const styles = StyleSheet.create({
         paddingVertical: 20,
         height: globalStyles.screenHeight - 90
     },
+    noFavoriteMemoriesText: {
+        color: globalStyles.textPrimaryColor,
+        fontFamily: globalStyles.montserratBold,
+        fontSize: 22
+    },
     slideInnerContainer: {
         elevation: 4,
         width: '100%',

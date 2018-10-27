@@ -53,7 +53,7 @@ export default function (state = {memory: null, memories: [], memoryCreationStar
 
             /* Remove memory from favorites if removeFromFavorite === true */
             if(removeFromFavorite) {
-                cloneFavoriteMemories = cloneFavoriteMemories.filter(e => e.uid !== action.payload.uid);
+                cloneFavoriteMemories = cloneFavoriteMemories.filter(e => e.uid !== clonedMemory.uid);
             }
             /* Replace with new memory data */
             let cloneMemories = clone(state.memories);

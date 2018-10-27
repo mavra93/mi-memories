@@ -3,6 +3,8 @@
   "story": "story",
   "newest": "newest",
   "oldest": "oldest",
+  "noMemories": "No memories",
+  "noFavoriteMemories": "No favorite memories",
   "enterMemoryTitle": "Enter memory title",
   "enterMemoryDesc": "Enter memory description",
   "createMemory": "Create memory",

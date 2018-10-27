@@ -14,6 +14,11 @@ const styles = StyleSheet.create({
         width: globalStyles.screenWidth,
         paddingHorizontal: 10
     },
+    noMemoriesText: {
+        color: globalStyles.textPrimaryColor,
+        fontFamily: globalStyles.montserratBold,
+        fontSize: 22
+    },
     memoryBox: {
         flex: 1,
         height: 350,

@@ -3,6 +3,8 @@
   "story": "priča",
   "newest": "najnoviji",
   "oldest": "najstariji",
+  "noMemories": "Nema uspomena",
+  "noFavoriteMemories": "Nema omiljenih uspomena",
   "enterMemoryTitle": "Unesi naslov uspomene",
   "enterMemoryDesc": "Unesi opis uspomene",
   "createMemory": "Kreiraj uspomenu",

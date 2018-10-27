@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
-import {View, FlatList, Animated, Keyboard} from 'react-native';
+import {View, FlatList, Animated, Keyboard, Text} from 'react-native';
 import {connect} from 'react-redux';
 import {Icon} from 'native-base';
 import Interactable from 'react-native-interactable';
 import debounce from 'lodash/debounce';
-import {signOut} from '../../redux/actions/userActions';
+import {translate} from 'react-native-translate';
 import {fetchMemories, resetMemories, searchMemories} from '../../redux/actions/memoryActions';
 import styles from './styles';
 import MemoryBox from "./components/MemoryBox";
@@ -46,13 +46,13 @@ class HomeScreenContainer extends Component {
 
     onSnap = () => {
         this.setState({
-            scrollEnabled: this.state.deltaY._value <= -130 || this.props.memories.length < 1
+            scrollEnabled: this.state.deltaY._value <= -130
         })
     };
 
     onStop = () => {
         this.setState({
-            scrollEnabled: this.state.deltaY._value === -130 || this.props.memories.length < 1
+            scrollEnabled: this.state.deltaY._value === -130
         })
     };
 
@@ -114,7 +114,8 @@ class HomeScreenContainer extends Component {
                                     onEndReachedThreshold={0.1}
                                 />
                             </Animated.View>
-                            : null
+                            :
+                            !loading ? <Text style={styles.noMemoriesText}>{translate('noMemories')}</Text> : null
                     }
                 </Interactable.View>
             </View>

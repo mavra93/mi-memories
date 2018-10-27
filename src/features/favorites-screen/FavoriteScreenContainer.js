@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import {View} from 'react-native';
+import {View, Text} from 'react-native';
 import {connect} from 'react-redux'
 import Carousel from 'react-native-snap-carousel-tabs';
+import {translate} from 'react-native-translate';
 import {getFavoriteMemories} from '../../redux/actions/memoryActions'
 import styles from './styles';
 import globalStyles from '../../globalStyles';
@@ -29,13 +30,16 @@ class FavoriteScreenContainer extends Component {
             <View style={styles.layoutContainer}>
                 {
                     loading ? <Loader /> :
-                        <Carousel
-                            layout={'default'}
-                            data={favoriteMemories}
-                            renderItem={this.renderItem}
-                            sliderWidth={globalStyles.screenWidth}
-                            itemWidth={globalStyles.screenWidth - 90}
-                        />
+                        favoriteMemories.length > 0 ?
+                            <Carousel
+                                layout={'default'}
+                                data={favoriteMemories}
+                                renderItem={this.renderItem}
+                                sliderWidth={globalStyles.screenWidth}
+                                itemWidth={globalStyles.screenWidth - 90}
+                            />
+                            :
+                            <Text style={styles.noFavoriteMemoriesText}>{translate('noFavoriteMemories')}</Text>
                 }
             </View>
         )
