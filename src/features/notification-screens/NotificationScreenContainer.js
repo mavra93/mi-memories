@@ -6,7 +6,8 @@ import {translate} from 'react-native-translate';
 import {connect} from 'react-redux'
 import {Actions} from 'react-native-router-flux';
 import CreatedNotificationsScreen from './CreatedNotificationsScreen';
-import DeliveredNotificationScreen from './DeliveredNotificationsScreen';
+import ReceivedNotificationsScreen from './ReceivedNotificationsScreen';
+import {getCreatedNotifications} from '../../redux/actions/notificationActions';
 import globalStyles from '../../globalStyles';
 import styles from './styles';
 
@@ -20,8 +21,8 @@ class NotificationScreenContainer extends Component {
                 title: translate('created')
             },
             {
-                key: 'delivered',
-                title: translate('delivered')
+                key: 'received',
+                title: translate('received')
             },
         ],
     };
@@ -37,7 +38,7 @@ class NotificationScreenContainer extends Component {
                     navigationState={this.state}
                     renderScene={SceneMap({
                         created: CreatedNotificationsScreen,
-                        delivered: DeliveredNotificationScreen,
+                        received: ReceivedNotificationsScreen,
                     })}
                     renderTabBar={props =>
                         <TabBar
@@ -59,11 +60,17 @@ class NotificationScreenContainer extends Component {
 }
 
 const mapStateToProps = (state) => {
-    return {};
+    return {
+        user: state.user.user,
+        users: state.user.users,
+        createdNotifications: state.notification.createdNotifications
+    };
 };
 
 const mapDispatchToProps = (dispatch) => {
-    return {};
+    return {
+        getCreatedNotifications: (id) => dispatch(getCreatedNotifications(id))
+    };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(NotificationScreenContainer)

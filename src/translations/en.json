@@ -23,8 +23,11 @@
   "editMemory": "Edit memory",
   "searchByTitle": "Search memories by title",
   "created": "Created",
-  "delivered": "Delivered",
+  "received": "Received",
   "enterNotificationTitle": "Enter notification title",
   "enterNotificationDesc": "Enter notification description",
-  "crateNotification": "Create notification"
+  "crateNotification": "Create notification",
+  "willGetNotification": " will get notification on ",
+  "gotNotification": " got notification on ",
+  "sendYouNotification": " send you notification on "
 }

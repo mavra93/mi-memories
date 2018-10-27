@@ -86,6 +86,57 @@ const styles = StyleSheet.create({
         color: globalStyles.borderPrimaryColor,
         fontFamily: globalStyles.montserrat,
     },
+    list: {
+        backgroundColor: globalStyles.backgroundPrimaryColor,
+        width: globalStyles.screenWidth,
+        padding: 10
+    },
+    notifyBox: {
+        borderRadius: 5,
+        backgroundColor: globalStyles.titleColor,
+        height: 150,
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        marginBottom: 15
+    },
+    notifyBoxLeft: {
+        flex: 0.3,
+        padding: 20
+    },
+    notifyBoxImage: {
+        width: 80,
+        height: 80,
+        borderRadius: 5
+    },
+    notifyBoxRight: {
+        flex: 0.7,
+        justifyContent: 'center',
+    },
+    notifyBoxTitle: {
+        color: globalStyles.textPrimaryColor,
+        fontFamily: globalStyles.montserratBold
+    },
+    notifyBoxMessage: {
+        marginTop: 10,
+        marginBottom: 10,
+        color: globalStyles.textPrimaryColor,
+        fontFamily: globalStyles.montserrat
+    },
+    notifyBoxMessageInfo: {
+        color: globalStyles.textPrimaryColor,
+        fontFamily: globalStyles.montserrat
+    },
+    notifyBoxMessageDate: {
+        color: globalStyles.primaryColor,
+        fontFamily: globalStyles.montserrat
+    },
+    notifyBoxMessageCreatedDate: {
+        color: globalStyles.borderPrimaryColor,
+        fontFamily: globalStyles.montserrat,
+        fontSize: 12
+    }
 });
 
 
