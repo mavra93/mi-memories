@@ -60,6 +60,7 @@ class CalendarComponent extends Component {
                 markedDates={markedDates}
                 theme={{
                     backgroundColor: globalStyles.secondaryBackgroundColor,
+                    textDisabledColor: globalStyles.backgroundPrimaryColor,
                     calendarBackground: globalStyles.secondaryBackgroundColor,
                     selectedDayTextColor: globalStyles.textPrimaryColor,
                     todayTextColor: globalStyles.primaryColor,

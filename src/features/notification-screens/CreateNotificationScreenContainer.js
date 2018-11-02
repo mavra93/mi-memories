@@ -11,6 +11,7 @@ import {createNotification} from '../../redux/actions/notificationActions'
 import CalendarComponent from './components/CalendarComponent';
 import SelectUser from './components/SelectUser';
 import globalStyles from '../../globalStyles';
+import {getRandomHour} from '../../helpers/getRandomHour';
 
 const ANIMATION_DURATION = 300;
 
@@ -35,6 +36,11 @@ class CreateNotificationScreenContainer extends Component {
         this.formHeight = new Animated.Value(200);
         this.keyboardWillShowSub = Keyboard.addListener('keyboardDidShow', this.keyboardDidShow);
         this.keyboardWillHideSub = Keyboard.addListener('keyboardDidHide', this.keyboardDidHide);
+        const date = moment().add(1, 'days');
+        date.hour(getRandomHour());
+        this.setState({
+            sendAt: date.unix()
+        })
     }
 
     keyboardDidShow = () => {

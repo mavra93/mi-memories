@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import {View, Text, FlatList} from 'react-native';
+import {View, Text, FlatList, TouchableOpacity} from 'react-native';
 import {connect} from 'react-redux'
 import {Translate} from 'react-native-translate';
+import {Actions} from 'react-native-router-flux';
 import {getReceivedNotifications} from '../../redux/actions/notificationActions';
 import FastImage from 'react-native-fast-image';
 import moment from 'moment';
@@ -9,18 +10,21 @@ import styles from './styles';
 
 class ReceivedNotificationsScreen extends Component {
 
-
     componentWillMount() {
         const {user, getReceivedNotifications} = this.props;
         getReceivedNotifications(user.uid);
     }
+
+    openDetails = (notification) => {
+        Actions.notificationDetailsScreen({notification});
+    };
 
     renderRow = (data) => {
         const notification = data.item;
         const fromUser = this.props.users.find(user => user.id === notification.createdBy);
         const sendAt = moment.unix(notification.createdAt).format('LL');
         return (
-            <View style={styles.notifyBox}>
+            <TouchableOpacity style={styles.notifyBox} onPress={() => this.openDetails(notification)}>
                 <View style={styles.notifyBoxLeft}>
                     <FastImage style={styles.notifyBoxImage} source={{uri: fromUser.profileImage}}/>
                 </View>
@@ -32,7 +36,7 @@ class ReceivedNotificationsScreen extends Component {
                         <Text style={styles.notifyBoxMessageDate}>{sendAt}</Text>
                     </Text>
                 </View>
-            </View>
+            </TouchableOpacity>
         )
     };
 

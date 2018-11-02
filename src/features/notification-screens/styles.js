@@ -137,7 +137,66 @@ const styles = StyleSheet.create({
         color: globalStyles.textPrimaryColor,
         fontFamily: globalStyles.montserrat,
         fontSize: 12
-    }
+    },
+    contentWrapper: {
+        backgroundColor: globalStyles.secondaryBackgroundColor,
+        flex: 1,
+        justifyContent: 'flex-start',
+        paddingHorizontal: 15,
+        paddingBottom: 15,
+    },
+    detailHeader: {
+        flex: 0.2,
+        height: 150,
+        paddingVertical: 15,
+        position: 'relative'
+    },
+    title: {
+        flex: 0.6,
+        fontFamily: globalStyles.montserratExtraBold,
+        color: globalStyles.titleColor,
+        fontSize: 22
+    },
+    info: {
+        position: 'relative',
+        flex: 0.4,
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center'
+    },
+    date: {
+        color: globalStyles.primaryColor,
+        fontFamily: globalStyles.montserrat,
+        fontSize: 15
+    },
+    avatar: {
+        width: 50,
+        height: 50,
+        borderRadius: 25,
+        position: 'absolute',
+        top: 15,
+        right: 0
+    },
+    bullet: {
+        width: 5,
+        height: 5,
+        borderRadius: 2.5,
+        backgroundColor: globalStyles.iconsColor,
+        marginHorizontal: 10
+    },
+    user: {
+        fontFamily: globalStyles.montserrat,
+        color: globalStyles.textPrimaryColor,
+        fontSize: 15
+    },
+    descriptionContainer: {
+        flex: 0.8,
+    },
+    description: {
+        color: globalStyles.textPrimaryColor,
+        fontFamily: globalStyles.montserrat,
+        fontSize: 15
+    },
 });
 
 
