@@ -13,7 +13,9 @@ class SelectUser extends Component {
     componentDidMount() {
         const {user, users} = this.props;
         const data = users.filter(item => item.id !== user.uid);
-        this.props.selectUser(data[0].id);
+        if(data.length > 0) {
+            this.props.selectUser(data[0].id);
+        }
     }
 
     selectUser = (uid) => {
@@ -32,7 +34,7 @@ class SelectUser extends Component {
                 {data.map((item, i) => {
                     return (
                         <Picker.Item key={i} label={item.displayName} value={item.id}
-                                     color={globalStyles.borderPrimaryColor}/>
+                                     color={globalStyles.primaryColor} />
                     )
                 })}
             </Picker>

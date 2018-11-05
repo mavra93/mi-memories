@@ -179,6 +179,9 @@ class CreateEditMemoryContainer extends Component {
                             <Picker
                                 selectedValue={category}
                                 style={styles.picker}
+                                textStyle={{
+                                    fontFamily: globalStyles.montserrat
+                                }}
                                 onValueChange={(itemValue, itemIndex) => this.setState({category: itemValue})}>
                                 {categories.map((category, i) => {
                                     return (

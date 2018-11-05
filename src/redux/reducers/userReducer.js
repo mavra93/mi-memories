@@ -1,7 +1,8 @@
 import {
     GET_USER,
     AUTH_SUCCESS,
-    AUTH_ERR,
+    LOGIN_ERR,
+    REG_ERR,
     USER_FETCHED,
     SIGNED_OUT,
     FETCH_USERS_FINISHED,
@@ -16,6 +17,8 @@ export default function
          users: [],
          user: null,
          err: null,
+         loginErr: null,
+         regErr: null,
          isLoggedIn: false,
          userFetched: false,
          registerFinished: false,
@@ -36,9 +39,11 @@ export default function
                 loading: false
             };
         case AUTH_SUCCESS:
-            return {...state, user: action.payload, isLoggedIn: true, registerFinished: false};
-        case AUTH_ERR:
-            return {...state, err: action.payload, isLoggedIn: false};
+            return {...state, user: action.payload, isLoggedIn: true, registerFinished: false, loginErr: null, regErr: null};
+        case LOGIN_ERR:
+            return {...state, loginErr: action.payload, isLoggedIn: false};
+        case REG_ERR:
+            return {...state, regErr: action.payload, isLoggedIn: false};
         case SIGNED_OUT:
             return {...state, user: null, userFetched: false, isLoggedIn: false};
         case FETCH_USERS_FINISHED:

@@ -13,10 +13,16 @@ class RegisterScreenContainer extends Component {
 
     render() {
         return (
-            <RegisterComponent signUpUser={this.signUpUser} onLoginClick={this.props.onLoginClick} />
+            <RegisterComponent signUpUser={this.signUpUser} onLoginClick={this.props.onLoginClick} regErr={this.props.regErr} />
         )
     }
 }
+
+const mapStateToProps = state => {
+    return {
+        regErr: state.user.regErr
+    }
+};
 
 const mapDispatchToProps = dispatch => {
     return {
@@ -26,6 +32,6 @@ const mapDispatchToProps = dispatch => {
     }
 };
 
-export default connect(null, mapDispatchToProps)(RegisterScreenContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(RegisterScreenContainer)
 
 

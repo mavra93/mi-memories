@@ -5,7 +5,8 @@ import {uploadImage} from "../../helpers/uploadImage";
 
 export const GET_USER = 'GET_USER';
 export const AUTH_SUCCESS = 'AUTH_SUCCESS';
-export const AUTH_ERR = 'AUTH_ERR';
+export const LOGIN_ERR = 'LOGIN_ERR';
+export const REG_ERR = 'REG_ERR';
 export const USER_FETCHED = 'USER_FETCHED';
 export const SIGNED_OUT = 'SIGNED_OUT';
 export const FETCH_USERS_FINISHED = 'FETCH_USERS_FINISHED';
@@ -68,7 +69,7 @@ export function login(user) {
             })
         }).catch(err => {
             dispatch({
-                type: AUTH_ERR,
+                type: LOGIN_ERR,
                 payload: err
             })
         })
@@ -141,8 +142,8 @@ export function signUp(user) {
             updateProfile(userInfo.username.value);
         }).catch(err => {
             dispatch({
-                type: AUTH_ERR,
-                payload: err
+                type: REG_ERR,
+                payload: err.code
             })
         })
     }

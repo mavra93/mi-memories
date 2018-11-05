@@ -12,6 +12,7 @@ const ANIMATION_DURATION = 500;
 class RegisterComponent extends Component {
 
     state = {
+        showRegErr: false,
         username: {
             value: null,
             type: 'text'
@@ -28,7 +29,9 @@ class RegisterComponent extends Component {
 
 
     handleSignUp = () => {
-        this.props.signUpUser(this.state);
+        this.setState({
+            showRegErr: true
+        }, () => this.props.signUpUser(this.state));
     };
 
     goToLoginScreen = () => {
@@ -44,12 +47,13 @@ class RegisterComponent extends Component {
             [targetName]: {
                 ...this.state[targetName],
                 isValid: validation.isElValid
-            }
+            },
+            showRegErr: false
         });
     };
 
     render() {
-        const {username, email, password, formValid} = this.state;
+        const {username, email, password, formValid, showRegErr} = this.state;
         return (
             <Container>
                 <Form onChange={this.onChange}>
@@ -70,6 +74,7 @@ class RegisterComponent extends Component {
                                    secureTextEntry={true}
                                    value={password.value}/>
                         {!password.isValid && password.value ? <ErrorText text={translate('passwordNotValid')} /> : null}
+                        {showRegErr && this.props.regErr !== null ? <ErrorText text={translate('userExists')} /> : null}
                     </View>
                 </Form>
                 <View style={styles.buttonsWrapper}>

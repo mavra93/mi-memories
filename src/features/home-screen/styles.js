@@ -17,7 +17,9 @@ const styles = StyleSheet.create({
     noMemoriesText: {
         color: globalStyles.textPrimaryColor,
         fontFamily: globalStyles.montserratBold,
-        fontSize: 22
+        fontSize: 22,
+        marginTop: 20,
+        textAlign: 'center'
     },
     memoryBox: {
         flex: 1,

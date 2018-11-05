@@ -9,9 +9,11 @@ import isValid from '../../../helpers/isValid';
 import ErrorText from "../../_shared/error-text/ErrorText";
 
 const ANIMATION_DURATION = 500;
+const USER_NOT_FOUND = 'auth/user-not-found';
 
 class LoginComponent extends Component {
     state = {
+        showLoginErr: false,
         statusBarColor: globalStyles.primaryColor,
         email: {
             value: null,
@@ -24,7 +26,9 @@ class LoginComponent extends Component {
     };
 
     handleLogin = () => {
-        this.props.login(this.state);
+        this.setState({
+            showLoginErr: true
+        }, () => this.props.login(this.state))
     };
 
     goToRegisterScreen = () => {
@@ -40,13 +44,14 @@ class LoginComponent extends Component {
             [targetName]: {
                 ...this.state[targetName],
                 isValid: validation.isElValid
-            }
+            },
+            showLoginErr: false
         });
     };
 
     render() {
-        const {onInputClick} = this.props;
-        const {email, password, formValid} = this.state;
+        const {onInputClick, authErr} = this.props;
+        const {email, password, formValid, showLoginErr} = this.state;
         return (
             <Container>
                 <Form onChange={this.onChange}>
@@ -68,6 +73,7 @@ class LoginComponent extends Component {
                                    secureTextEntry={true}
                                    value={password.value}/>
                         {!password.isValid && password.value ? <ErrorText text={translate('passwordNotValid')} /> : null}
+                        {showLoginErr && authErr !== null ? <ErrorText text={translate(authErr === USER_NOT_FOUND ? 'userNotFound' : 'wrongPassword')} /> : null}
                     </View>
                 </Form>
                 <View style={styles.buttonsWrapper}>

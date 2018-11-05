@@ -31,5 +31,8 @@
   "crateNotification": "Create notification",
   "willGetNotification": " will get notification on ",
   "gotNotification": " got notification on ",
-  "sendYouNotification": " send you notification on "
+  "sendYouNotification": " send you notification on ",
+  "userNotFound": "User not found",
+  "wrongPassword": "Wrong password",
+  "userExists": "User already exists"
 }

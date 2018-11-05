@@ -12,10 +12,16 @@ class LoginScreenContainer extends Component {
 
     render() {
         return (
-            <LoginComponent login={this.login} onInputClick={this.props.onInputClick} onRegistrationClick={this.props.onRegistrationClick}/>
+            <LoginComponent login={this.login} authErr={this.props.loginErr} onInputClick={this.props.onInputClick} onRegistrationClick={this.props.onRegistrationClick}/>
         )
     }
 }
+
+const mapStateToProps = state => {
+    return {
+        loginErr: state.user.loginErr
+    }
+};
 
 const mapDispatchToProps = dispatch => {
     return {
@@ -25,6 +31,6 @@ const mapDispatchToProps = dispatch => {
     }
 };
 
-export default connect(null, mapDispatchToProps)(LoginScreenContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(LoginScreenContainer)
 
 

@@ -31,5 +31,8 @@
   "crateNotification": "Kreiraj notifikaciju",
   "willGetNotification": " će dobiti notifikaciju ",
   "gotNotification": " je dobio notifikaciju ",
-  "sendYouNotification": " je poslao notifikaciju "
+  "sendYouNotification": " je poslao notifikaciju ",
+  "userNotFound": "Korisnik nije pronađen",
+  "wrongPassword": "Kriva lozinka",
+  "userExists": "Korisnik već postoji"
 }
