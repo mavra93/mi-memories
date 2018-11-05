@@ -8,6 +8,8 @@ import FastImage from 'react-native-fast-image';
 import moment from 'moment';
 import styles from './styles';
 
+const AVATAR_IMAGE = require('../../assets/images/avatar.png');
+
 class ReceivedNotificationsScreen extends Component {
 
     componentWillMount() {
@@ -26,7 +28,7 @@ class ReceivedNotificationsScreen extends Component {
         return (
             <TouchableOpacity style={styles.notifyBox} onPress={() => this.openDetails(notification)}>
                 <View style={styles.notifyBoxLeft}>
-                    <FastImage style={styles.notifyBoxImage} source={{uri: fromUser.profileImage}}/>
+                    <FastImage style={styles.notifyBoxImage} source={fromUser && fromUser.profileImage ? {uri: fromUser.profileImage} : AVATAR_IMAGE}  />
                 </View>
                 <View style={styles.notifyBoxRight}>
                     <Text style={styles.notifyBoxTitle}>{notification.title}</Text>
