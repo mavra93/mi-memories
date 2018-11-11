@@ -42,21 +42,25 @@ export function getUser() {
 export function getUsers() {
     let users = [];
     return dispatch => {
-        firestore.collection('users').get().then(querySnapshot => {
-            querySnapshot.forEach(doc => {
-                const user = doc.data();
-                users.push(user);
+        return new Promise((resolve, reject) => {
+            firestore.collection('users').get().then(querySnapshot => {
+                querySnapshot.forEach(doc => {
+                    const user = doc.data();
+                    users.push(user);
+                });
+                resolve(users);
+                dispatch({
+                    type: FETCH_USERS_FINISHED,
+                    payload: users
+                });
+            }).catch((error) => {
+                reject(error);
+                dispatch({
+                    type: FETCH_USERS_ERROR,
+                    payload: error
+                });
             });
-            dispatch({
-                type: FETCH_USERS_FINISHED,
-                payload: users
-            });
-        }).catch((error) => {
-            dispatch({
-                type: FETCH_USERS_ERROR,
-                payload: error
-            });
-        });
+        })
     }
 }
 

@@ -14,6 +14,7 @@ import {createMemory, editMemory} from '../../redux/actions/memoryActions';
 import isValid from '../../helpers/isValid';
 import {capitalizeFirstLetter} from '../../helpers/capitalize';
 import Loader from '../_shared/loader/Loader';
+import {getUsers} from '../../redux/actions/userActions';
 
 const ANIMATION_DURATION = 300;
 
@@ -121,7 +122,7 @@ class CreateEditMemoryContainer extends Component {
 
     createEditMemory = () => {
         const {title, description, category, imagePaths, editMode} = this.state;
-        const {user, users, memory} = this.props;
+        const {user, memory} = this.props;
         const memoryObj = {
             title: title.value,
             description: description.value,
@@ -137,7 +138,9 @@ class CreateEditMemoryContainer extends Component {
             memoryObj.createdBy = memory.createdBy;
             this.props.editMemory(memoryObj);
         } else {
-            this.props.createMemory(memoryObj, user, users);
+            this.props.getUsers().then(users => {
+                this.props.createMemory(memoryObj, user, users);
+            })
         }
     };
 
@@ -216,7 +219,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         createMemory: (memory, user, users) => dispatch(createMemory(memory, user, users)),
-        editMemory: (memory) => dispatch(editMemory(memory))
+        editMemory: (memory) => dispatch(editMemory(memory)),
+        getUsers: () => dispatch(getUsers())
     };
 };
 

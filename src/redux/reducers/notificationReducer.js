@@ -5,8 +5,6 @@ import {
     FETCH_RECEIVED_NOTIFICATIONS_FINISHED
 }  from '../actions/notificationActions';
 
-const clone = require('clone');
-
 export default function (state = {createdNotifications: [], receivedNotifications: [], loading: false}, action) {
     switch (action.type) {
         case FETCH_CREATED_NOTIFICATIONS_BEGIN:

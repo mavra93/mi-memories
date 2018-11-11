@@ -25,10 +25,12 @@ const styles = StyleSheet.create({
         marginBottom: 15,
     },
     buttonText: {
-        color: globalStyles.textPrimaryColor
+        color: globalStyles.textPrimaryColor,
+        fontFamily: globalStyles.montserratBold,
     },
     greenText: {
         color: globalStyles.primaryColor,
+        fontFamily: globalStyles.montserrat,
         width: 200,
         textAlign: 'center',
         marginBottom: 15,
