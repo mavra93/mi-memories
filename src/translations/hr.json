@@ -34,5 +34,6 @@
   "sendYouNotification": " je poslao notifikaciju ",
   "userNotFound": "Korisnik nije pronađen",
   "wrongPassword": "Kriva lozinka",
-  "userExists": "Korisnik već postoji"
+  "userExists": "Korisnik već postoji",
+  "by": " od "
 }

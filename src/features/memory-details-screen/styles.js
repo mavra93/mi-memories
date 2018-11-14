@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
     },
     title: {
         flex: 0.5,
+        width: '90%',
         fontFamily: globalStyles.montserratExtraBold,
         color: globalStyles.titleColor,
         fontSize: 22

@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import FastImage from 'react-native-fast-image';
-import {Translate} from 'react-native-translate';
+import {Translate, translate} from 'react-native-translate';
 import moment from 'moment';
 import styles from '../styles';
 
@@ -27,7 +27,7 @@ class MemoryBox extends React.PureComponent {
                     <View style={styles.memoryContent}>
                         <Text style={styles.memoryTitle} numberOfLines={1}>{memory.title}</Text>
                         <Text style={styles.memoryDescription} numberOfLines={4}>{memory.description}</Text>
-                        <Text style={styles.memoryInfo}>{date + ' by ' + createdBy.displayName}</Text>
+                        <Text style={styles.memoryInfo}>{date + translate('by') + createdBy.displayName}</Text>
                     </View>
                 </TouchableOpacity> :
                 null

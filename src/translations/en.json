@@ -34,5 +34,6 @@
   "sendYouNotification": " send you notification on ",
   "userNotFound": "User not found",
   "wrongPassword": "Wrong password",
-  "userExists": "User already exists"
+  "userExists": "User already exists",
+  "by": " by "
 }

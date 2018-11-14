@@ -63,7 +63,7 @@ class CreateEditMemoryContainer extends Component {
                     type: 'text'
                 },
                 imagePaths: memory.images,
-                category: translate(memory.category)
+                category: memory.category
             })
         }
     };
@@ -167,7 +167,7 @@ class CreateEditMemoryContainer extends Component {
                                        ref="title"
                                        value={title.value}/>
                         </View>
-                        <View style={styles.input}>
+                        <View>
                             <TextInput placeholder={translate('enterMemoryDesc')}
                                        placeholderTextColor={globalStyles.textPrimaryColor}
                                        underlineColorAndroid="transparent"

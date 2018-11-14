@@ -10,6 +10,7 @@ import ReceivedNotificationsScreen from './ReceivedNotificationsScreen';
 import {getCreatedNotifications} from '../../redux/actions/notificationActions';
 import globalStyles from '../../globalStyles';
 import styles from './styles';
+import Loader from '../_shared/loader/Loader';
 
 class NotificationScreenContainer extends Component {
 
@@ -32,8 +33,10 @@ class NotificationScreenContainer extends Component {
     };
 
     render() {
+        const {loading} = this.props;
         return (
             <View style={styles.container}>
+                {loading ? <Loader /> : null}
                 <TabView
                     navigationState={this.state}
                     renderScene={SceneMap({
@@ -63,7 +66,8 @@ const mapStateToProps = (state) => {
     return {
         user: state.user.user,
         users: state.user.users,
-        createdNotifications: state.notification.createdNotifications
+        createdNotifications: state.notification.createdNotifications,
+        loading: state.notification.loading
     };
 };
 

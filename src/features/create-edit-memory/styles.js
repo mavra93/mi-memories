@@ -52,7 +52,6 @@ const styles = StyleSheet.create({
     },
     picker: {
         color: globalStyles.textPrimaryColor,
-        fontFamily: globalStyles.montserrat,
         marginTop: 15,
         height: 50
     },
